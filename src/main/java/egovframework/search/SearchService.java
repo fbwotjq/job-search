@@ -80,10 +80,27 @@ public class SearchService {
 					
 					field = field.split("/")[0];
 					String result = wnsearch.getField(collection, field, index, false);
+
+					result.replaceAll("&#8228;", "");
+					result.replaceAll("&#8231;", "");
+					result.replaceAll("&lt;B&gt;", "");
+					result.replaceAll("&lt;BR&gt;", "");
+					result.replaceAll("&lt;/B&gt;", "");
+					result.replaceAll("&lt;/BR&gt;", "");
+					result.replaceAll("&lt;b&gt;", "");
+					result.replaceAll("&lt;br&gt;", "");
+					result.replaceAll("&lt;/b&gt;", "");
+					result.replaceAll("&lt;/br&gt;", "");
+					result.replaceAll("<B>", "");
+					result.replaceAll("<BR>", "");
+					result.replaceAll("</B>", "");
+					result.replaceAll("</BR>", "");
 					result.replaceAll("<b>", "");
 					result.replaceAll("<br>", "");
 					result.replaceAll("</b>", "");
 					result.replaceAll("</br>", "");
+					result.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+
 					documentMap.put(field, result);
 					
 				});
