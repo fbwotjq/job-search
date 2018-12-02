@@ -1,8 +1,8 @@
-package egovframework.search;
+package egovframework.search.outer;
 
-import egovframework.search.common.WNCollection;
+import egovframework.search.outer.common.WNCollection;
 import egovframework.search.common.WNDefine;
-import egovframework.search.common.WNSearch;
+import egovframework.search.outer.common.WNSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

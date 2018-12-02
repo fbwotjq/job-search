@@ -360,10 +360,10 @@ hr { display:none}
 .btn-blue:active,
 .btn-blue.active{color:#fff;background-color:#214fb8;border-color:#3b63bc}
 
-.btn.ic-compare { background:url(../images/content/ic_compare.gif) no-repeat 10px 50%; padding-left:30px}
-.btn.ic-bookmark { background:url(../images/content/ic_bookmark.png) no-repeat 10px 50%; padding-left:30px}
-.btn.ic-resume { background:url(../images/content/ic_resume.gif) no-repeat 10px 50%; padding-left:30px}
-.btn.ic-meet { background:url(../images/content/ic_meet.gif) no-repeat 10px 50%; padding-left:30px}
+.btn.ic-compare { background:url(../../images/outer/content/ic_compare.gif) no-repeat 10px 50%; padding-left:30px}
+.btn.ic-bookmark { background:url(../../images/outer/content/ic_bookmark.png) no-repeat 10px 50%; padding-left:30px}
+.btn.ic-resume { background:url(../../images/outer/content/ic_resume.gif) no-repeat 10px 50%; padding-left:30px}
+.btn.ic-meet { background:url(../../images/outer/content/ic_meet.gif) no-repeat 10px 50%; padding-left:30px}
 
 /*=================================================================================================
 
@@ -381,7 +381,7 @@ hr { display:none}
 .tableStyle_center tfoot td {text-align:center;padding:5px;line-height:24px;background: #f1f1f1;border-bottom: 1px solid #dadada; border-left:1px solid #dadada;font-weight:500;}
 .tableStyle_center tfoot td:first-child {border-left:0;}
 .tableStyle_center .blLine {border-left:1px solid #dadada !important;}
-span.new {display:inline-block;vertical-align: text-top;width:18px;height:18px;margin-left:8px;text-indent:-999999px;overflow: hidden;background:url('../images/board/icon_new.gif') no-repeat;}
+span.new {display:inline-block;vertical-align: text-top;width:18px;height:18px;margin-left:8px;text-indent:-999999px;overflow: hidden;background:url('../../images/board/icon_new.gif') no-repeat;}
 
 /*테이블 th 왼쪽정렬*/
 .tableStyle_thleft {border-top:solid 2px #4c5365;border-bottom:1px solid #929aaa;table-layout:fixed; border-collapse:separate;clear:both;}
@@ -407,13 +407,13 @@ span.new {display:inline-block;vertical-align: text-top;width:18px;height:18px;m
 .tableStyle_03 td {line-height:22px;border:1px solid #ccc;}
 
 /* bullet style */
-.dep02 dt {background:url('../images/content/bul_h5.gif') 0px 6px no-repeat; padding-left:20px; font-weight:bold;float:left}
+.dep02 dt {background:url('../../images/outer/content/bul_h5.gif') 0px 6px no-repeat; padding-left:20px; font-weight:bold;float:left}
 .dep02 dd {float:left}
-.dep02_none li {background:url('../images/content/icon3.gif') 21px no-repeat; padding-left:30px; margin-bottom:3px;}
+.dep02_none li {background:url('../../images/outer/content/icon3.gif') 21px no-repeat; padding-left:30px; margin-bottom:3px;}
 
-.dep01 li {background:url('../images/content/li_bullet01.gif') 0 8px no-repeat;padding-left:10px;}
-.dep01 li li {background:url('../images/content/li_bullet02.gif') 0 10px no-repeat;padding-left:10px; font-size:13px}
-.dep02 li {background:url('../images/content/li_bullet02.gif') 0 10px no-repeat;padding-left:10px; font-size:13px}
+.dep01 li {background:url('../../images/outer/content/li_bullet01.gif') 0 8px no-repeat;padding-left:10px;}
+.dep01 li li {background:url('../../images/outer/content/li_bullet02.gif') 0 10px no-repeat;padding-left:10px; font-size:13px}
+.dep02 li {background:url('../../images/outer/content/li_bullet02.gif') 0 10px no-repeat;padding-left:10px; font-size:13px}
 
 /* tabmenu */		
 /*컨텐츠 탭메뉴*/
@@ -439,7 +439,7 @@ span.new {display:inline-block;vertical-align: text-top;width:18px;height:18px;m
 .tabmenu_m .on {background-color:#fff;display:inline-block;border:1px solid #055d5d;border-top:4px solid #4c5365;line-height:35px;border-bottom:none;font-weight:bold;height:37px;}
 
 /* error */
-#error_wrap {background:url(../images/common/error_img.gif) no-repeat top center; text-align:center;width:500px; margin:50px auto 0; padding-top:220px}
+#error_wrap {background:url(../../images/outer/common/error_img.gif) no-repeat top center; text-align:center;width:500px; margin:50px auto 0; padding-top:220px}
 #error_wrap .error_box h1 {font-size:36px; color:#cc0033; letter-spacing:-1px; font-weight:bold}
 #error_wrap .error_text { font-size:14px; margin:10px 0 40px}
 #error_wrap .error_text p.text1 {font-size:18px;font-weight:500;margin-bottom:10px}

@@ -20,14 +20,14 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta name="keyword" content="" />
 <title>통합검색</title>
 <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/base.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/layout.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/font.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/search.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/base.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/font.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/search.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/responsive.css">
 <script src="${pageContext.request.contextPath}/web/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/web/js/jquery.cookie.js"></script>
-<script src="${pageContext.request.contextPath}/web/js/search.js"></script>
+<script src="${pageContext.request.contextPath}/web/js/outer/search.js"></script>
 </head>
 <body id="main">	
 <ul id="skipnavi">
@@ -50,8 +50,8 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 		</div><!--//util -->
 		<div class="head row">
 			<div class="logo fl">
-				<h1><a href="http://job.jeonnam.go.kr" class="shmobilelogo"><img src="${pageContext.request.contextPath}/web/images/common/logo.png" alt=""></a></h1>
-				<span><img src="${pageContext.request.contextPath}/web/images/common/logo_sub.png" alt="생명의 땅, 청년이 돌아오는 전남"></span>
+				<h1><a href="http://job.jeonnam.go.kr" class="shmobilelogo"><img src="${pageContext.request.contextPath}/web/images/outer/common/logo.png" alt=""></a></h1>
+				<span><img src="${pageContext.request.contextPath}/web/images/outer/common/logo_sub.png" alt="생명의 땅, 청년이 돌아오는 전남"></span>
 			</div>
 			<div class="search fr mt10">
                     <fieldset>
@@ -62,7 +62,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                         	<input type="hidden" id="collection" name="collection" value="${collection}"/>
                         	<input type="hidden" id="paging" name="startCount" value=""/>
                         	<input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
-                        	<input type="image" id="topSearch" name="topSearch" src="${pageContext.request.contextPath}/web/images/common/btn_search.gif" alt="검색하기" class="btn_search">
+                        	<input type="image" id="topSearch" name="topSearch" src="${pageContext.request.contextPath}/web/images/outer/common/btn_search.gif" alt="검색하기" class="btn_search">
                         </form>
                     </fieldset>
                 </div>
@@ -290,7 +290,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                         <span class="fc_gray">${entry['RDATE']}</span>
                                         <p class="txt_justify">${entry['CONTENT']}</p>
                                     </div>
-                                    <%-- <span class="fr"><img src="${pageContext.request.contextPath}/web/images/content/com_head_bg.jpg" alt=""></span> --%>
+                                    <%-- <span class="fr"><img src="${pageContext.request.contextPath}/web/images/outer/content/com_head_bg.jpg" alt=""></span> --%>
                                     <!--//1-->
                                 </li>
 								<c:if test="${status.last && collectionCountMap['localBusinessCount'] > 3 && collection eq 'ALL'}">
@@ -319,7 +319,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                         <span class="fc_gray">${entry['RDATE']}</span>
                                         <p class="txt_justify">${entry['CONTENT']}</p>
                                     </div>
-                                    <%-- <span class="fr"><img src="${pageContext.request.contextPath}/web/images/content/com_head_bg.jpg" alt=""></span> --%>
+                                    <%-- <span class="fr"><img src="${pageContext.request.contextPath}/web/images/outer/content/com_head_bg.jpg" alt=""></span> --%>
                                     <!--//1-->
                                 </li>
                                 <c:if test="${status.last && collectionCountMap['jobNewsCount'] > 3 && collection eq 'ALL'}">
@@ -376,7 +376,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 	<footer id="footer" style="margin-top: 6px;">
     <div class="row">
         <div class="copyright fl">
-            <div class="footlogo"><img src="${pageContext.request.contextPath}/web/images/common/logo_foot.png" alt="전라남도일자리종합센터"></div>
+            <div class="footlogo"><img src="${pageContext.request.contextPath}/web/images/outer/common/logo_foot.png" alt="전라남도일자리종합센터"></div>
             <ul class="footmenu mb10">
                 <li><a href="http://job.jeonnam.go.kr/content/view.do?menuCd=J008001">센터소개</a></li>
                 <li><a href="http://job.jeonnam.go.kr/content/view.do?menuCd=J009005">회원약관</a></li>

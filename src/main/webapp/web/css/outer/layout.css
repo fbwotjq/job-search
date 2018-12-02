@@ -17,7 +17,7 @@ Author: TrueDesign
 /** header **/
 /* util */
 #header {position:relative;height:175px}
-.util {height:35px;background:url('../images/common/util_bg.gif') repeat-x 0 0}
+.util {height:35px;background:url('../../images/outer/common/util_bg.gif') repeat-x 0 0}
 .util .row {padding:0;}
 .util li { float:left; border-right:1px solid #DDD; font-size:12px}
 .util li a {display:block;line-height:34px; background:#969dac; color:#FFF;padding:0 15px; letter-spacing:-0.5px;text-align:center}
@@ -27,7 +27,7 @@ Author: TrueDesign
 .util .top_site li a.current {font-weight:bold;line-height:35px}
 .util .top_mem {float:right;width:255px;}
 .util .top_mem li { border-right:0;width:33.3%}
-.util .top_mem li a.login { background:#19b5d6 url('../images/common/util_login.gif') no-repeat 15px 50%; text-indent:12px}
+.util .top_mem li a.login { background:#19b5d6 url('../../images/outer/common/util_login.gif') no-repeat 15px 50%; text-indent:12px}
 .util .top_mem li a.regist{ background:#3c78ce}  
 .util .top_mem li a.sitemap{ background:#eeeeee; color:inherit}
 
@@ -47,7 +47,7 @@ Author: TrueDesign
 .headermenu{position:relative;width:1000px; margin:0 auto}
 .headermenu .stlogo {display:none}
 .headermenu_ul {width:960px;height:40px;position: relative; float:left}
-.headermenu_ul li {display:inline-block;font-size:16px;text-align: center;position:relative;background: url('../images/common/lineW.png') 0px 50% no-repeat;}
+.headermenu_ul li {display:inline-block;font-size:16px;text-align: center;position:relative;background: url('../../images/outer/common/lineW.png') 0px 50% no-repeat;}
 .headermenu_ul li:first-child, .headermenu_ul li:nth-child(1) {background:none}
 .headermenu_ul > li > a{text-decoration:none;color:#FFF;display:inline-block;padding:7px 25px;font-weight:700}
 .headermenu_ul > li:hover, .headermenu_ul > li.on {background:#FFF;margin-top:-2px}
@@ -64,13 +64,13 @@ Author: TrueDesign
 .headermember > li > a{color:#FFF;display:block}
 
 /* aside menu */
-.aside h2.snb_title {padding:47px 0;margin:0 0 10px;color:#fff;background:url(../images/common/snb_bg.gif) no-repeat 0 0;text-align: center;font-size:18px}
+.aside h2.snb_title {padding:47px 0;margin:0 0 10px;color:#fff;background:url(../../images/outer/common/snb_bg.gif) no-repeat 0 0;text-align: center;font-size:18px}
 .aside h2.snb_title a {color:#fff}
 #submenu {position: relative;width: 100%;margin-bottom: 50px;overflow: hidden;}	
 #submenu > li {	border-bottom: 1px solid #ddd; }
 #submenu > li > a {display: block;position: relative;padding: 11px 45px 15px 15px;}
-#submenu > li > a:after {display: inline-block;position: absolute;top: 0;right: 0;width:28px;height:50px;background: url(../images/common/side_depth2.png) no-repeat right 0;content:'';overflow: hidden;} 	
-#submenu > li > a[href^="http://"]:after {background: url(../images/common/newWindows.png) no-repeat right 0;}	
+#submenu > li > a:after {display: inline-block;position: absolute;top: 0;right: 0;width:28px;height:50px;background: url(../../images/outer/common/side_depth2.png) no-repeat right 0;content:'';overflow: hidden;}
+#submenu > li > a[href^="http://"]:after {background: url(../../images/outer/common/newWindows.png) no-repeat right 0;}
 #submenu > li.on {margin-top: -1px;background-color:#159fcc;border-bottom: none;}
 #submenu > li.on > a {color: #fff;}	
 #submenu > li.on > a:after {background-position: right -50px;}
@@ -78,9 +78,9 @@ Author: TrueDesign
 #submenu > li.on.plus > a:after {background-position: right -150px;}
 #submenu .depth3 {display: none;padding: 12px 15px 15px;background:#fafbfd;border-top: 1px solid #ddd;	border-left: 1px solid #f6f6f8;	border-right: 1px solid #f6f6f8;overflow: hidden;}	
 #submenu > li.on .depth3 {display: block;border-top: none;border-bottom: 1px solid #ddd;}
-#submenu .depth3 > li {margin-top: 8px;	padding-left: 9px;background: url(../images/common/side_depth3.gif) no-repeat 0 10px;}
+#submenu .depth3 > li {margin-top: 8px;	padding-left: 9px;background: url(../../images/outer/common/side_depth3.gif) no-repeat 0 10px;}
 #submenu .depth3 > li:first-child {margin-top: 0;}
-#submenu .depth3 > li.on {background: url(../images/common/side_depth3_on.gif) no-repeat 0 10px;	}
+#submenu .depth3 > li.on {background: url(../../images/outer/common/side_depth3_on.gif) no-repeat 0 10px;	}
 #submenu .depth3 > li > a {color: #737477; font-size:13px}	
 #submenu .depth3 li.on > a {color: #159fcc;font-weight:500;}	
 
@@ -102,7 +102,7 @@ Author: TrueDesign
 .copyright p{color:#969dac}
 .copyright p strong{color:#FFF; font-size:16px}
 .footmenu,.footaddr{display:inline-block}
-.foottel,.footfax{margin-left:10px;padding-left:10px;background: url('../images/common/line.png') 0px 50% no-repeat;color:#FFF}
-.footmenu li { float:left;margin-left:10px;padding-left:10px;background:url('../images/common/line.png') 0px 50% no-repeat;}
+.foottel,.footfax{margin-left:10px;padding-left:10px;background: url('../../images/outer/common/line.png') 0px 50% no-repeat;color:#FFF}
+.footmenu li { float:left;margin-left:10px;padding-left:10px;background:url('../../images/outer/common/line.png') 0px 50% no-repeat;}
 .footmenu li:first-child,.footmenu .first {margin-left:0px;padding-left:0px;background:none} 
 .footmenu li a {color:#969dac}

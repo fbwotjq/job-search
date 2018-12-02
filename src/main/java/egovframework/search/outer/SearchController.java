@@ -1,6 +1,6 @@
-package egovframework.search;
+package egovframework.search.outer;
 
-import egovframework.search.common.WNCollection;
+import egovframework.search.outer.common.WNCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class SearchController {
 		List<String> popKeywords = searchService.getPopKeyword();
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("search/search");
+		modelAndView.setViewName("search/outer/search");
 		modelAndView.addObject("query", query);
 		modelAndView.addObject("collection", collection);
 		modelAndView.addObject("totalCount", totalCount);

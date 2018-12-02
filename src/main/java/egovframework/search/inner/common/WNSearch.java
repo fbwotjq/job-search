@@ -1,13 +1,17 @@
-package egovframework.search.common;
+package egovframework.search.inner.common;
 
-import static egovframework.search.common.WNUtils.*;
+import egovframework.search.common.WNAnchor;
+import egovframework.search.common.WNCommon;
+import egovframework.search.common.WNDefine;
+import egovframework.search.common.WNUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static egovframework.search.common.WNDefine.*;
-import static egovframework.search.common.WNCollection.*;
+import static egovframework.search.common.WNUtils.*;
+import static egovframework.search.inner.common.WNCollection.*;
 
 /**
  *  file: WNSearch.jsp

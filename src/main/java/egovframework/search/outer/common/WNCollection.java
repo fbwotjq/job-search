@@ -1,4 +1,4 @@
-package egovframework.search.common;
+package egovframework.search.outer.common;
 
 public class WNCollection {
 	
