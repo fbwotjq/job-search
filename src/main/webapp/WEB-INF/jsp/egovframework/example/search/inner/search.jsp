@@ -94,124 +94,132 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                         </div>
                         <!--//통합검색 박스-->
                         <div class="search_sec">
-                            <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
-                            <div class="job_box">
-                                <dl>
-                                    <dt>
-                                        <a href="/">이랜드하당노인복지관</a>
-                                    </dt>
-                                    <dd>
-                                        <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                        <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                        <span><strong>경력 : </strong>경력무관</span>
-                                        <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                        <span><strong>고용형태 : </strong>월급</span>
-                                        <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                        <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                        <em>홈 &gt; 구인구직 &gt; 채용정보</em>
-                                    </dd>
-                                </dl>
-                                <ul class="img_list">
-                                    <li>
-                                        <a href="/" title="" target="_blank">
-                                            <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                            <span class="date">2018.10.11</span>
-                                            <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                            </p>
-                                        </a>
-                                        <em>홈 &gt; 구인구직 &gt; 게시판</em>
-                                    </li>
-                                </ul>
-                                <span class="TxtR"><a href="employmentInformation">구인구직 검색결과 더보기 +</a></span>
-                            </div>
-                            <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
-                            <div class="job_box">
-                                <dl>
-                                    <dt>
-                                        <a href="/">이랜드하당노인복지관</a>
-                                    </dt>
-                                    <dd>
-                                        <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                        <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                        <span><strong>경력 : </strong>경력무관</span>
-                                        <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                        <span><strong>고용형태 : </strong>월급</span>
-                                        <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                        <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                        <em>홈 &gt; 교육훈련 &gt; 기관소개</em>
-                                    </dd>
-                                </dl>
-                                <ul class="img_list">
-                                    <li>
-                                        <a href="/" title="" target="_blank">
-                                            <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                            <span class="date">2018.10.11</span>
-                                            <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                            </p>
-                                        </a>
-                                        <em>홈 &gt; 교육훈련 &gt; 게시판</em>
-                                    </li>
-                                </ul>
-                                <span class="TxtR"><a href="employmentInformation">교육훈련 검색결과 더보기 +</a></span>
-                            </div>
-                            <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
-                            <div class="job_box">
-                                <ul class="img_list">
-                                    <li>
-                                        <a href="/" title="" target="_blank">
-                                            <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
-                                            <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                            <span class="date">2018.10.11</span>
-                                            <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                            </p>
-                                        </a>
-                                        <em>홈 &gt; 일자리지원 &gt; 사업장</em>
-                                    </li>
-                                </ul>
-                                <dl>
-                                    <dt>
-                                        <a href="/">이랜드하당노인복지관</a>
-                                    </dt>
-                                    <dd>
-                                        <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                        <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                        <span><strong>경력 : </strong>경력무관</span>
-                                        <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                        <span><strong>고용형태 : </strong>월급</span>
-                                        <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                        <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                        <em>홈 &gt; 일자리지원 &gt; 게시판</em>
-                                    </dd>
-                                </dl>
-                                <span class="TxtR"><a href="employmentInformation">일자리지원 검색결과 더보기 +</a></span>
-                            </div>
-                            <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
-                            <div class="job_box">
-                                <ul class="img_list">
-                                    <li>
-                                        <a href="/" title="" target="_blank">
-                                            <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
-                                            <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                            <span class="date">2018.10.11</span>
-                                            <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                            </p>
-                                        </a>
-                                        <em>홈 &gt; 미니잡매칭 &gt; 채용정보</em>
-                                    </li>
-                                </ul>
-                                <ul class="img_list">
-                                    <li>
-                                        <a href="/" title="" target="_blank">
-                                            <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                            <span class="date">2018.10.11</span>
-                                            <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                            </p>
-                                        </a>
-                                        <em>홈 &gt; 미니잡매칭 &gt; 게시판</em>
-                                    </li>
-                                </ul>
-                                <span class="TxtR"><a href="employmentInformation">미니잡매칭 검색결과 더보기 +</a></span>
-                            </div>
+                            <c:if test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || collection eq 'publicJobNet'}">
+                                <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
+                                <div class="job_box">
+                                    <dl>
+                                        <dt>
+                                            <a href="/">이랜드하당노인복지관</a>
+                                        </dt>
+                                        <dd>
+                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
+                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
+                                            <span><strong>경력 : </strong>경력무관</span>
+                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
+                                            <span><strong>고용형태 : </strong>월급</span>
+                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
+                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
+                                            <em>홈 &gt; 구인구직 &gt; 채용정보</em>
+                                        </dd>
+                                    </dl>
+                                    <ul class="img_list">
+                                        <li>
+                                            <a href="/" title="" target="_blank">
+                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                <span class="date">2018.10.11</span>
+                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                </p>
+                                            </a>
+                                            <em>홈 &gt; 구인구직 &gt; 게시판</em>
+                                        </li>
+                                    </ul>
+                                    <span class="TxtR"><a href="employmentInformation">구인구직 검색결과 더보기 +</a></span>
+                                </div>
+                            </c:if>
+                            <c:if test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || collection eq 'educationTrainingNet'}">
+                                <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
+                                <div class="job_box">
+                                    <dl>
+                                        <dt>
+                                            <a href="/">이랜드하당노인복지관</a>
+                                        </dt>
+                                        <dd>
+                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
+                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
+                                            <span><strong>경력 : </strong>경력무관</span>
+                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
+                                            <span><strong>고용형태 : </strong>월급</span>
+                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
+                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
+                                            <em>홈 &gt; 교육훈련 &gt; 기관소개</em>
+                                        </dd>
+                                    </dl>
+                                    <ul class="img_list">
+                                        <li>
+                                            <a href="/" title="" target="_blank">
+                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                <span class="date">2018.10.11</span>
+                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                </p>
+                                            </a>
+                                            <em>홈 &gt; 교육훈련 &gt; 게시판</em>
+                                        </li>
+                                    </ul>
+                                    <span class="TxtR"><a href="employmentInformation">교육훈련 검색결과 더보기 +</a></span>
+                                </div>
+                            </c:if>
+                            <c:if test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
+                                <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
+                                <div class="job_box">
+                                    <ul class="img_list">
+                                        <li>
+                                            <a href="/" title="" target="_blank">
+                                                <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
+                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                <span class="date">2018.10.11</span>
+                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                </p>
+                                            </a>
+                                            <em>홈 &gt; 일자리지원 &gt; 사업장</em>
+                                        </li>
+                                    </ul>
+                                    <dl>
+                                        <dt>
+                                            <a href="/">이랜드하당노인복지관</a>
+                                        </dt>
+                                        <dd>
+                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
+                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
+                                            <span><strong>경력 : </strong>경력무관</span>
+                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
+                                            <span><strong>고용형태 : </strong>월급</span>
+                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
+                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
+                                            <em>홈 &gt; 일자리지원 &gt; 게시판</em>
+                                        </dd>
+                                    </dl>
+                                    <span class="TxtR"><a href="employmentInformation">일자리지원 검색결과 더보기 +</a></span>
+                                </div>
+                            </c:if>
+                            <c:if test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
+                                <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
+                                <div class="job_box">
+                                    <ul class="img_list">
+                                        <li>
+                                            <a href="/" title="" target="_blank">
+                                                <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
+                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                <span class="date">2018.10.11</span>
+                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                </p>
+                                            </a>
+                                            <em>홈 &gt; 미니잡매칭 &gt; 채용정보</em>
+                                        </li>
+                                    </ul>
+                                    <ul class="img_list">
+                                        <li>
+                                            <a href="/" title="" target="_blank">
+                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                <span class="date">2018.10.11</span>
+                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                </p>
+                                            </a>
+                                            <em>홈 &gt; 미니잡매칭 &gt; 게시판</em>
+                                        </li>
+                                    </ul>
+                                    <span class="TxtR"><a href="employmentInformation">미니잡매칭 검색결과 더보기 +</a></span>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                     <article class="rangking">
