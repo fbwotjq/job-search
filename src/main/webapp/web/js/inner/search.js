@@ -5,7 +5,8 @@ $(document).ready(function() {
 
     function doSearch() {
         var query = $('#topQuery').val();
-        if(query != undefined && query.replace(/^\s+|\s+$/gm, '') !== '' && $.trim(query) !== '검색어를 입력해주세요' && $.trim(query) !== '') {
+        if(query != undefined && query.replace(/^\s+|\s+$/gm, EMPTY_TEXT) !== EMPTY_TEXT &&
+            $.trim(query) !== '검색어를 입력해주세요' && $.trim(query) !== EMPTY_TEXT) {
             $('#searchForm').submit();
         } else {
             alert(plzInsertKeywordText);
@@ -33,7 +34,6 @@ $(document).ready(function() {
 
     $("#topQuery").focus(function() {
         var query = $(this).val();
-        console.log($.trim(query) === plzInsertKeywordText, $.trim(query), plzInsertKeywordText)
         if($.trim(query) === plzInsertKeywordText) {
             $(this).val(EMPTY_TEXT);
         }
@@ -46,6 +46,26 @@ $(document).ready(function() {
         this.submit();
     });
 
-    console.log($.cookie('my_keyword'));
+    $('#lmb ul li a').click(function () {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var collectionName = $(this).attr('href');
+        $('#collection').val(collectionName);
+        $('#searchForm').submit();
+
+    });
+
+    var myKeyword = $.cookie('my_keyword');
+    if(myKeyword != undefined && myKeyword != '' && myKeyword.replace(/^\s+|\s+$/gm,'') != '') {
+        $('#myKeywordArea').empty();
+        var array = myKeyword.split(",");
+        for (i = 0; i < array.length ; i++) {
+            $('#myKeywordArea').append("<li><small>" + (i + 1) + "</small><a href='" + array[i] + "' class='otherKeyword'><span>" + array[i] + "</span></a></li>");
+        }
+    } else {
+        $('#myKeywordAreaDiv').hide();
+    }
 
 });

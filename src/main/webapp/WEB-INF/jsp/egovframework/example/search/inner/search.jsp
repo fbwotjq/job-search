@@ -72,11 +72,11 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     <h2 class="hidden">주메뉴</h2>
                     <menu id="lmb">
                         <ul class="lm_2th">
-                            <li><a href="#" <c:if test="${collection eq 'ALL'}">class="on"</c:if> title="MENU 통합검색 Search"><span>통합검색</span></a></li>
-                            <li><a href="#" <c:if test="${collection eq 'publicJobNet'}">class="on"</c:if> title="MENU 구인구직 Search"><span>구인구직</span></a></li>
-                            <li><a href="#" <c:if test="${collection eq 'educationTrainingNet'}">class="on"</c:if> title="MENU 교육훈련 Search"><span>교육훈련</span></a></li>
-                            <li><a href="#" <c:if test="${collection eq 'jobSupportNet'}">class="on"</c:if> title="MENU 일자리지원 Search"><span>일자리지원</span></a></li>
-                            <li><a href="#" <c:if test="${collection eq 'miniJobMatchingNet'}">class="on"</c:if> title="MENU 미니잡매칭 Search"><span>미니잡매칭</span></a></li>
+                            <li><a href="ALL" <c:if test="${collection eq 'ALL'}">class="on"</c:if> title="MENU 통합검색 Search"><span>통합검색</span></a></li>
+                            <li><a href="publicJobNet" <c:if test="${collection eq 'publicJobNet'}">class="on"</c:if> title="MENU 구인구직 Search"><span>구인구직</span></a></li>
+                            <li><a href="educationTrainingNet" <c:if test="${collection eq 'educationTrainingNet'}">class="on"</c:if> title="MENU 교육훈련 Search"><span>교육훈련</span></a></li>
+                            <li><a href="jobSupportNet" <c:if test="${collection eq 'jobSupportNet'}">class="on"</c:if> title="MENU 일자리지원 Search"><span>일자리지원</span></a></li>
+                            <li><a href="miniJobMatchingNet" <c:if test="${collection eq 'miniJobMatchingNet'}">class="on"</c:if> title="MENU 미니잡매칭 Search"><span>미니잡매칭</span></a></li>
                         </ul>
                     </menu>
                     <div class="item">
@@ -216,9 +216,9 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                     </div>
                     <article class="rangking">
                         <!--랭킹메뉴-->
-                        <article class="group">
+                        <article class="group" id="myKeywordAreaDiv">
                             <h3>내가 찾은 검색어</h3>
-                            <ul class="list">
+                            <ul class="list" id="myKeywordArea">
                                 <li>
                                     <small>1</small>
                                     <a href="javascript:;" onclick="">
