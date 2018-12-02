@@ -1,15 +1,3 @@
-function otherKeywordClickEventBinding() {
-	
-	$('.otherKeyword').click(function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		var query = $(this).attr('href');
-		$('#topQuery').val(query);
-		$('#searchForm').submit();
-	});
-	
-}
-
 function doPaging(paging) {
 	
 	event.preventDefault();

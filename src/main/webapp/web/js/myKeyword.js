@@ -1,3 +1,15 @@
+function otherKeywordClickEventBinding() {
+
+    $('.otherKeyword').click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var query = $(this).attr('href');
+        $('#topQuery').val(query);
+        $('#searchForm').submit();
+    });
+
+}
+
 function setMyKeyword(keyword) {
 
     if(keyword != undefined && keyword != '' && keyword.replace(/^\s+|\s+$/gm, '') != '') {
