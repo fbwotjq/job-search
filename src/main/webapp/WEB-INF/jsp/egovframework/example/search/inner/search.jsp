@@ -12,7 +12,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>일자리통합정보망 > 통합검색</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/web/images/inner/favicon.ico">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/inner/base.css?ver=1" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/inner/layout.css?ver=1" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/inner/content.css?ver=1" />
@@ -52,51 +52,49 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
             <!--통합검색-->
             <div class="total_search">
                 <div class="search_form">
-                    <form>
+                    <form id="searchForm" action="${pageContext.request.contextPath}/inner/search/search.do" method="get">
                         <fieldset>
                             <legend>통합검색</legend>
                             <div class="keyword">
                                 <div class="searchbox">
-                                    <form id="searchForm" action="${pageContext.request.contextPath}/inner/search/search.do" method="get">
-                                        <input type="text" name="query" id="topQuery" class="search_box" value="<c:choose><c:when test="${query != '' && query ne null}">${query}</c:when><c:otherwise>검색어를 입력해주세요</c:otherwise></c:choose>" title="검색어를 입력해주세요">
-                                        <input type="hidden" id="collection" name="collection" value="${collection}"/>
-                                        <input type="hidden" id="paging" name="startCount" value=""/>
-                                        <input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
-                                    </form>
+                                    <input type="text" name="query" id="topQuery" class="search_box" value="<c:choose><c:when test="${query != '' && query ne null}">${query}</c:when><c:otherwise>검색어를 입력해주세요</c:otherwise></c:choose>" title="검색어를 입력해주세요">
+                                    <input type="hidden" id="collection" name="collection" value="${collection}"/>
+                                    <input type="hidden" id="paging" name="startCount" value=""/>
+                                    <input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
                                     <button type="submit" id="searchSubmit"><span class="blind">검색</span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                 </div>
-                <p class="ment">&quot;<span class="fc_red"><strong>${query}</strong></span>&quot; 에 대한 전체 <strong>총 <span>847</span> 건</strong>의 결과를 찾았습니다.</p>
+                <p class="ment">&quot;<span class="fc_red"><strong>${query}</strong></span>&quot; 에 대한 전체 <strong>총 <span>${totalCount}</span> 건</strong>의 결과를 찾았습니다.</p>
                 <div class="result">
                     <h2 class="hidden">주메뉴</h2>
                     <menu id="lmb">
                         <ul class="lm_2th">
-                            <li><a href="#" class="on" title="MENU 통합검색 Search"><span>통합검색</span></a></li>
-                            <li><a href="#" title="MENU 구인구직 Search"><span>구인구직</span></a></li>
-                            <li><a href="#" title="MENU 교육훈련 Search"><span>교육훈련</span></a></li>
-                            <li><a href="#" title="MENU 일자리지원 Search"><span>일자리지원</span></a></li>
-                            <li><a href="#" title="MENU 미니잡매칭 Search"><span>미니잡매칭</span></a></li>
+                            <li><a href="#" <c:if test="${collection eq 'ALL'}">class="on"</c:if> title="MENU 통합검색 Search"><span>통합검색</span></a></li>
+                            <li><a href="#" <c:if test="${collection eq 'publicJobNet'}">class="on"</c:if> title="MENU 구인구직 Search"><span>구인구직</span></a></li>
+                            <li><a href="#" <c:if test="${collection eq 'educationTrainingNet'}">class="on"</c:if> title="MENU 교육훈련 Search"><span>교육훈련</span></a></li>
+                            <li><a href="#" <c:if test="${collection eq 'jobSupportNet'}">class="on"</c:if> title="MENU 일자리지원 Search"><span>일자리지원</span></a></li>
+                            <li><a href="#" <c:if test="${collection eq 'miniJobMatchingNet'}">class="on"</c:if> title="MENU 미니잡매칭 Search"><span>미니잡매칭</span></a></li>
                         </ul>
                     </menu>
                     <div class="item">
                         <!--통합검색 박스-->
                         <div class="total_search_box">
                             <div class="ts_wrap">
-                                <span><span class="em_b_black">통합검색</span> (총 369건)</span>
+                                <span><span class="em_b_black">통합검색</span> (총 ${totalCount}건)</span>
                                 <ul class="clearfix">
-                                    <li><a href="/">구인구직 (<span class="fc_red">1</span>)</a></li>
-                                    <li><a href="/">교육훈련 (<span class="fc_red">0</span>)</a></li>
-                                    <li><a href="/">일자리지원 (<span class="fc_red">4</span>)</a></li>
-                                    <li><a href="/">미니잡매칭 (<span class="fc_red">364</span>)</a></li>
+                                    <li><a href="/">구인구직 (<span class="fc_red"><c:out value="${collectionCountMap['publicJobNetCount']}"/></span>)</a></li>
+                                    <li><a href="/">교육훈련 (<span class="fc_red"><c:out value="${collectionCountMap['educationTrainingNetCount']}"/></span>)</a></li>
+                                    <li><a href="/">일자리지원 (<span class="fc_red"><c:out value="${collectionCountMap['jobSupportNetCount']}"/></span>)</a></li>
+                                    <li><a href="/">미니잡매칭 (<span class="fc_red"><c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/></span>)</a></li>
                                 </ul>
                             </div>
                         </div>
                         <!--//통합검색 박스-->
                         <div class="search_sec">
-                            <h2>구인구직 <span>총 1,1000건</span></h2>
+                            <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
                             <div class="job_box">
                                 <dl>
                                     <dt>
@@ -126,7 +124,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </ul>
                                 <span class="TxtR"><a href="employmentInformation">구인구직 검색결과 더보기 +</a></span>
                             </div>
-                            <h2>교육훈련 <span>총 1,1000건</span></h2>
+                            <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
                             <div class="job_box">
                                 <dl>
                                     <dt>
@@ -156,7 +154,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </ul>
                                 <span class="TxtR"><a href="employmentInformation">교육훈련 검색결과 더보기 +</a></span>
                             </div>
-                            <h2>일자리지원 <span>총 1,1000건</span></h2>
+                            <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
                             <div class="job_box">
                                 <ul class="img_list">
                                     <li>
@@ -187,7 +185,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </dl>
                                 <span class="TxtR"><a href="employmentInformation">일자리지원 검색결과 더보기 +</a></span>
                             </div>
-                            <h2>미니잡매칭 <span>총 1,1000건</span></h2>
+                            <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
                             <div class="job_box">
                                 <ul class="img_list">
                                     <li>

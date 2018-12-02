@@ -1,16 +1,16 @@
-var plzInsertKeywordText = '검색어를 입력하여 주세요';
-var EMPTY_TEXT = '';
-
-function doSearch() {
-    var query = $('#topQuery').val();
-    if(query != undefined && query.replace(/^\s+|\s+$/gm, '') !== '' && $.trim(query) !== '검색어를 입력해주세요' && $.trim(query) !== '') {
-        $('#searchForm').submit();
-    } else {
-        alert(plzInsertKeywordText);
-    }
-}
-
 $(document).ready(function() {
+
+    var plzInsertKeywordText = '검색어를 입력해주세요';
+    var EMPTY_TEXT = '';
+
+    function doSearch() {
+        var query = $('#topQuery').val();
+        if(query != undefined && query.replace(/^\s+|\s+$/gm, '') !== '' && $.trim(query) !== '검색어를 입력해주세요' && $.trim(query) !== '') {
+            $('#searchForm').submit();
+        } else {
+            alert(plzInsertKeywordText);
+        }
+    }
 
     $('#searchSubmit').click(function () {
         event.preventDefault();
@@ -18,8 +18,8 @@ $(document).ready(function() {
     });
 
     $("#topQuery").keydown(function (event) {
-        event.preventDefault();
         if(event.keyCode == 13) {
+            event.preventDefault();
             doSearch();
         }
     });
@@ -33,6 +33,7 @@ $(document).ready(function() {
 
     $("#topQuery").focus(function() {
         var query = $(this).val();
+        console.log($.trim(query) === plzInsertKeywordText, $.trim(query), plzInsertKeywordText)
         if($.trim(query) === plzInsertKeywordText) {
             $(this).val(EMPTY_TEXT);
         }

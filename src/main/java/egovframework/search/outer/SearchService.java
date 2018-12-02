@@ -111,7 +111,8 @@ public class SearchService {
 		// 전체 결과
 		int totalCount = collectionCountMap.entrySet().stream().mapToInt(map -> map.getValue()).sum();
 		int lastPaging = totalCount == 0 ? 0 : (int)Math.floor(totalCount / 10) * 10;
-		String paging = collectionNameList.size() == 1 ? wnsearch.getPageLinks(startCount, totalCount, viewResultCount, 5) : "";
+		String paging = collectionNameList.size() == 1 ? wnsearch.getPageLinks(startCount, totalCount,
+				viewResultCount, 5) : WNCommon.EMPTY_STRING;
 		
 		logger.info(String.format("[SEARCH::SERVICE] RESULT DEBUG MESSAGE => totalCount: %s, collectionCountMap:%s, paging: %s", 
 				totalCount, collectionCountMap, paging));

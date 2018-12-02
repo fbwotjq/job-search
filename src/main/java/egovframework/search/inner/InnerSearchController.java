@@ -29,17 +29,31 @@ public class InnerSearchController {
     ) {
 
         int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
-        String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS : new String[] { collection };
+        String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS
+                : new String[] { collection };
         logger.info(String.format("[SEARCH::CONTROLLER] PARAM DEBUG MESSAGE => %s,%s,%s", query, collection, startCount));
 
         Map<String, Object> result = innerSearchService.search(query, collections, startCount, viewCount);
+
+        int totalCount = (int) result.get("totalCount");
+        String paging = (String) result.get("paging");
+        int lastPaging = (int) result.get("lastPaging");
+        Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
+        Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search/inner/search");
         modelAndView.addObject("query", query);
         modelAndView.addObject("collection", collection);
+        modelAndView.addObject("totalCount", totalCount);
+        modelAndView.addObject("lastPaging", lastPaging);
+        modelAndView.addObject("collectionCountMap", collectionCountMap);
+        modelAndView.addObject("collectionResultMap", collectionResultMap);
+        modelAndView.addObject("paging", paging);
+        modelAndView.addObject("startCount", startCount);
 
         return modelAndView;
+
     }
 
 }
