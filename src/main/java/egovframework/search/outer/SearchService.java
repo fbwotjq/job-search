@@ -1,5 +1,6 @@
 package egovframework.search.outer;
 
+import egovframework.search.common.WNCommon;
 import egovframework.search.outer.common.WNCollection;
 import egovframework.search.common.WNDefine;
 import egovframework.search.outer.common.WNSearch;
@@ -21,11 +22,6 @@ import java.util.stream.IntStream;
 @Service
 public class SearchService {
 
-	private final static boolean IS_DEBUG = true;
-	private final static boolean IS_UID_SEARCH = false;
-	private final static boolean IS_REALTIME_KEYWORD = false;
-	private final static boolean USE_SUGGESTED_QUERY = false;
-
 	private final static String POP_KEYWORDURI_PATH = "/manager/WNRun.do?target=popword&collection=_ALL_&range=M";
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
@@ -42,14 +38,14 @@ public class SearchService {
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// 검색 조건 셋팅, 질의, 디버그 
-		WNSearch wnsearch = new WNSearch(IS_DEBUG, IS_UID_SEARCH, collections, null, 0);
+		WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
 		collectionNameList.stream().forEach((String collection) -> {
 			
 			wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
 			wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, "RANK/DESC");
 			
 		});
-		wnsearch.search(query, IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, USE_SUGGESTED_QUERY);
+		wnsearch.search(query, WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
 		
 		String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : "";
 		logger.info(String.format("[SEARCH::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));

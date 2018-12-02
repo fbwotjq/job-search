@@ -2,7 +2,7 @@ package egovframework.search.outer.common;
 
 public class WNCollection {
 	
-	public static String SEARCH_IP = "211.39.94.35";
+	public static String SEARCH_IP = "dev.truetech.info"; //"211.39.94.35";
 	public static int SEARCH_PORT=7000;
 	public static String MANAGER_IP = "211.39.94.35";
 	public static int MANAGER_PORT=7800;

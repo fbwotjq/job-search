@@ -13,6 +13,11 @@ public class WNCommon {
     public final static String EMPTY_STRING = "";
     public final static String ZERO = "0";
 
+    public final static boolean IS_DEBUG = true;
+    public final static boolean IS_UID_SEARCH = false;
+    public final static boolean IS_REALTIME_KEYWORD = false;
+    public final static boolean USE_SUGGESTED_QUERY = false;
+
     private Search search = null;
     private JspWriter out = null;
     boolean isDebug = false;

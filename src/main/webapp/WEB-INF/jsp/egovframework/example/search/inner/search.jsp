@@ -21,6 +21,9 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <!--[if lt IE 9]>
     <script src="${pageContext.request.contextPath}/web/js/inner/html5shiv.js"></script>
     <![endif]-->
+    <script src="${pageContext.request.contextPath}/web/js/jquery-1.12.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/web/js/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/web/js/inner/search.js"></script>
 </head>
 <body>
 <div id="skipNav">
@@ -53,7 +56,13 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             <legend>통합검색</legend>
                             <div class="keyword">
                                 <div class="searchbox">
-                                    <input type="text" name="query" id="topQuery" class="search_box" value="검색하실 키워드를 입력해주세요!" title="검색어를 입력해주세요" onkeydown="if(event.keyCode == 13) commSearchForm.submit();" onfocus="this.value='';return true">
+                                    <form id="searchForm" action="${pageContext.request.contextPath}/inner/search/search.do" method="get">
+                                        <input type="text" name="query" id="topQuery" class="search_box" value="<c:choose><c:when test="${query != '' && query ne null}">${query}</c:when><c:otherwise>검색어를 입력해주세요</c:otherwise></c:choose>"
+                                               title="검색어를 입력해주세요" onkeydown="if(event.keyCode == 13) commSearchForm.submit();" onfocus="this.value='';return true">
+                                        <input type="hidden" id="collection" name="collection" value="${collection}"/>
+                                        <input type="hidden" id="paging" name="startCount" value=""/>
+                                        <input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
+                                    </form>
                                     <button type="submit"><span class="blind">검색</span></button>
                                 </div>
                             </div>
