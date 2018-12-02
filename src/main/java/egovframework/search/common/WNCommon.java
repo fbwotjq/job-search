@@ -8,10 +8,14 @@ import java.io.IOException;
 import javax.servlet.jsp.JspWriter;
 
 public class WNCommon {
-	
-   private Search search = null;
-   private JspWriter out = null;
-   boolean isDebug = false;
+
+    public final static String COLLECTION_ALL = "ALL";
+    public final static String EMPTY_STRING = "";
+    public final static String ZERO = "0";
+
+    private Search search = null;
+    private JspWriter out = null;
+    boolean isDebug = false;
 
    /**
     * SF-1 Search 클래스 객체를 생성하는 WNCommon의 생성자 함수이다.

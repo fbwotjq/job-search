@@ -1,5 +1,6 @@
 package egovframework.search.outer;
 
+import egovframework.search.common.WNCommon;
 import egovframework.search.outer.common.WNCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +19,7 @@ import java.util.Map;
 public class SearchController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
-	
-	private final static String COLLECTION_ALL = "ALL";
-	private final static String EMPTY_STRING = "";
-	private final static String ZERO = "0";
-	
+
 	@Autowired SearchService searchService; 
 	
 	/**
@@ -34,13 +31,13 @@ public class SearchController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/search.do", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView search(
-		@RequestParam(value = "query", defaultValue = EMPTY_STRING, required = false) String query,
-		@RequestParam(value = "collection", defaultValue = COLLECTION_ALL, required = false) String collection,
-		@RequestParam(value = "startCount", defaultValue = ZERO, required = false) int startCount
+		@RequestParam(value = "query", defaultValue = WNCommon.EMPTY_STRING, required = false) String query,
+		@RequestParam(value = "collection", defaultValue = WNCommon.COLLECTION_ALL, required = false) String collection,
+		@RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount
 	) {
 
-		int viewCount = COLLECTION_ALL.equals(collection) ? 3 : 10;
-		String[] collections = COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS : new String[] { collection };
+		int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
+		String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS : new String[] { collection };
 		logger.info(String.format("[SEARCH::CONTROLLER] PARAM DEBUG MESSAGE => %s,%s,%s", query, collection, startCount));
 		
 		Map<String, Object> result = searchService.search(query, collections, startCount, viewCount);
