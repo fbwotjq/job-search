@@ -23,6 +23,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <![endif]-->
     <script src="${pageContext.request.contextPath}/web/js/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/web/js/jquery.cookie.js"></script>
+    <script src="${pageContext.request.contextPath}/web/js/myKeyword.js"></script>
     <script src="${pageContext.request.contextPath}/web/js/inner/search.js"></script>
 </head>
 <body>
@@ -57,19 +58,18 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             <div class="keyword">
                                 <div class="searchbox">
                                     <form id="searchForm" action="${pageContext.request.contextPath}/inner/search/search.do" method="get">
-                                        <input type="text" name="query" id="topQuery" class="search_box" value="<c:choose><c:when test="${query != '' && query ne null}">${query}</c:when><c:otherwise>검색어를 입력해주세요</c:otherwise></c:choose>"
-                                               title="검색어를 입력해주세요" onkeydown="if(event.keyCode == 13) commSearchForm.submit();" onfocus="this.value='';return true">
+                                        <input type="text" name="query" id="topQuery" class="search_box" value="<c:choose><c:when test="${query != '' && query ne null}">${query}</c:when><c:otherwise>검색어를 입력해주세요</c:otherwise></c:choose>" title="검색어를 입력해주세요">
                                         <input type="hidden" id="collection" name="collection" value="${collection}"/>
                                         <input type="hidden" id="paging" name="startCount" value=""/>
                                         <input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
                                     </form>
-                                    <button type="submit"><span class="blind">검색</span></button>
+                                    <button type="submit" id="searchSubmit"><span class="blind">검색</span></button>
                                 </div>
                             </div>
                         </fieldset>
                     </form>
                 </div>
-                <p class="ment">&quot;<span class="fc_red"><strong>일자리</strong></span>&quot; 에 대한 전체 <strong>총 <span>847</span> 건</strong>의 결과를 찾았습니다.</p>
+                <p class="ment">&quot;<span class="fc_red"><strong>${query}</strong></span>&quot; 에 대한 전체 <strong>총 <span>847</span> 건</strong>의 결과를 찾았습니다.</p>
                 <div class="result">
                     <h2 class="hidden">주메뉴</h2>
                     <menu id="lmb">

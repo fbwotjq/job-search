@@ -12,6 +12,7 @@ public class WNCommon {
     public final static String COLLECTION_ALL = "ALL";
     public final static String EMPTY_STRING = "";
     public final static String ZERO = "0";
+    public final static String RANK_DESC = "RANK/DESC";
 
     public final static boolean IS_DEBUG = true;
     public final static boolean IS_UID_SEARCH = false;

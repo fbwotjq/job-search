@@ -42,15 +42,14 @@ public class SearchService {
 		collectionNameList.stream().forEach((String collection) -> {
 			
 			wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
-			wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, "RANK/DESC");
+			wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
 			
 		});
 		wnsearch.search(query, WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
 		
-		String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : "";
+		String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
 		logger.info(String.format("[SEARCH::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
 
-		
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// 검색 결과 정리
 		
@@ -77,25 +76,25 @@ public class SearchService {
 					field = field.split("/")[0];
 					String result = wnsearch.getField(collection, field, index, false);
 
-					result.replaceAll("&#8228;", "");
-					result.replaceAll("&#8231;", "");
-					result.replaceAll("&lt;B&gt;", "");
-					result.replaceAll("&lt;BR&gt;", "");
-					result.replaceAll("&lt;/B&gt;", "");
-					result.replaceAll("&lt;/BR&gt;", "");
-					result.replaceAll("&lt;b&gt;", "");
-					result.replaceAll("&lt;br&gt;", "");
-					result.replaceAll("&lt;/b&gt;", "");
-					result.replaceAll("&lt;/br&gt;", "");
-					result.replaceAll("<B>", "");
-					result.replaceAll("<BR>", "");
-					result.replaceAll("</B>", "");
-					result.replaceAll("</BR>", "");
-					result.replaceAll("<b>", "");
-					result.replaceAll("<br>", "");
-					result.replaceAll("</b>", "");
-					result.replaceAll("</br>", "");
-					result.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+					result.replaceAll("&#8228;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&#8231;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;B&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;BR&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;/B&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;/BR&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;b&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;br&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;/b&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("&lt;/br&gt;", WNCommon.EMPTY_STRING);
+					result.replaceAll("<B>", WNCommon.EMPTY_STRING);
+					result.replaceAll("<BR>", WNCommon.EMPTY_STRING);
+					result.replaceAll("</B>", WNCommon.EMPTY_STRING);
+					result.replaceAll("</BR>", WNCommon.EMPTY_STRING);
+					result.replaceAll("<b>", WNCommon.EMPTY_STRING);
+					result.replaceAll("<br>", WNCommon.EMPTY_STRING);
+					result.replaceAll("</b>", WNCommon.EMPTY_STRING);
+					result.replaceAll("</br>", WNCommon.EMPTY_STRING);
+					result.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", WNCommon.EMPTY_STRING);
 
 					documentMap.put(field, result);
 					

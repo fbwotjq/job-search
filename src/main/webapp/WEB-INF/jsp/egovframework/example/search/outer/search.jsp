@@ -27,6 +27,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/responsive.css">
 <script src="${pageContext.request.contextPath}/web/js/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/web/js/jquery.cookie.js"></script>
+<script src="${pageContext.request.contextPath}/web/js/myKeyword.js"></script>
 <script src="${pageContext.request.contextPath}/web/js/outer/search.js"></script>
 </head>
 <body id="main">	
