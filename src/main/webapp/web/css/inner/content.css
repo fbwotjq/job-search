@@ -1,0 +1,88 @@
+@charset "utf-8";
+/*통합검색*/
+.total_search {margin-top:131px;}
+.total_search .search_form{border:1px solid #c9c9c9;background-color: #f9f9f9;}
+.total_search .search_form .keyword {position:relative;width:575px;margin:0 auto;padding:40px 0;}
+.total_search .search_form .keyword .searchbox {width:98.6%;height:55px;margin-bottom:10px;border:4px solid #ffce23;background-color:#fff;}
+.total_search .search_form .keyword .searchbox select{display:inline-block;float:left;height:55px !important; border:none !important; margin:0; font-size:1.2em; padding:0 10px; vertical-align:top;}
+.total_search .search_form .keyword input {width:100%;height:55px;padding-left:10px;border:none;box-sizing:border-box;vertical-align:top;font-size:1.3em;color:#222c;}
+.total_search .search_form .keyword button {position:absolute;top:40px;width:86px;height:63px; border:0 none; background:none;cursor: pointer;right: -90px;background: url('../../images/inner/content/icon_search_white.png') no-repeat #ffce23 center;}
+.total_search .ment {padding:60px;font-size:1.75em;text-align:center;}
+.total_search .ment strong {font-weight:700;}
+.total_search .ment strong span {position:relative; color:#f15931;}
+.total_search .ment strong span:before {position:absolute; left:0; bottom:-3px; width:100%; height:1px; background-color:#f15931; content:'';}
+
+.total_search .result {position:relative;min-height: 1470px;}
+
+/*left menu*/
+.total_search .result #lmb{position:relative;display:block;float:left;width:247px;margin-top:0;z-index:10}
+#lmb .lm_2th {border:1px solid #c9c9c9;box-sizing: border-box;}
+#lmb .lm_2th li{min-height:38px;border-bottom:1px solid #c9c9c9;}
+#lmb .lm_2th li:last-child{border:none;}
+#lmb .lm_2th li a{display:block;height:55px;}
+#lmb .lm_2th li a:hover,#lmb .lm_2th li a:active,#lmb .lm_2th li a:focus{background:#007dc6;}
+#lmb .lm_2th li.first a,#lmb .lm_2th li:first-child a{height:55px;}
+#lmb .lm_2th li.first a:hover,#lmb .lm_2th li.first a:active,#lmb .lm_2th li.first a:focus{background:#007dc6;}
+#lmb .lm_2th li a span{display:block;height:55px;padding-left:35px;font-size:1.25em;line-height:52px;font-weight:700;}
+#lmb .lm_2th li a:hover span,#lmb .lm_2th li a:active span,#lmb .lm_2th li a:focus span{line-height:52px;text-decoration:none;background:url('../../images/inner/content/bul_lmb_ov.png') no-repeat 200px 50%;color:#fff}
+#lmb .lm_2th li a.on span{line-height:52px;text-decoration:none;background:#007dc6 url('../../images/inner/content/bul_lmb_ov.png') no-repeat 200px 50%;color:#fff;}
+#lmb .lm_2th a span,#lmb .lm_2th a span{height:38px;font-size:1.417em;line-height:3.5em;background:url('../../images/inner/content/bul_lmb_off.png') no-repeat 210px 50%;}
+
+/*list*/
+.total_search .item {float:right;width:925px;position:relative;}
+.total_search .item .total_search_box {padding:4px; background:url('../../images/inner/content/total_ptrn.gif') repeat left top;margin-bottom:50px;}
+.total_search .item .total_search_box .ts_wrap {padding:16px 22px 65px 22px;background-color:#fff;}
+.total_search .item .total_search_box .ts_wrap > span {display:inline-block; padding-left:25px; background:url('../../images/inner/content/total_tit.gif') no-repeat left 4px;font-size:1.25em;font-weight:700;}
+.total_search .item .total_search_box .ts_wrap ul {margin-top:15px; padding-left:26px;}
+.total_search .item .total_search_box .ts_wrap ul li {float:left; width:23%; padding-right:2%;}
+.total_search .item .total_search_box .ts_wrap ul li a {display:inline-block; padding-left:18px; background:url('../../images/inner/content/total_bu.gif') no-repeat left 5px; color:#000;font-size:1.1em;}
+.total_search .item .total_search_box .ts_wrap ul li a:hover {text-decoration:underline;}
+.total_search .item .search_sec h2 {clear:both;font-size:1.7em;font-weight:700;margin:25px 0 30px;background:url('../../images/inner/content/bul_h4.gif') no-repeat 0 50%; padding-left:25px;}
+.total_search .item .search_sec h2 span{color:#007dc6;font-size:0.95em;font-weight:500;margin-left:10px;}
+
+.total_search .item .search_sec .job_box {border-bottom:1px dashed #c9c9c9;padding-bottom:30px;margin-bottom:50px;}
+.total_search .item .search_sec .job_box dl {overflow:hidden; margin:10px 0 50px 15px; line-height:170%; position:relative}
+.total_search .item .search_sec .job_box dl dt {margin-bottom:10px;font-size:1.25em;font-weight:500; background:url('../../images/inner/content/li_bullet01.gif') no-repeat 0 12px; padding-left:9px}
+.total_search .item .search_sec .job_box dl dt a {color:#007dc6;text-decoration:underline;}
+.total_search .item .search_sec .job_box dl dd {padding-left:9px;}
+.total_search .item .search_sec .job_box dl dd > span {display:inline-block; margin-right:10px; padding-right:10px;background: url('../../images/inner/common/line2.png') no-repeat right 6px;}
+.total_search .item .search_sec .job_box dl dd > span strong {margin-right:5px}
+.total_search .item .search_sec .job_box dl dd > span.subject {width:70%; display:inline-block}
+.total_search .item .search_sec .job_box dl dd > em{color:#777;padding-top:10px;display:block;}
+.total_search .item .search_sec .job_box dl dd.more {margin-top:5px;background:#f9fafc; padding: 5px;}
+.total_search .item .search_sec .job_box dl dd.more a { background: url('../../images/inner/content/ic_more.gif') no-repeat right 4px; padding-right:15px;}
+.total_search .item .search_sec .job_box .TxtR {text-align:right;display:block;font-size:1.1em;}
+.total_search .item .search_sec .job_box .TxtR a{text-decoration:underline;}
+
+.total_search .item .search_sec .job_box .img_list li{margin:0 0 50px 15px;}
+.total_search .item .search_sec .job_box .img_list img{float:left;width:110px;height: 75px;margin-right: 8px;border:1px solid #dedede;}
+.total_search .item .search_sec .job_box .img_list .title{background: url('../../images/inner/content/li_bullet01.gif') no-repeat 0 12px;font-size: 1.25em;font-weight: 500;padding-left:10px;margin-right:10px;}
+.total_search .item .search_sec .job_box .img_list .title strong{margin-left:10px;color:#007dc6;text-decoration: underline;font-weight:500;}
+.total_search .item .search_sec .job_box .img_list .date{font-weight:400;color:#969dac;}
+.total_search .item .search_sec .job_box .img_list p{margin-top:10px;padding-left:10px;}
+.total_search .item .search_sec .job_box .img_list em{color:#777;padding-top:10px;display:block;margin-left:9px;}
+
+/*rangking*/
+.total_search .result .rangking {position:absolute;left:0; top:300px; width:247px;}
+.total_search .result .rangking .group {position:relative; margin-bottom:20px; padding:25px 30px; border:1px solid #c9c9c9;}
+.total_search .result .rangking .group h3 {margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid #e2e2e2;font-size:1.25em;font-weight:700;}
+.total_search .result .rangking .group .list li {position:relative; margin:8px 0; font-size:.95em; color:#333;}
+.total_search .result .rangking .group .list small {position:absolute; left:0; top:4px; width:12px; height:12px; border:1px solid #d5d5d5; font-size:11px; color:#686868; text-align:center; line-height:12px;}
+.total_search .result .rangking .group .list span {padding:0 0 0 25px;}
+.total_search .result .rangking .group .menu {position:absolute;right:30px;top:15px;width:90px;}
+.total_search .result .rangking .group .menu li {float:left;width:50%;}
+.total_search .result .rangking .group .menu a {display:block;height:30px; border:1px solid #c5c5c5; color:#333; text-align:center; line-height:30px;}
+.total_search .result .rangking .group .menu .on a {border-color:#4280be; background-color:#0575b7; color:#fff;}
+
+/* page navigation */
+.paging_wrap {position:relative;margin: 20px 0;}
+.pagination li {display:inline-block;}
+.pagination li a {display:inline-block;width:36px;height:36px;line-height:36px;border:1px solid #ccc; text-align:center;font-size:13px;color:#929aaa}
+.pagination li.active a, .pagination li a:hover, .pagination li a:focus {/*background:#4c5365;color:#fff;*/color:#363c48;font-weight:bold;border:1px solid #363c48;}
+.pagination li a:hover { text-decoration:none}
+.pagination li.button a { background:url('../../images/inner/content/ic_paginate.png') no-repeat;text-indent:-1000em; }
+.pagination li.button.previous a { background-position:0 0}
+.pagination li.button.left a { background-position:-36px 0}
+.pagination li.button.right a { background-position:-72px 0}
+.pagination li.button.next a { background-position:-108px 0}
+.pagination li.button a span { text-indent:-1000em;}

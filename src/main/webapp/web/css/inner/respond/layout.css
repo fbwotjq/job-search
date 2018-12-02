@@ -1,0 +1,127 @@
+@charset "utf-8";
+
+@media all and (max-width:1300px){
+	
+	/*탭메뉴*/
+	.sub_nav_wrap {width:100%;}
+	
+}
+@media all and (min-width:1200px){
+	
+	.util_wrap {width:1200px;}
+	#footer .footWrap{max-width:100%;}
+	#footer .footWrap .footer_box {margin-top:60px;}
+	#footer .footWrap .footer_box .logo{float:left;margin-right:40px;}
+	#footer .footWrap .footer_box .footer_link {float:left;margin-top:0px;}
+}
+	@media all and (min-width:1000px) and (max-width:1225px) {
+		
+			/*PC메뉴*/
+			#gnb > li {padding:0 37px;}
+		}
+	@media only screen and (min-width:1001px) {
+			/*mobile_menu*/
+			#mainNavi-wrap ,.header_mo ,.allmenu_mo {display:none;}
+	} 
+@media all and (max-width:1000px){
+	
+	/*pc메뉴*/
+	.util_wrap , #top-nav-prev-next {display:none;}
+	#header.start {height:80px;}
+
+	/* 컨텐츠 만족도 및 담당자 */
+	.satisfy_wrap .research {padding:25px 20px 50px 90px !important;}
+	.satisfy_wrap .research div {padding-right:0px;}
+	.satisfy_wrap .research input[type=text] {width:90%;top:40px !important;}
+	.satisfy_wrap .research input[type=submit], .satisfy_wrap .research input[type=button] {top:40px !important;}
+
+	/*헤더*/
+	#header {background: rgba(255,255,255,0.9);border-bottom:none;}
+	#header.fixed {background: rgba(255,255,255,0.9);}
+	#gnb {display:none;}
+
+	/*비주얼*/
+	#container .tit_nav {height:243px;}
+	#container .tit_nav h3 {padding:140px 0 35px 0}
+	#container .tit_nav h3:after {background:none;}
+	#container .tit_nav .slogon_text {display:none;}
+
+	/*탭메뉴*/
+	.sub_nav_wrap .sub_nav {display:none;}
+	.sub_nav_wrap .sub_nav.mobile {display:block;}
+}
+
+@media all and (max-width:800px){
+	
+	/* 컨텐츠 만족도 및 담당자 */
+	.charge li {margin-bottom:10px;display:block;}
+	.charge li:nth-child(4) {float:none;margin:0 0 0 4px !important;border-top:1px dashed #d2d2d2;padding-top:5px;}
+	/*관련사이트*/
+	aside.relate_site {left:0px;width:100%;} 
+	aside.relate_site div {width:100%;}
+	#footer {height:auto;}
+	#footer .footWrap .linkArea {margin-top:60px;text-align:center;}
+	#footer .footWrap .linkArea li:after{display:inline-block; position:relative; margin:0 10px; content:''; vertical-align:middle;background:rgba(181,181,181,0.2);border-radius:5px;width:4px;height:4px;}
+	#footer .footWrap .linkArea li:last-child:after {background:none;}
+	#footer .footWrap .footer_box {text-align:center;}
+	#footer .footWrap .footer_box .footer_link {text-align:center;padding:10px 50px;}
+
+	
+}
+
+@media all and (max-width:500px){
+	
+	/*mobile_menu*/
+	.header_mo .headtop_mo .size_mo .menu_btn {margin-left:8%;}
+	#header .container h1 > a {background-size:auto 70%;}
+	#header .container h1 {margin-left:-103px;top:25px;}
+	/* 컨텐츠 만족도 및 담당자 */
+	.satisfy_wrap .research .h1 {display:none;}
+	.satisfy_wrap .research {padding:25px 20px 60px 20px !important;}
+	.satisfy_wrap .research input[type=text] {width:80%;left:0px;top:50px !important;}
+	.satisfy_wrap .research input[type=submit], .satisfy_wrap .research input[type=button] {top:50px !important;}
+
+}
+
+@media all and (max-width:414px){
+	
+	/*mobile_header*/
+	.header_mo .headtop_mo .size_mo .menu_btn {margin-left:8%;}
+	.gnb_searchBox ul li input[type=text] {width:200px !important;}
+
+	/*비주얼*/
+	#container .tit_nav {height:190px;}
+	#container .tit_nav h3 {padding:125px 0 20px 0;font-size:1.55em;}
+	#container .tit_nav h3:after {background:none;}
+
+	/*sns*/
+	.contents_tools > ul > li:nth-child(1) > a {background-size:auto 263%;}
+	.contents_tools > ul > li:nth-child(2) {display:none;}
+	
+	/*탭메뉴*/
+	.sub_nav_wrap .sub_nav {line-height:31px;}
+	.sub_nav_wrap .sub_nav.mobile {top:155px;}
+	.sub_nav_wrap .sub_nav.mobile > ul > li {padding:2px;}
+	.sub_nav_wrap .sub_nav.mobile > a:after{bottom:11px;}
+	.sub_nav_wrap .sub_nav.mobile > a.on:after{bottom: 3px;}
+}
+
+
+@media all and (max-width:360px){
+	
+	/*mobile_header*/
+	.allmenu_mo .alltop h2 img{max-width:75%;}
+	/* 컨텐츠 만족도 및 담당자 */
+	.satisfy_wrap .research input[type=text] {top:60px !important;}
+	.satisfy_wrap .research input[type=submit], .satisfy_wrap .research input[type=button] {top:60px !important;}
+
+}
+
+@media all and (max-width:320px){
+	
+	/*mobile_header*/
+	#header .container h1 {margin-left: -89px;top: 28px;}
+	/* 모바일 일자리통합정보망 */
+	.all_link ul.underLink li a {font-size:0.95em;}
+
+}

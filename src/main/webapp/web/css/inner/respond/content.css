@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+
+@media all and (max-width:1300px) {
+		
+	#contents {width:96%;margin:0 auto;}
+	
+	
+}
+
+@media all and (max-width:1240px) and (min-width:999px) {
+
+	.total_search .item {width:73%;}
+
+}
+
+@media all and (max-width:1000px) {
+		
+	.total_search {margin-top:80px;}
+	
+	
+}
+@media all and (max-width: 1024px) {
+	/*주메뉴*/
+	.total_search .result #lmb {display:inline-block;float:none;width:100%;}
+	.total_search .result #lmb .lm_2th {min-height:113px;}
+	.total_search .result #lmb .lm_2th li {float:left;width:33.3%;min-height:51px;border-right:1px solid #dfdfdf;box-sizing:border-box;}
+	.total_search .result #lmb .lm_2th li:nth-child(3) {border-right:none;;}
+	#lmb .lm_2th a span, #lmb .lm_2th a span , #lmb .lm_2th li a:hover span,#lmb .lm_2th li a:active span,#lmb .lm_2th li a:focus span, #lmb .lm_2th li a.on span {background-position:92% 50%;}
+
+
+	/*리스트*/
+	.total_search .item {width:100%;margin-top:20px;}
+	/*랭킹*/
+	.total_search .result .rangking {display:none;}
+
+}
+@media all and (max-width:950px) {
+
+	.total_search .search_form {border:1px solid #c9c9c9; background-color:#f9f9f9; width:100%;}
+	.total_search .search_form .keyword {position:relative;width: 95%;margin:0 auto;padding:20px 0;}
+	.total_search .search_form .keyword .searchbox select {height:55px !important; border:none !important; margin:0; padding:0 10px; vertical-align:top;width:110px;width: 110px;}
+	.total_search .search_form .keyword button {position:absolute; right:20px; top:43px; width:20px; height:20px; border:0 none; background:none;}
+	.total_search .search_form .keyword button:before {position:absolute; left:0; top:0; z-index:1; width:10px; height:10px; border-radius:100%; border:3px solid #373737; background-color:#fff; content:'';}
+	.total_search .search_form .keyword button:after {position:absolute; right:5px; bottom:0; width:4px; height:15px; background-color:#373737; content:''; transform:rotate(-40deg);}
+	.total_search .search_form .keyword p {font-weight:200; color:#565b64;font-size: 1.1em;}
+	.total_search .search_form .keyword p span {display:block;}
+	.total_search .search_form .keyword p span strong {margin-right:5px; color:#303237;}
+
+}
+@media all and (max-width:800px) {
+	
+	/*통합검색 박스*/
+	.total_search .item .total_search_box .ts_wrap {padding-bottom:62px;}
+	.total_search .item .total_search_box .ts_wrap ul li {width:48%;}
+
+}
+@media all and (max-width:424px) {
+
+	#lmb .lm_2th a span, #lmb .lm_2th a span , #lmb .lm_2th li a:hover span,#lmb .lm_2th li a:active span,#lmb .lm_2th li a:focus span, #lmb .lm_2th li a.on span {background-image:none;}
+	#lmb .lm_2th li a span {text-align:center;padding:0px;}
+	/*통합검색 박스*/
+	.total_search .item .total_search_box .ts_wrap ul li {width:100%;margin-bottom:10px;}
+	.total_search .item .total_search_box .ts_wrap {padding-bottom:135px;}
+}
+		

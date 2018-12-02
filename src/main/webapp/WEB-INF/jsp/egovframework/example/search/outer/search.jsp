@@ -19,7 +19,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta name="description" content="" />
 <meta name="keyword" content="" />
 <title>통합검색</title>
-<link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+<link type="image/x-icon" rel="shortcut icon" href="${pageContext.request.contextPath}/web/images/outer/favicon.ico">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/base.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/layout.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/outer/font.css">
