@@ -50,7 +50,7 @@ public class WNCollection {
 				"RANK/DESC,DATE/DESC",  // set sort field (field,order) multi sort '/'
 				"basic,rpfmo,100",  // set sort field (field,order) multi sort '/'
 				"TITLE/100,CONTENT/50",// set search field
-				"DOCID,LINK_ID,BD_ID,BOARD_NAME,TITLE,CONTENT,COMPANY_NAME,TEL_NO,HOMEPAGE,EMAIL,EDU_ADDR1,EDU_ADDR2,EDU_PURPOSE,LOCATION,EDU_TIME,RECRUIT_START_DT,RECRUIT_END_DT,EDU_START_DT,EDU_END_DT,INSERT_DT,INSERT_ID,UPDATE_DT,UPDATE_ID,MENU_CD,ALIAS", // set document field
+				"DOCID,LINK_ID,BD_ID,BOARD_NAME,TITLE,CONTENT,COMPANY_NAME,TEL_NO,HOMEPAGE,EMAIL,EDU_ADDR1,EDU_ADDR2,EDU_PURPOSE,LOCATION,EDU_TIME,RECRUIT_START_DT,RECRUIT_END_DT,EDU_START_DT,EDU_END_DT,INSERT_DT,INSERT_ID,UPDATE_DT,UPDATE_ID,ALIAS", // set document field :TODO MENU_CD, --> 해당 필드를 넣으면 검색이 안됨
 				"", // set date range
 				"", // set rank range
 				"", // set prefix query, example: <fieldname:contains:value1>|<fieldname:contains:value2>/1,  (fieldname:contains:value) and ' ', or '|', not '!' / operator (AND:1, OR:0)
@@ -98,7 +98,7 @@ public class WNCollection {
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
 				"일자리지원" // collection display name
 			},
-			{
+			/*{
 				"miniJobMatchingNet", // set index name
 				"miniJobMatchingNet", // set collection name
 				"0,3",  // set pageinfo (start,count)
@@ -125,7 +125,7 @@ public class WNCollection {
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
 				"미니잡매칭" // collection display name
-			}
+			}*/
 		};
 	}
 }

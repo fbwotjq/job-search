@@ -168,18 +168,28 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                                     <dt>[공채속보] <a href="/">${entry['TITLE']}</a></dt>
                                                     <dd>
                                                         <p>${entry['CONTENT']}</p>
-                                                        <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                                        <span><strong>경력 : </strong>경력무관</span>
-                                                        <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                                        <span><strong>고용형태 : </strong>월급</span>
-                                                        <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                                        <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                                        <em>홈 &gt; 구인구직 &gt; 채용정보</em>
+                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                        <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
                                                     </dd>
                                                 </dl>
                                             </c:when>
                                             <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
-
+                                                <dl>
+                                                    <dt>[일자리정책,사업/${entry['BOARD_NAME']}] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                        <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                    </dd>
+                                                </dl>
                                             </c:when>
                                             <c:when test="${entry['ALIAS']  eq 'goodCompany'}">
                                                 <dl>
@@ -194,7 +204,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             <c:otherwise><%--publicJobBbs--%>
                                                 <dl>
                                                     <dt>
-                                                        [${entry['BOARD_NAME']}] <a href="/">${entry['TITLE']}</a>
+                                                        [게시판/${entry['BOARD_NAME']}] <a href="/">${entry['TITLE']}</a>
                                                     </dt>
                                                     <dd>
                                                         <p>${entry['CONTENT']}</p>
@@ -215,9 +225,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                         <c:choose>
                                             <c:when test="${entry['ALIAS'] eq 'eduOrgan'}"><%--기관소개--%>
                                                 <dl>
-                                                    <dt>
-                                                        <a href="/">${entry['TITLE']}</a>
-                                                    </dt>
+                                                    <dt>[기관소개]<a href="/">${entry['TITLE']}</a></dt>
                                                     <dd>
                                                         <p>${entry['CONTENT']}</p>
                                                         <span><strong>지역 : </strong>${entry['LOCATION']}</span>
@@ -228,24 +236,20 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             </c:when>
                                             <c:when test="${entry['ALIAS']  eq 'eduInfo'}"><%--교육훈련명--%>
                                                 <dl>
-                                                    <dt>
-                                                        <a href="/">${entry['TITLE']}</a>
-                                                    </dt>
+                                                    <dt>[교육훈련명] <a href="/">${entry['TITLE']}</a></dt>
                                                     <dd>
                                                         <p>${entry['CONTENT']}</p>
                                                         <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
                                                         <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
-                                                        <span><strong>교육정원 : </strong> --- </span>
+                                                        <span><strong>교육정원 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
                                                         <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
-                                                        <span class="bg_none"><strong>교육장소 : </strong> --- </span>
+                                                        <span class="bg_none"><strong>교육장소 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
                                                     </dd>
                                                 </dl>
                                             </c:when>
                                             <c:when test="${entry['ALIAS']  eq 'eduBbs'}"><%--게시판--%>
                                                 <dl>
-                                                    <dt>
-                                                        <a href="/">[${entry['BOARD_NAME']}]${entry['TITLE']}</a>
-                                                    </dt>
+                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
                                                     <dd>
                                                         <p>${entry['CONTENT']}</p>
                                                     </dd>
@@ -253,32 +257,6 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             </c:when>
                                         </c:choose>
                                     </c:forEach>
-                                    <%--<dl>
-                                        <dt>
-                                            <a href="/">이랜드하당노인복지관</a>
-                                        </dt>
-                                        <dd>
-                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                            <span><strong>경력 : </strong>경력무관</span>
-                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                            <span><strong>고용형태 : </strong>월급</span>
-                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                            <em>홈 &gt; 교육훈련 &gt; 기관소개</em>
-                                        </dd>
-                                    </dl>
-                                    <ul class="img_list">
-                                        <li>
-                                            <a href="/" title="" target="_blank">
-                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                                <span class="date">2018.10.11</span>
-                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                                </p>
-                                            </a>
-                                            <em>홈 &gt; 교육훈련 &gt; 게시판</em>
-                                        </li>
-                                    </ul>--%>
                                     <c:if test="${collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 3}">
                                         <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">교육훈련 검색결과 더보기 +</a></span>
                                     </c:if>
@@ -287,33 +265,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
                                 <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
                                 <div class="job_box">
-                                    <ul class="img_list">
-                                        <li>
-                                            <a href="/" title="" target="_blank">
-                                                <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
-                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                                <span class="date">2018.10.11</span>
-                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                                </p>
-                                            </a>
-                                            <em>홈 &gt; 일자리지원 &gt; 사업장</em>
-                                        </li>
-                                    </ul>
-                                    <dl>
-                                        <dt>
-                                            <a href="/">이랜드하당노인복지관</a>
-                                        </dt>
-                                        <dd>
-                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                            <span><strong>경력 : </strong>경력무관</span>
-                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                            <span><strong>고용형태 : </strong>월급</span>
-                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                            <em>홈 &gt; 일자리지원 &gt; 게시판</em>
-                                        </dd>
-                                    </dl>
+                                    <c:choose>
+                                        <c:when test="${entry['ALIAS']  eq 'bussinessJang'}"><%--사업장--%>
+                                            <dl>
+                                                <dt>[교육훈련명] <a href="/">${entry['TITLE']}</a></dt>
+                                                <dd>
+                                                    <p>${entry['CONTENT']}</p>
+                                                    <span><strong>회차명 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
+                                                    <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                    <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
+                                                    <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
+                                                    <span class="bg_none"><strong>근무형태 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
+                                                </dd>
+                                            </dl>
+                                        </c:when>
+                                        <c:when test="${entry['ALIAS']  eq 'bussinessBbs'}"><%--게시판--%>
+                                            <dl>
+                                                <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
+                                                <dd>
+                                                    <p>${entry['CONTENT']}</p>
+                                                </dd>
+                                            </dl>
+                                        </c:when>
+                                    </c:choose>
                                     <c:if test="${collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 3}">
                                         <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
                                     </c:if>
