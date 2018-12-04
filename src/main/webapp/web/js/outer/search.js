@@ -1,12 +1,3 @@
-function doPaging(paging) {
-	
-	event.preventDefault();
-	event.stopPropagation();
-	$('#paging').val(paging);
-	$('#searchForm').submit();
-	
-}
-
 var doubleSubmitFlag = false;
 function doubleSubmitCheck(){
     if(doubleSubmitFlag){

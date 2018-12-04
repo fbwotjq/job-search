@@ -80,24 +80,31 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                         </ul>
                     </menu>
                     <div class="item">
-                        <!--통합검색 박스-->
-                        <div class="total_search_box">
-                            <div class="ts_wrap">
-                                <span><span class="em_b_black">통합검색</span> (총 ${totalCount}건)</span>
-                                <ul class="clearfix">
-                                    <li><a href="/">구인구직 (<span class="fc_red"><c:out value="${collectionCountMap['publicJobNetCount']}"/></span>)</a></li>
-                                    <li><a href="/">교육훈련 (<span class="fc_red"><c:out value="${collectionCountMap['educationTrainingNetCount']}"/></span>)</a></li>
-                                    <li><a href="/">일자리지원 (<span class="fc_red"><c:out value="${collectionCountMap['jobSupportNetCount']}"/></span>)</a></li>
-                                    <li><a href="/">미니잡매칭 (<span class="fc_red"><c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/></span>)</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <c:choose>
+                            <c:when test="${collection eq 'ALL'}">
+                                <!--통합검색 박스-->
+                                <div class="total_search_box">
+                                    <div class="ts_wrap">
+                                        <span><span class="em_b_black">통합검색</span> (총 ${totalCount}건)</span>
+                                        <ul class="clearfix">
+                                            <li><a href="/">구인구직 (<span class="fc_red"><c:out value="${collectionCountMap['publicJobNetCount']}"/></span>)</a></li>
+                                            <li><a href="/">교육훈련 (<span class="fc_red"><c:out value="${collectionCountMap['educationTrainingNetCount']}"/></span>)</a></li>
+                                            <li><a href="/">일자리지원 (<span class="fc_red"><c:out value="${collectionCountMap['jobSupportNetCount']}"/></span>)</a></li>
+                                            <li><a href="/">미니잡매칭 (<span class="fc_red"><c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/></span>)</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+
+                            </c:otherwise>
+                        </c:choose>
                         <!--//통합검색 박스-->
                         <div class="search_sec">
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || collection eq 'publicJobNet'}">
                                 <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
                                 <div class="job_box">
-                                    <dl>
+                                    <%--<dl>
                                         <dt>
                                             <a href="/">이랜드하당노인복지관</a>
                                         </dt>
@@ -122,14 +129,131 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             </a>
                                             <em>홈 &gt; 구인구직 &gt; 게시판</em>
                                         </li>
-                                    </ul>
-                                    <span class="TxtR"><a href="employmentInformation">구인구직 검색결과 더보기 +</a></span>
+                                    </ul>--%>
+                                    <c:forEach var="entry" items="${collectionResultMap['publicJobNetResult']}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${entry['ALIAS'] eq 'careers'}">
+                                                <dl>
+                                                    <dt>[구인구직]<a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                        <span><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'publicJobs'}">
+                                                <dl>
+                                                    <dt>[공공일자리] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'publicAgencyJobs'}">
+                                                <dl>
+                                                    <dt>[공공기관채용정보] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'publicRecruitment'}">
+                                                <dl>
+                                                    <dt>[공채속보] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>마감일 : </strong>2017-12-15(금)</span>
+                                                        <span><strong>경력 : </strong>경력무관</span>
+                                                        <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
+                                                        <span><strong>고용형태 : </strong>월급</span>
+                                                        <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
+                                                        <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
+                                                        <em>홈 &gt; 구인구직 &gt; 채용정보</em>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
+
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'goodCompany'}">
+                                                <dl>
+                                                    <dt>[전남우수기업]<a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>주요제품 : </strong>${entry['MAIN_PRODUCT']}</span>
+                                                        <span><strong>전화번호 : </strong>${entry['PHONE_NUMBER']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:otherwise><%--publicJobBbs--%>
+                                                <dl>
+                                                    <dt>
+                                                        [${entry['BOARD_NAME']}] <a href="/">${entry['TITLE']}</a>
+                                                    </dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                    </dd>
+                                                </dl>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 3}">
+                                        <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">구인구직 검색결과 더보기 +</a></span>
+                                    </c:if>
                                 </div>
                             </c:if>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || collection eq 'educationTrainingNet'}">
                                 <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
                                 <div class="job_box">
-                                    <dl>
+                                    <c:forEach var="entry" items="${collectionResultMap['educationTrainingNetResult']}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${entry['ALIAS'] eq 'eduOrgan'}"><%--기관소개--%>
+                                                <dl>
+                                                    <dt>
+                                                        <a href="/">${entry['TITLE']}</a>
+                                                    </dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>지역 : </strong>${entry['LOCATION']}</span>
+                                                        <span><strong>전화번호 : </strong>${entry['TEL_NO']}</span>
+                                                        <span><strong>홈페이지 : </strong>${entry['HOMEPAGE']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'eduInfo'}"><%--교육훈련명--%>
+                                                <dl>
+                                                    <dt>
+                                                        <a href="/">${entry['TITLE']}</a>
+                                                    </dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
+                                                        <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
+                                                        <span><strong>교육정원 : </strong> --- </span>
+                                                        <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
+                                                        <span class="bg_none"><strong>교육장소 : </strong> --- </span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS']  eq 'eduBbs'}"><%--게시판--%>
+                                                <dl>
+                                                    <dt>
+                                                        <a href="/">[${entry['BOARD_NAME']}]${entry['TITLE']}</a>
+                                                    </dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <%--<dl>
                                         <dt>
                                             <a href="/">이랜드하당노인복지관</a>
                                         </dt>
@@ -154,8 +278,10 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             </a>
                                             <em>홈 &gt; 교육훈련 &gt; 게시판</em>
                                         </li>
-                                    </ul>
-                                    <span class="TxtR"><a href="employmentInformation">교육훈련 검색결과 더보기 +</a></span>
+                                    </ul>--%>
+                                    <c:if test="${collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 3}">
+                                        <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">교육훈련 검색결과 더보기 +</a></span>
+                                    </c:if>
                                 </div>
                             </c:if>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
@@ -188,7 +314,9 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             <em>홈 &gt; 일자리지원 &gt; 게시판</em>
                                         </dd>
                                     </dl>
-                                    <span class="TxtR"><a href="employmentInformation">일자리지원 검색결과 더보기 +</a></span>
+                                    <c:if test="${collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 3}">
+                                        <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
+                                    </c:if>
                                 </div>
                             </c:if>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
@@ -217,7 +345,9 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             <em>홈 &gt; 미니잡매칭 &gt; 게시판</em>
                                         </li>
                                     </ul>
-                                    <span class="TxtR"><a href="employmentInformation">미니잡매칭 검색결과 더보기 +</a></span>
+                                    <c:if test="${collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 3}">
+                                        <span class="TxtR"><a class="collectionMore" href="miniJobMatchingNet">미니잡매칭 검색결과 더보기 +</a></span>
+                                    </c:if>
                                 </div>
                             </c:if>
                         </div>

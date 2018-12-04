@@ -46,11 +46,21 @@ $(document).ready(function() {
         this.submit();
     });
 
-    $('#lmb ul li a').click(function () {
+    $('#lmb ul li a').click(function (event) {
 
         event.preventDefault();
         event.stopPropagation();
 
+        var collectionName = $(this).attr('href');
+        $('#collection').val(collectionName);
+        $('#searchForm').submit();
+
+    });
+
+    $('.collectionMore').click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
         var collectionName = $(this).attr('href');
         $('#collection').val(collectionName);
         $('#searchForm').submit();

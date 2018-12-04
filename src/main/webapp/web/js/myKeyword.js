@@ -1,3 +1,12 @@
+function doPaging(paging) {
+
+    event.preventDefault();
+    event.stopPropagation();
+    $('#paging').val(paging);
+    $('#searchForm').submit();
+
+}
+
 function otherKeywordClickEventBinding() {
 
     $('.otherKeyword').click(function(event) {
