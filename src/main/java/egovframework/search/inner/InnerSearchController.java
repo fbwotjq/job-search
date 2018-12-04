@@ -26,9 +26,9 @@ public class InnerSearchController {
 
     @RequestMapping(value = "/search.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView search(
-            @RequestParam(value = "query", defaultValue = WNCommon.EMPTY_STRING, required = false) String query,
-            @RequestParam(value = "collection", defaultValue = WNCommon.COLLECTION_ALL, required = false) String collection,
-            @RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount
+        @RequestParam(value = "query", defaultValue = WNCommon.EMPTY_STRING, required = false) String query,
+        @RequestParam(value = "collection", defaultValue = WNCommon.COLLECTION_ALL, required = false) String collection,
+        @RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount
     ) {
 
         int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
