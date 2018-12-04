@@ -2,6 +2,7 @@ package egovframework.search.inner;
 
 import egovframework.search.common.WNCommon;
 import egovframework.search.inner.common.WNCollection;
+import egovframework.search.outer.SearchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,6 +22,7 @@ public class InnerSearchController {
     private static final Logger logger = LoggerFactory.getLogger(InnerSearchController.class);
 
     @Autowired InnerSearchService innerSearchService;
+    @Autowired SearchService searchService;
 
     @RequestMapping(value = "/search.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView search(
@@ -41,6 +44,9 @@ public class InnerSearchController {
         Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
         Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
 
+        List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
+        List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search/inner/search");
         modelAndView.addObject("query", query);
@@ -50,7 +56,8 @@ public class InnerSearchController {
         modelAndView.addObject("collectionCountMap", collectionCountMap);
         modelAndView.addObject("collectionResultMap", collectionResultMap);
         modelAndView.addObject("paging", paging);
-        modelAndView.addObject("startCount", startCount);
+        modelAndView.addObject("weeklyPopKeywords", weeklyPopKeywords);
+        modelAndView.addObject("dailyPopKeywords", dailyPopKeywords);
 
         return modelAndView;
 
