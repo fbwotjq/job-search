@@ -266,7 +266,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
                                 <div class="job_box">
                                     <c:choose>
-                                        <c:when test="${entry['ALIAS']  eq 'bussinessJang'}"><%--사업장--%>
+                                        <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
                                             <dl>
                                                 <dt>[교육훈련명] <a href="/">${entry['TITLE']}</a></dt>
                                                 <dd>
@@ -279,7 +279,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                                 </dd>
                                             </dl>
                                         </c:when>
-                                        <c:when test="${entry['ALIAS']  eq 'bussinessBbs'}"><%--게시판--%>
+                                        <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
                                             <dl>
                                                 <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
                                                 <dd>
@@ -325,6 +325,19 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </div>
                             </c:if>
                         </div>
+                        <c:if test="${totalCount > 10 && collection ne 'ALL'}">
+                            <!--page navigation-->
+                            <div class="paging_wrap">
+                                <div class="tac">
+                                    <ul class="pagination">
+                                        <li class="button previous"><a href="#" title="처음" <c:if test="${startCount ne 0}">onClick="javascript:doPaging('0');"</c:if>><span>처음</span></a></li>
+                                            ${paging}
+                                        <li class="button next"><a href="#" title="마지막" <c:if test="${totalCount ne 0}">onClick="javascript:doPaging('${lastPaging}');"</c:if>><span>마지막</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--//page navigation-->
+                        </c:if>
                     </div>
                     <article class="rangking">
                         <!--랭킹메뉴-->

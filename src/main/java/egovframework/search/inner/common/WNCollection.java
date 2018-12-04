@@ -98,7 +98,7 @@ public class WNCollection {
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
 				"일자리지원" // collection display name
 			},
-			/*{
+			{
 				"miniJobMatchingNet", // set index name
 				"miniJobMatchingNet", // set collection name
 				"0,3",  // set pageinfo (start,count)
@@ -125,7 +125,7 @@ public class WNCollection {
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
 				"미니잡매칭" // collection display name
-			}*/
+			}
 		};
 	}
 }
