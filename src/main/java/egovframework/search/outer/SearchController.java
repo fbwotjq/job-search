@@ -48,7 +48,7 @@ public class SearchController {
 		Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
 		Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
 
-		List<String> popKeywords = searchService.getPopKeyword();
+		List<String> popKeywords = searchService.getPopKeyword("_ALL_", "M");
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("search/outer/search");

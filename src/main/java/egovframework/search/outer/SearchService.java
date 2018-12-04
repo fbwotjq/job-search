@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
 @Service
 public class SearchService {
 
-	private final static String POP_KEYWORDURI_PATH = "/manager/WNRun.do?target=popword&collection=_ALL_&range=M";
+	private final static String POP_KEYWORDURI_PATH = "/manager/WNRun.do?target=popword&collection=%s&range=%s";
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchService.class);
 
@@ -131,14 +131,14 @@ public class SearchService {
 		
 	}
 
-	public List<String> getPopKeyword() {
+	public List<String> getPopKeyword(String collection, String range) {
 
 		List<String> keywords = new ArrayList<>();
 
 		try {
 
 			RestTemplate restTemplate = new RestTemplate();
-			URI uri = URI.create(String.format("http://%s:%s%s", WNCollection.MANAGER_IP, WNCollection.MANAGER_PORT, POP_KEYWORDURI_PATH));
+			URI uri = URI.create(String.format("http://%s:%s%s", WNCollection.MANAGER_IP, WNCollection.MANAGER_PORT, String.format(POP_KEYWORDURI_PATH, collection, range)));
 			String responseString = restTemplate.getForObject(uri, String.class);
 
 			if(responseString != null && !responseString.equals("")) {
