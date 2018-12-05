@@ -103,8 +103,8 @@ public class InnerSearchService {
                 return map;
 
             }).collect(Collectors.toList());
-            groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
-                    input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
+            //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
+            //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
         }
 

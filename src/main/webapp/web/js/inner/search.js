@@ -67,12 +67,13 @@ $(document).ready(function() {
 
     });
 
-    $('groupMore').click(function (event) {
+    $('.groupMore').click(function (event) {
 
         event.preventDefault();
         event.stopPropagation();
+
         var groupName = $(this).attr('href');
-        $('#group').val(collectionName);
+        $('#group').val(groupName);
         $('#searchForm').submit();
 
     });
