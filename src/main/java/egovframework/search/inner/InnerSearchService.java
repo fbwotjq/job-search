@@ -20,7 +20,7 @@ public class InnerSearchService {
         String[] collections,
         int startCount,
         int viewResultCount
-    ) {
+    ) throws Exception {
 
         List<String> collectionNameList = new ArrayList<>(Arrays.asList(collections));
         logger.info(String.format("[SEARCH::SERVICE] PARAM DEBUG MESSAGE => %s,%s,%s,%s", query, collections, startCount, viewResultCount));
@@ -96,16 +96,23 @@ public class InnerSearchService {
 
         });
 
+        // 실시간 검색어
+        String realTimeKeywordString = wnsearch.recvRealTimeSearchKeywordList(5);
+        realTimeKeywordString = (realTimeKeywordString == null || "".equals(realTimeKeywordString)) ?
+                wnsearch.realTimeKeywords : realTimeKeywordString;
+        List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null
+                ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(","))) : new ArrayList<>();
+
         // 전체 결과
         int totalCount = collectionCountMap.entrySet().stream().mapToInt(map -> map.getValue()).sum();
         int lastPaging = totalCount == 0 ? 0 : (int)Math.floor(totalCount / 10) * 10;
         String paging = collectionNameList.size() == 1 ? wnsearch.getPageLinks(startCount, totalCount, viewResultCount,
                 5) : WNCommon.EMPTY_STRING;
 
-        logger.info(String.format("[SEARCH::SERVICE] RESULT DEBUG MESSAGE => totalCount: %s, collectionCountMap:%s, paging: %s",
-                totalCount, collectionCountMap, paging));
+        logger.info(String.format("[SEARCH::SERVICE] RESULT DEBUG MESSAGE => totalCount: %s, collectionCountMap:%s, paging: %s, realTimeKeywordString: %s",
+                totalCount, collectionCountMap, paging, realTimeKeywordString));
 
-        if ( wnsearch != null ) {
+        if (wnsearch != null) {
             wnsearch.closeServer();
         }
 
@@ -114,6 +121,7 @@ public class InnerSearchService {
         resultMap.put("collectionCountMap", collectionCountMap);
         resultMap.put("collectionResultMap", collectionResultMap);
         resultMap.put("paging", paging);
+        resultMap.put("realTimeKeywords", realTimeKeywords);
 
         return resultMap;
 

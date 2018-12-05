@@ -31,35 +31,47 @@ public class InnerSearchController {
         @RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount
     ) {
 
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("search/inner/search");
+        modelAndView.addObject("query", query);
+        modelAndView.addObject("collection", collection);
+
         int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
         String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS
                 : new String[] { collection };
         logger.info(String.format("[SEARCH::CONTROLLER] PARAM DEBUG MESSAGE => %s,%s,%s", query, collection, startCount));
 
-        Map<String, Object> result = innerSearchService.search(query, collections, startCount, viewCount);
+        try {
 
-        int totalCount = (int) result.get("totalCount");
-        String paging = (String) result.get("paging");
-        int lastPaging = (int) result.get("lastPaging");
-        Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
-        Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
+            Map<String, Object> result = innerSearchService.search(query, collections, startCount, viewCount);
 
-        List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
-        List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
+            int totalCount = (int) result.get("totalCount");
+            String paging = (String) result.get("paging");
+            int lastPaging = (int) result.get("lastPaging");
+            List<String> realTimeKeywords = (List<String>) result.get("realTimeKeywords");
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("search/inner/search");
-        modelAndView.addObject("query", query);
-        modelAndView.addObject("collection", collection);
-        modelAndView.addObject("totalCount", totalCount);
-        modelAndView.addObject("lastPaging", lastPaging);
-        modelAndView.addObject("collectionCountMap", collectionCountMap);
-        modelAndView.addObject("collectionResultMap", collectionResultMap);
-        modelAndView.addObject("paging", paging);
-        modelAndView.addObject("weeklyPopKeywords", weeklyPopKeywords);
-        modelAndView.addObject("dailyPopKeywords", dailyPopKeywords);
+            Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
+            Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
 
-        return modelAndView;
+            List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
+            List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
+
+
+            modelAndView.addObject("totalCount", totalCount);
+            modelAndView.addObject("lastPaging", lastPaging);
+            modelAndView.addObject("collectionCountMap", collectionCountMap);
+            modelAndView.addObject("collectionResultMap", collectionResultMap);
+            modelAndView.addObject("paging", paging);
+            modelAndView.addObject("weeklyPopKeywords", weeklyPopKeywords);
+            modelAndView.addObject("dailyPopKeywords", dailyPopKeywords);
+            modelAndView.addObject("realTimeKeywords", realTimeKeywords);
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            return modelAndView;
+        }
 
     }
 

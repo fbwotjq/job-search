@@ -78,8 +78,6 @@ $(document).ready(function() {
         $('#myKeywordAreaDiv').hide();
     }
 
-    otherKeywordClickEventBinding();
-
     $('.popkeywordtab').click(function (event) {
 
         event.preventDefault();
@@ -94,5 +92,7 @@ $(document).ready(function() {
         $atag.parent().addClass("on");
 
     });
+
+    otherKeywordClickEventBinding();
 
 });

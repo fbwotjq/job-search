@@ -414,41 +414,16 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </ul>
                             </article>
                         </c:if>
-                        <article class="group">
-                            <h3>실시간 검색어</h3>
-                            <ul class="list">
-                                <li>
-                                    <small>1</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>박람회</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>2</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>도시기본계획</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>3</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>채용공고</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>4</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>봉사</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>5</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>임대주택</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
+                        <c:if test="${realTimeKeywords ne null && fn:length(realTimeKeywords) > 0}">
+                            <article class="group">
+                                <h3>실시간 검색어</h3>
+                                <ul class="list">
+                                    <c:forEach var="realTimKeyword" items="${realTimeKeywords}" varStatus="status" end="4">
+                                        <li><small>${status.index + 1}</small><a href="${realTimKeyword}" class="otherKeyword"><span>${realTimKeyword}</span></a></li>
+                                    </c:forEach>
+                                </ul>
+                            </article>
+                        </c:if>
                         <!--//랭킹메뉴-->
                     </article>
                 </div>
