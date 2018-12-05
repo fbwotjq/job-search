@@ -80,26 +80,33 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                         </ul>
                     </menu>
                     <div class="item">
-                        <c:choose>
-                            <c:when test="${collection eq 'ALL'}">
-                                <!--통합검색 박스-->
-                                <div class="total_search_box">
-                                    <div class="ts_wrap">
+                        <div class="total_search_box">
+                            <div class="ts_wrap">
+                                <c:choose>
+                                    <c:when test="${collection eq 'ALL'}">
+                                        <!--통합검색 박스-->
                                         <span><span class="em_b_black">통합검색</span> (총 ${totalCount}건)</span>
                                         <ul class="clearfix">
-                                            <li><a href="/">구인구직 (<span class="fc_red"><c:out value="${collectionCountMap['publicJobNetCount']}"/></span>)</a></li>
-                                            <li><a href="/">교육훈련 (<span class="fc_red"><c:out value="${collectionCountMap['educationTrainingNetCount']}"/></span>)</a></li>
-                                            <li><a href="/">일자리지원 (<span class="fc_red"><c:out value="${collectionCountMap['jobSupportNetCount']}"/></span>)</a></li>
-                                            <li><a href="/">미니잡매칭 (<span class="fc_red"><c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/></span>)</a></li>
+                                            <li><a class="collectionMore" href="publicJobNet">구인구직 (<span class="fc_red"><c:out value="${collectionCountMap['publicJobNetCount']}"/></span>)</a></li>
+                                            <li><a class="collectionMore" href="educationTrainingNet">교육훈련 (<span class="fc_red"><c:out value="${collectionCountMap['educationTrainingNetCount']}"/></span>)</a></li>
+                                            <li><a class="collectionMore" href="jobSupportNet">일자리지원 (<span class="fc_red"><c:out value="${collectionCountMap['jobSupportNetCount']}"/></span>)</a></li>
+                                            <li><a class="collectionMore" href="miniJobMatchingNet">미니잡매칭 (<span class="fc_red"><c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/></span>)</a></li>
                                         </ul>
-                                    </div>
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-
-                            </c:otherwise>
-                        </c:choose>
-                        <!--//통합검색 박스-->
+                                        <!--//통합검색 박스-->
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span><span class="em_b_black">구인구직</span> (총 369건)</span>
+                                        <ul class="clearfix">
+                                            <li><a href="/">채용정보 (<span class="fc_red">1</span>)</a></li>
+                                            <li><a href="/">공공일자리 (<span class="fc_red">0</span>)</a></li>
+                                            <li><a href="/">공공기관채용정보 (<span class="fc_red">4</span>)</a></li>
+                                            <li><a href="/">공채속보 (<span class="fc_red">364</span>)</a></li>
+                                            <li><a href="/">게시판 (<span class="fc_red">364</span>)</a></li>
+                                        </ul>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
                         <div class="search_sec">
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || collection eq 'publicJobNet'}">
                                 <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
