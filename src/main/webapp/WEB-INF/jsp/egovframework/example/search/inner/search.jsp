@@ -214,7 +214,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                         </c:choose>
                                     </c:forEach>
                                     <c:if test="${collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 3}">
-                                        <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">구인구직 검색결과 더보기 +</a></span>
+                                        <span class="TxtR"><a class="collectionMore" href="publicJobNet">구인구직 검색결과 더보기 +</a></span>
                                     </c:if>
                                 </div>
                             </c:if>
@@ -241,13 +241,13 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                                         <p>${entry['CONTENT']}</p>
                                                         <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
                                                         <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
-                                                        <span><strong>교육정원 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
+                                                        <span><strong>교육정원 : </strong>${entry['EDU_MAX_COUNT']} 명</span>
                                                         <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
-                                                        <span class="bg_none"><strong>교육장소 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
+                                                        <span class="bg_none"><strong>교육장소 : </strong>${entry['EDU_ADDR1']}</span>
                                                     </dd>
                                                 </dl>
                                             </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'eduBbs'}"><%--게시판--%>
+                                            <c:when test="${entry['ALIAS'] eq 'eduBbs'}"><%--게시판--%>
                                                 <dl>
                                                     <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
                                                     <dd>
@@ -265,29 +265,32 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
                                 <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
                                 <div class="job_box">
-                                    <c:choose>
-                                        <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
-                                            <dl>
-                                                <dt>[교육훈련명] <a href="/">${entry['TITLE']}</a></dt>
-                                                <dd>
-                                                    <p>${entry['CONTENT']}</p>
-                                                    <span><strong>회차명 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
-                                                    <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
-                                                    <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
-                                                    <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
-                                                    <span class="bg_none"><strong>근무형태 : </strong> --- </span><%--:TODO 확인필요, 수집/색인 내역 확인 필요--%>
-                                                </dd>
-                                            </dl>
-                                        </c:when>
-                                        <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
-                                            <dl>
-                                                <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
-                                                <dd>
-                                                    <p>${entry['CONTENT']}</p>
-                                                </dd>
-                                            </dl>
-                                        </c:when>
-                                    </c:choose>
+                                    <c:forEach var="entry" items="${collectionResultMap['jobSupportNetResult']}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
+                                                <dl>
+                                                    <dt>[교육훈련명] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>회차명 : </strong>${entry['OFFER_NAME']}</span>
+                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                        <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
+                                                        <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
+                                                        <span class="bg_none"><strong>근무형태 : </strong>${entry['WORK_TYPE']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
+                                                <dl>
+                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:otherwise> </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
                                     <c:if test="${collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 3}">
                                         <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
                                     </c:if>
@@ -296,18 +299,34 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
                                 <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
                                 <div class="job_box">
-                                    <ul class="img_list">
-                                        <li>
-                                            <a href="/" title="" target="_blank">
-                                                <img src="${pageContext.request.contextPath}/web/images/inner/content/no_images.gif" width="110" height="75">
-                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                                <span class="date">2018.10.11</span>
-                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                                </p>
-                                            </a>
-                                            <em>홈 &gt; 미니잡매칭 &gt; 채용정보</em>
-                                        </li>
-                                    </ul>
+                                    <c:forEach var="entry" items="${collectionResultMap['miniJobMatchingNetResult']}" varStatus="status">
+                                <%--DOCID,LINK_ID,TITLE,CONTENT,COMPANY_NM,COMPANY_JOB,TEL_NO,INSERT_DT,INFOSUB_ID,KIND_NM,HIRE_CNT,PAY,EDUCATION,CAREER,MENU_CD,ALIAS--%>
+                                        <c:choose>
+                                            <c:when test="${entry['ALIAS'] eq 'miniJob'}"><%--사업장--%>
+                                                <dl>
+                                                    <dt>[미니잡매칭] <a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NM']}</span>
+                                                        <span><strong>업종 : </strong> ${entry['COMPANY_JOB']}</span>
+                                                        <span><strong>모집직종 : </strong> ${entry['KIND_NM']}</span>
+                                                        <span class="bg_none"><strong>급여 : </strong> ${entry['PAY']}</span>
+                                                        <span class="bg_none"><strong>학력 : </strong> ${entry['EDUCATION']}</span>
+                                                        <span class="bg_none"><strong>경력 : </strong> ${entry['CAREER']}</span>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
+                                                <dl>
+                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="/">${entry['TITLE']}</a></dt>
+                                                    <dd>
+                                                        <p>${entry['CONTENT']}</p>
+                                                    </dd>
+                                                </dl>
+                                            </c:when>
+                                            <c:otherwise> </c:otherwise>
+                                        </c:choose>
+                                    <%-- 혹시나 디자인 변경을 대비해서
                                     <ul class="img_list">
                                         <li>
                                             <a href="/" title="" target="_blank">
@@ -319,6 +338,8 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                             <em>홈 &gt; 미니잡매칭 &gt; 게시판</em>
                                         </li>
                                     </ul>
+                                    --%>
+                                    </c:forEach>
                                     <c:if test="${collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 3}">
                                         <span class="TxtR"><a class="collectionMore" href="miniJobMatchingNet">미니잡매칭 검색결과 더보기 +</a></span>
                                     </c:if>
