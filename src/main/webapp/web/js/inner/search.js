@@ -80,4 +80,19 @@ $(document).ready(function() {
 
     otherKeywordClickEventBinding();
 
+    $('.popkeywordtab').click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        $('#popkeywordtabarea .menu li').removeClass("on");
+        $('#popkeywordtabarea .list').hide();
+
+        var $atag = $(this);
+        var type = $atag.attr('href');
+        $('#' + type + 'Popkeywords').show();
+        $atag.parent().addClass("on");
+
+    });
+
 });
