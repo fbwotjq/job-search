@@ -28,7 +28,8 @@ public class InnerSearchController {
     public ModelAndView search(
         @RequestParam(value = "query", defaultValue = WNCommon.EMPTY_STRING, required = false) String query,
         @RequestParam(value = "collection", defaultValue = WNCommon.COLLECTION_ALL, required = false) String collection,
-        @RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount
+        @RequestParam(value = "startCount", defaultValue = WNCommon.ZERO, required = false) int startCount,
+        @RequestParam(value = "group", defaultValue = WNCommon.EMPTY_STRING, required = false) String group
     ) {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -43,19 +44,19 @@ public class InnerSearchController {
 
         try {
 
-            Map<String, Object> result = innerSearchService.search(query, collections, startCount, viewCount);
+            Map<String, Object> result = innerSearchService.search(query, collections, group, startCount, viewCount);
 
             int totalCount = (int) result.get("totalCount");
             String paging = (String) result.get("paging");
             int lastPaging = (int) result.get("lastPaging");
             List<String> realTimeKeywords = (List<String>) result.get("realTimeKeywords");
+            List<Map<String, String>> groupings = (List<Map<String, String>>) result.get("groupings");
 
             Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
             Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
 
             List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
             List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
-
 
             modelAndView.addObject("totalCount", totalCount);
             modelAndView.addObject("lastPaging", lastPaging);
@@ -65,6 +66,7 @@ public class InnerSearchController {
             modelAndView.addObject("weeklyPopKeywords", weeklyPopKeywords);
             modelAndView.addObject("dailyPopKeywords", dailyPopKeywords);
             modelAndView.addObject("realTimeKeywords", realTimeKeywords);
+            modelAndView.addObject("groupingsResults", groupings);
 
         } catch (Exception e) {
             logger.error(e.getMessage());

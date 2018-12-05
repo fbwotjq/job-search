@@ -61,6 +61,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                     <input type="hidden" id="collection" name="collection" value="${collection}"/>
                                     <input type="hidden" id="paging" name="startCount" value=""/>
                                     <input type="hidden" id="hiddenQuery" name="hiddenQuery" value="${query}"/>
+                                    <input type="hidden" id="group" name="group" value="${group}"/>
                                     <button type="submit" id="searchSubmit"><span class="blind">검색</span></button>
                                 </div>
                             </div>
@@ -95,14 +96,19 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                         <!--//통합검색 박스-->
                                     </c:when>
                                     <c:otherwise>
-                                        <span><span class="em_b_black">구인구직</span> (총 369건)</span>
-                                        <ul class="clearfix">
-                                            <li><a href="/">채용정보 (<span class="fc_red">1</span>)</a></li>
-                                            <li><a href="/">공공일자리 (<span class="fc_red">0</span>)</a></li>
-                                            <li><a href="/">공공기관채용정보 (<span class="fc_red">4</span>)</a></li>
-                                            <li><a href="/">공채속보 (<span class="fc_red">364</span>)</a></li>
-                                            <li><a href="/">게시판 (<span class="fc_red">364</span>)</a></li>
-                                        </ul>
+                                        <span><span class="em_b_black"><c:choose>
+                                            <c:when test="${collection eq 'publicJobNet'}">구인구직</c:when>
+                                            <c:when test="${collection eq 'educationTrainingNet'}">교육훈련</c:when>
+                                            <c:when test="${collection eq 'jobSupportNet'}">일자리지원</c:when>
+                                            <c:when test="${collection eq 'miniJobMatchingNet'}">미니잡매칭</c:when>
+                                        </c:choose></span> (총 ${totalCount}건)</span>
+                                        <c:if test="${groupingsResults ne null && fn:length(groupingsResults) > 0}">
+                                            <ul class="clearfix">
+                                                <c:forEach var="entry" items="${groupingsResults}" varStatus="status">
+                                                    <li><a class="groupMore" href="${entry['groupByCode']}">${entry['groupByName']} (<span class="fc_red">${entry['groupByCount']}</span>)</a></li>
+                                                </c:forEach>
+                                            </ul>
+                                        </c:if>
                                     </c:otherwise>
                                 </c:choose>
                             </div>

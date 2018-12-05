@@ -67,6 +67,16 @@ $(document).ready(function() {
 
     });
 
+    $('groupMore').click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+        var groupName = $(this).attr('href');
+        $('#group').val(collectionName);
+        $('#searchForm').submit();
+
+    });
+
     var myKeyword = $.cookie('my_keyword');
     if(myKeyword != undefined && myKeyword != '' && myKeyword.replace(/^\s+|\s+$/gm,'') != '') {
         $('#myKeywordArea').empty();

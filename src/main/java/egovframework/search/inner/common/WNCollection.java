@@ -36,7 +36,7 @@ public class WNCollection {
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
 				"", // use check prefix query filed
-				"", // set use check fast access field
+				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
@@ -64,7 +64,7 @@ public class WNCollection {
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
 				"", // use check prefix query filed
-				"", // set use check fast access field
+				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
@@ -92,7 +92,7 @@ public class WNCollection {
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
 				"", // use check prefix query filed
-				"", // set use check fast access field
+				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC
@@ -120,7 +120,7 @@ public class WNCollection {
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
 				"", // use check prefix query filed
-				"", // set use check fast access field
+				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
 				"", // set Duplicate Detection Criterion Field, RANK/DESC,DATE/DESC

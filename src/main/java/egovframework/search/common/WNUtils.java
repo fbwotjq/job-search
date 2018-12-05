@@ -485,5 +485,9 @@ public class WNUtils {
         req_value = req_value.replaceAll(">","");
         return req_value;
     }
+
+    public static boolean isEmpty(String input) {
+        return input == null || WNCommon.EMPTY_STRING.equals(input.trim());
+    }
 	    
 }
