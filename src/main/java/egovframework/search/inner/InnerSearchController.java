@@ -36,11 +36,12 @@ public class InnerSearchController {
         modelAndView.setViewName("search/inner/search");
         modelAndView.addObject("query", query);
         modelAndView.addObject("collection", collection);
+        modelAndView.addObject("group", group);
 
         int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
         String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS
                 : new String[] { collection };
-        logger.info(String.format("[SEARCH::CONTROLLER] PARAM DEBUG MESSAGE => %s,%s,%s", query, collection, startCount));
+        logger.info(String.format("[SEARCH::CONTROLLER] PARAM DEBUG MESSAGE => %s,%s,%s,%s", query, collection, startCount, group));
 
         try {
 

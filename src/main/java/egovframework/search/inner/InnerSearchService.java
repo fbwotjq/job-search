@@ -66,6 +66,9 @@ public class InnerSearchService {
         WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
         collectionNameList.stream().forEach((String collection) -> {
 
+            if(!WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection, WNDefine.EXQUERY_FIELD,
+                    String.format("<%s:contains:%s>", MULTI_GROUP_BY_FIELD, group));
+
             wnsearch.setCollectionInfoValue(collection, WNDefine.MULTI_GROUP_BY, MULTI_GROUP_BY_FIELD);
             wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
             wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);

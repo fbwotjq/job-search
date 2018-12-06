@@ -73,6 +73,7 @@ $(document).ready(function() {
         event.stopPropagation();
 
         var groupName = $(this).attr('href');
+
         $('#group').val(groupName);
         $('#searchForm').submit();
 
