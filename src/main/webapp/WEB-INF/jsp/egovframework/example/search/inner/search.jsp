@@ -373,41 +373,19 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </li>
                             </ul>
                         </article>
+                        <c:if test="${frequentlyAskedMenus ne null && fn:length(frequentlyAskedMenus) > 0}">
                         <article class="group">
                             <h3>많이 찾는 메뉴</h3>
                             <ul class="list">
-                                <li>
-                                    <small>1</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>교육훈련 &gt; 지원제도</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>2</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>구인구직 &gt; 게시판</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>3</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>일자리지원 &gt; 마을로</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>4</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>구인구직 &gt; 채용공고</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <small>5</small>
-                                    <a href="javascript:;" onclick="">
-                                        <span>구인구직 &gt; 게시판</span>
-                                    </a>
-                                </li>
+                                <c:forEach var="item" items="${frequentlyAskedMenus}" varStatus="status" end="4">
+                                    <li>
+                                        <small>${status.index + 1}</small>
+                                        <a href="${item.menuUrl}" target="_blank"><span>${item.menuNm}</span></a>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </article>
+                        </c:if>
                         <c:if test="${(weeklyPopKeywords ne null && fn:length(weeklyPopKeywords) > 0) || (dailyPopKeywords ne null && fn:length(dailyPopKeywords))}">
                             <article class="group" id="popkeywordtabarea">
                                 <h3>인기검색어</h3>

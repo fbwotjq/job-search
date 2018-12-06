@@ -1,12 +1,18 @@
 package egovframework.search.inner;
 
+import egovframework.search.FrequentlyAskedMenu;
 import egovframework.search.common.WNCommon;
 import egovframework.search.common.WNDefine;
 import egovframework.search.common.WNUtils;
+import egovframework.search.inner.common.WNCollection;
 import egovframework.search.inner.common.WNSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -170,8 +176,9 @@ public class InnerSearchService {
         String realTimeKeywordString = wnsearch.recvRealTimeSearchKeywordList(5);
         realTimeKeywordString = (realTimeKeywordString == null || "".equals(realTimeKeywordString)) ?
                 wnsearch.realTimeKeywords : realTimeKeywordString;
-        List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null
-                ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(","))) : new ArrayList<>();
+        List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null &&
+                !"".equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
+                : new ArrayList<>();
 
         // 전체 결과
         int totalCount = collectionCountMap.entrySet().stream().mapToInt(map -> map.getValue()).sum();
@@ -195,6 +202,32 @@ public class InnerSearchService {
         resultMap.put("groupings", groupings);
 
         return resultMap;
+
+    }
+
+    public List<FrequentlyAskedMenu> getFrequentlyAskedMenus() {
+
+        List<FrequentlyAskedMenu> frequentlyAskedMenus = null;
+        try {
+
+            String url = String.format("http://%s%s", WNCollection.SERVICE_DOMAIN, "/api/frequentMenuList.do?siteGroup=frequent&exceptMenuGroup=frequent&pageUnit=10");
+            logger.info(String.format("CALL => %s", url));
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<List<FrequentlyAskedMenu>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<FrequentlyAskedMenu>>(){});
+            frequentlyAskedMenus = response.getBody();
+            frequentlyAskedMenus.forEach((FrequentlyAskedMenu input) -> { logger.info(String.format("frequentlyAskedMenu %s, %s",
+                    input.getMenuNm(), input.getMenuUrl())); });
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            return frequentlyAskedMenus;
+        }
 
     }
 

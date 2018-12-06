@@ -6,6 +6,7 @@ public class WNCollection {
 	public static int SEARCH_PORT = 7000;
 	public static String MANAGER_IP = "211.39.94.35";
 	public static int MANAGER_PORT = 7800;
+    public static String SERVICE_DOMAIN = "dev.truetech.info:8180";
 
 	public static String[] COLLECTIONS = new String[]{"publicJobNet", "educationTrainingNet", "jobSupportNet", "miniJobMatchingNet"};
 	public static String[] COLLECTIONS_NAME = new String[]{"publicJobNet", "educationTrainingNet", "jobSupportNet", "miniJobMatchingNet"};

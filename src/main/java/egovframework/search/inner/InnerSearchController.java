@@ -1,5 +1,6 @@
 package egovframework.search.inner;
 
+import egovframework.search.FrequentlyAskedMenu;
 import egovframework.search.common.WNCommon;
 import egovframework.search.inner.common.WNCollection;
 import egovframework.search.outer.SearchService;
@@ -58,6 +59,7 @@ public class InnerSearchController {
 
             List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
             List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
+            List<FrequentlyAskedMenu> frequentlyAskedMenus = innerSearchService.getFrequentlyAskedMenus();
 
             modelAndView.addObject("totalCount", totalCount);
             modelAndView.addObject("lastPaging", lastPaging);
@@ -68,6 +70,7 @@ public class InnerSearchController {
             modelAndView.addObject("dailyPopKeywords", dailyPopKeywords);
             modelAndView.addObject("realTimeKeywords", realTimeKeywords);
             modelAndView.addObject("groupingsResults", groupings);
+            modelAndView.addObject("frequentlyAskedMenus", frequentlyAskedMenus);
 
         } catch (Exception e) {
             logger.error(e.getMessage());
