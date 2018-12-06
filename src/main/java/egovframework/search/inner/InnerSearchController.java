@@ -38,6 +38,7 @@ public class InnerSearchController {
         modelAndView.addObject("query", query);
         modelAndView.addObject("collection", collection);
         modelAndView.addObject("group", group);
+        modelAndView.addObject("serviceDomain", WNCollection.SERVICE_DOMAIN);
 
         int viewCount = WNCommon.COLLECTION_ALL.equals(collection) ? 3 : 10;
         String[] collections = WNCommon.COLLECTION_ALL.equals(collection) ? WNCollection.COLLECTIONS
