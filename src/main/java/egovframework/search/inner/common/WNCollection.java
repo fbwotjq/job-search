@@ -36,7 +36,7 @@ public class WNCollection {
 				"", // set categoryGroupBy (fieldname:value)
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
-				"", // use check prefix query filed
+				"ALIAS", // use check prefix query filed
 				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
@@ -64,7 +64,7 @@ public class WNCollection {
 				"", // set categoryGroupBy (fieldname:value)
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
-				"", // use check prefix query filed
+				"ALIAS", // use check prefix query filed
 				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
@@ -92,7 +92,7 @@ public class WNCollection {
 				"", // set categoryGroupBy (fieldname:value)
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
-				"", // use check prefix query filed
+				"ALIAS", // use check prefix query filed
 				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)
@@ -120,7 +120,7 @@ public class WNCollection {
 				"", // set categoryGroupBy (fieldname:value)
 				"", // set categoryQuery (fieldname:value)
 				"", // set property group (fieldname,min,max, groupcount)
-				"", // use check prefix query filed
+				"ALIAS", // use check prefix query filed
 				"ALIAS", // set use check fast access field
 				"", // set multigroupby field
 				"", // set auth query (Auth Target Field, Auth Collection, Auth Reference Field, Authority Query)

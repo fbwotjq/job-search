@@ -333,7 +333,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                                     </dd>
                                                 </dl>
                                             </c:when>
-                                            <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
+                                            <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
                                                 <dl>
                                                     <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
                                                     <dd>

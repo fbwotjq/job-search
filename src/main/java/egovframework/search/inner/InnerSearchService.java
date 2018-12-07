@@ -45,7 +45,8 @@ public class InnerSearchService {
         eduBbs("게시판"),
         bussinessJang("사업장"),
         bussinessBbs("게시판"),
-        miniJob("채용정보");
+        miniJob("채용정보"),
+        miniJobBbs("게시판");
 
         private String text;
         GROUP_BY_CDOE(String text) {
