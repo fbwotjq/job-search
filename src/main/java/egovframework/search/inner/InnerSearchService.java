@@ -4,6 +4,7 @@ import egovframework.search.FrequentlyAskedMenu;
 import egovframework.search.common.WNCommon;
 import egovframework.search.common.WNDefine;
 import egovframework.search.common.WNUtils;
+import egovframework.search.inner.common.GROUP_BY_CDOE;
 import egovframework.search.inner.common.WNCollection;
 import egovframework.search.inner.common.WNSearch;
 import org.slf4j.Logger;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 public class InnerSearchService {
@@ -28,34 +31,6 @@ public class InnerSearchService {
     private final static String groupByCode = "groupByCode";
     private final static String groupByCount = "groupByCount";
     private final static String groupByName = "groupByName";
-
-    public enum GROUP_BY_CDOE {
-
-        publicJobBbs("게시판"),
-        publicAgencyJobs("공공기관채용정보"),
-        careers("채용정보"),
-        publicRecruitment("공채속보"),
-        goodCompany("전남우수기업"),
-        jobPolicyBus("청년희망버스"),
-        jobPolicyMeet("구인구직만남의날"),
-        jobPolicyCenter("찾아가는일자리상담센터"),
-        jobPolicyDay("잡매칭데이"),
-        eduOrgan("기관소개"),
-        eduInfo("교육훈련정보"),
-        eduBbs("게시판"),
-        bussinessJang("사업장"),
-        bussinessBbs("게시판"),
-        miniJob("채용정보"),
-        miniJobBbs("게시판");
-
-        private String text;
-        GROUP_BY_CDOE(String text) {
-            this.text = text;
-        }
-        public String getText() {
-            return this.text;
-        }
-    }
 
     public Map<String,Object> search(
         String query,
@@ -96,7 +71,8 @@ public class InnerSearchService {
             String collection = collectionNameList.get(0);
             String multiGroupByResult = wnsearch.getMultiGroupByResult(collection, MULTI_GROUP_BY_FIELD);
             String[] multiGroupByResultArray = WNUtils.isEmpty(multiGroupByResult) ? new String[0] : multiGroupByResult.split("@");
-            groupings = Arrays.asList(multiGroupByResultArray).stream().filter((String input) -> { // 좆같은건 버린다.
+
+            Supplier<Stream<Map<String, String>>> streams = () -> Arrays.asList(multiGroupByResultArray).stream().filter((String input) -> { // 좆같은건 버린다.
 
                 String[] groupBys = input.split(MULTI_GROUP_BY_RESULT_SPLIT);
                 GROUP_BY_CDOE value = GROUP_BY_CDOE.valueOf(groupBys[0]);
@@ -112,13 +88,31 @@ public class InnerSearchService {
                 map.put(groupByName, GROUP_BY_CDOE.valueOf(groupBys[0]).getText());
                 return map;
 
+            });
+
+            final List<GROUP_BY_CDOE> matchedCodes = streams.get().map((Map<String, String> result) -> {
+                return GROUP_BY_CDOE.valueOf(result.get(groupByCode));
             }).collect(Collectors.toList());
-            //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
-            //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
+
+            groupings = Stream.concat(streams.get(), Arrays.stream(GROUP_BY_CDOE.values()).filter((GROUP_BY_CDOE code) -> {
+                return code.getCollection().equals(collection);
+            }).filter((GROUP_BY_CDOE code) -> {
+                return !matchedCodes.stream().filter((GROUP_BY_CDOE matchedCode) -> {
+                    return code == matchedCode;
+                }).findAny().isPresent();
+            }).map((GROUP_BY_CDOE code) -> {
+                Map<String, String> map = new HashMap<>();
+                map.put(groupByCode, code.name());
+                map.put(groupByCount, new Integer(0).toString());
+                map.put(groupByName, code.getText());
+                return map;
+            })).collect(Collectors.toList());
+            groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
+                    input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
         }
 
-        // 컬랙션별 결과
+        // 컬랙션별 검색된 도큐먼트 결과
         Map<String, Object> resultMap = new HashMap<>();
         Map<String, Integer> collectionCountMap = new HashMap<>();
         Map<String, Object> collectionResultMap = new HashMap<>();
@@ -181,7 +175,7 @@ public class InnerSearchService {
                 !"".equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
                 : new ArrayList<>();
 
-        // 전체 결과
+        // 전체 건수 결과
         int totalCount = collectionCountMap.entrySet().stream().mapToInt(map -> map.getValue()).sum();
         int lastPaging = totalCount == 0 ? 0 : (int)Math.floor(totalCount / 10) * 10;
         String paging = collectionNameList.size() == 1 ? wnsearch.getPageLinks(startCount, totalCount, viewResultCount,
