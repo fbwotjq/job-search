@@ -489,5 +489,33 @@ public class WNUtils {
     public static boolean isEmpty(String input) {
         return input == null || WNCommon.EMPTY_STRING.equals(input.trim());
     }
-	    
+
+    public static String replaceHtml(String result) {
+
+        if(result != null) {
+            result.replaceAll("&#8228;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&#8231;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;B&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;BR&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;/B&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;/BR&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;b&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;br&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;/b&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("&lt;/br&gt;", WNCommon.EMPTY_STRING);
+            result.replaceAll("<B>", WNCommon.EMPTY_STRING);
+            result.replaceAll("<BR>", WNCommon.EMPTY_STRING);
+            result.replaceAll("</B>", WNCommon.EMPTY_STRING);
+            result.replaceAll("</BR>", WNCommon.EMPTY_STRING);
+            result.replaceAll("<b>", WNCommon.EMPTY_STRING);
+            result.replaceAll("<br>", WNCommon.EMPTY_STRING);
+            result.replaceAll("</b>", WNCommon.EMPTY_STRING);
+            result.replaceAll("</br>", WNCommon.EMPTY_STRING);
+            result.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", WNCommon.EMPTY_STRING);
+        } else {
+            result = WNCommon.EMPTY_STRING;
+        }
+        return result;
+
+    }
 }

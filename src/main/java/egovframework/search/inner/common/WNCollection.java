@@ -31,7 +31,7 @@ public class WNCollection {
 				"", // set boost query (<fieldname:contains:value> | <field3:contains:value>...) and ' ', or '|'
 				"", // set filter operation (<fieldname:operator:value>)
 				"", // set groupby field(field, count)
-				"", // set sort field group(field/order,field/order,...)
+				"RANK/DESC", // set sort field group(field/order,field/order,...)
 				"", // set categoryBoost(fieldname,matchType,boostID,boostKeyword)
 				"", // set categoryGroupBy (fieldname:value)
 				"", // set categoryQuery (fieldname:value)
@@ -58,7 +58,7 @@ public class WNCollection {
 				"", // set collection query (<fieldname:contains:value^weight | value^weight>/option...) and ' ', or '|'
 				"", // set boost query (<fieldname:contains:value> | <field3:contains:value>...) and ' ', or '|'
 				"", // set filter operation (<fieldname:operator:value>)
-				"", // set groupby field(field, count)
+				"RANK/DESC", // set sort field group(field/order,field/order,...)
 				"", // set sort field group(field/order,field/order,...)
 				"", // set categoryBoost(fieldname,matchType,boostID,boostKeyword)
 				"", // set categoryGroupBy (fieldname:value)
@@ -86,7 +86,7 @@ public class WNCollection {
 				"", // set collection query (<fieldname:contains:value^weight | value^weight>/option...) and ' ', or '|'
 				"", // set boost query (<fieldname:contains:value> | <field3:contains:value>...) and ' ', or '|'
 				"", // set filter operation (<fieldname:operator:value>)
-				"", // set groupby field(field, count)
+				"RANK/DESC", // set sort field group(field/order,field/order,...)
 				"", // set sort field group(field/order,field/order,...)
 				"", // set categoryBoost(fieldname,matchType,boostID,boostKeyword)
 				"", // set categoryGroupBy (fieldname:value)
@@ -114,7 +114,7 @@ public class WNCollection {
 				"", // set collection query (<fieldname:contains:value^weight | value^weight>/option...) and ' ', or '|'
 				"", // set boost query (<fieldname:contains:value> | <field3:contains:value>...) and ' ', or '|'
 				"", // set filter operation (<fieldname:operator:value>)
-				"", // set groupby field(field, count)
+				"RANK/DESC", // set sort field group(field/order,field/order,...)
 				"", // set sort field group(field/order,field/order,...)
 				"", // set categoryBoost(fieldname,matchType,boostID,boostKeyword)
 				"", // set categoryGroupBy (fieldname:value)

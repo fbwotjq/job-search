@@ -4,8 +4,7 @@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %><%@
 taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%><%@
 taglib prefix="spring" uri="http://www.springframework.org/tags"%><%@
 taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%@
-taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!doctype html>
+taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html>
 <html lang="ko-KR">
 <head>
     <meta charset="UTF-8">
@@ -114,127 +113,224 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                             </div>
                         </div>
                         <div class="search_sec">
-                            <c:if test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || collection eq 'publicJobNet'}">
-                                <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
-                                <div class="job_box">
-                                    <%--<dl>
-                                        <dt>
-                                            <a href="/">이랜드하당노인복지관</a>
-                                        </dt>
-                                        <dd>
-                                            <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
-                                            <span><strong>마감일 : </strong>2017-12-15(금)</span>
-                                            <span><strong>경력 : </strong>경력무관</span>
-                                            <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
-                                            <span><strong>고용형태 : </strong>월급</span>
-                                            <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
-                                            <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
-                                            <em>홈 &gt; 구인구직 &gt; 채용정보</em>
-                                        </dd>
-                                    </dl>
-                                    <ul class="img_list">
-                                        <li>
-                                            <a href="/" title="" target="_blank">
-                                                <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
-                                                <span class="date">2018.10.11</span>
-                                                <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
-                                                </p>
-                                            </a>
-                                            <em>홈 &gt; 구인구직 &gt; 게시판</em>
-                                        </li>
-                                    </ul>--%>
-                                    <c:forEach var="entry" items="${collectionResultMap['publicJobNetResult']}" varStatus="status">
-                                        <c:choose>
-                                            <c:when test="${entry['ALIAS'] eq 'careers'}">
-                                                <dl>
-                                                    <dt>[채용정보]<a href="${serviceDomain}/spm/employ/employView.do?menuCd=${entry['MENU_CD']}&seekPersonNo=${entry['LINK_ID']}&bUserNo=${entry['BUSER_NO']}&wantedAuthNo=${entry['WANTED_AUTH_NO']}&listTarget=${entry['LIST_TARGET']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
-                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
-                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
-                                                        <span><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
-                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'publicJobs'}">
-                                                <dl>
-                                                    <dt>[공공일자리] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>등록일 : </strong>${entry['RDATE']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'publicAgencyJobs'}">
-                                                <dl>
-                                                    <dt>[공공기관채용정보] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>등록일 : </strong>${entry['RDATE']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'publicRecruitment'}">
-                                                <dl>
-                                                    <dt>[공채속보] <a href="${serviceDomain}/spm/openEmploy/openEmployView.do?openEmployNo=${entry['LINK_ID']}&menuCd=${entry['MENU_CD']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
-                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
-                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
-                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
-                                                        <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
-                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
-                                                <dl>
-                                                    <dt>[일자리정책,사업/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
-                                                        test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
-                                                        test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
-                                                        test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
-                                                        test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
-                                                        <span><strong>마감일 : </strong>${entry['RDATE']}</span>
-                                                        <span><strong>경력 : </strong>${entry['CAREER']}</span>
-                                                        <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
-                                                        <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
-                                                        <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'goodCompany'}">
-                                                <dl>
-                                                    <dt>[전남우수기업]<a href="${serviceDomain}/companyInfo/bestCompany/bestCompanyView.do?menuCd=${entry['MENU_CD']}&bestCompanyNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>주요제품 : </strong>${entry['MAIN_PRODUCT']}</span>
-                                                        <span><strong>전화번호 : </strong>${entry['PHONE_NUMBER']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:otherwise><%--publicJobBbs--%>
-                                                <dl>
-                                                    <dt>
-                                                        [게시판/${entry['BOARD_NAME']}] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
-                                                    </dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                    </dd>
-                                                </dl>
-                                            </c:otherwise>
-                                        </c:choose>
+                            <c:choose>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || (collection eq 'publicJobNet' && group ne '' && group ne null)}">
+                                    <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
+                                    <div class="job_box">
+                                        <%--<dl>
+                                            <dt>
+                                                <a href="/">이랜드하당노인복지관</a>
+                                            </dt>
+                                            <dd>
+                                                <p><!--채용제목-->하당노인복지관 노인<!--HS-->일자리<!--HE--> 및 사회활동지원사업 전담...</p>
+                                                <span><strong>마감일 : </strong>2017-12-15(금)</span>
+                                                <span><strong>경력 : </strong>경력무관</span>
+                                                <span><strong>학력 : </strong>고졸 ~ 대졸(4년)</span>
+                                                <span><strong>고용형태 : </strong>월급</span>
+                                                <span class="bg_none"><strong>근무지역 : </strong>전남 목포시</span>
+                                                <span class="db bg_none"><strong>키워드 : </strong>전담인력,노인<!--HS-->일자리</span>
+                                                <em>홈 &gt; 구인구직 &gt; 채용정보</em>
+                                            </dd>
+                                        </dl>
+                                        <ul class="img_list">
+                                            <li>
+                                                <a href="/" title="" target="_blank">
+                                                    <span class="title">[공지사항]<strong>2014년 전라남도 일자리 취업 박람회 개최</strong></span>
+                                                    <span class="date">2018.10.11</span>
+                                                    <p>행사명 : 2017년 전남동부권 <!--HS-->일자리<!--HE--> 박람회 일 시 : 2017. 11. 16(목) 10:00~17:00 장 소 : 순천팔마체육관 주 최 : 여수고용노동지청, 전라남도, 광양만권경제자유구역청,한국산업단지공단여수광양지사,전남테크노파크 주 관 : 광양만권<!--HS-->일자리<!--HE-->사업단 ※ 자세한 사항은 첨부파일 및 http://2017jnjobfair.com/ 으로 문의 바랍니다.
+                                                    </p>
+                                                </a>
+                                                <em>홈 &gt; 구인구직 &gt; 게시판</em>
+                                            </li>
+                                        </ul>--%>
+                                        <c:forEach var="entry" items="${collectionResultMap['publicJobNetResult']}" varStatus="status">
+                                            <c:choose>
+                                                <c:when test="${entry['ALIAS'] eq 'careers'}">
+                                                    <dl>
+                                                        <dt>[채용정보]<a href="${serviceDomain}/spm/employ/employView.do?menuCd=${entry['MENU_CD']}&seekPersonNo=${entry['LINK_ID']}&bUserNo=${entry['BUSER_NO']}&wantedAuthNo=${entry['WANTED_AUTH_NO']}&listTarget=${entry['LIST_TARGET']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'publicJobs'}">
+                                                    <dl>
+                                                        <dt>[공공일자리] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'publicAgencyJobs'}">
+                                                    <dl>
+                                                        <dt>[공공기관채용정보] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'publicRecruitment'}">
+                                                    <dl>
+                                                        <dt>[공채속보] <a href="${serviceDomain}/spm/openEmploy/openEmployView.do?openEmployNo=${entry['LINK_ID']}&menuCd=${entry['MENU_CD']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
+                                                    <dl>
+                                                        <dt>[일자리정책,사업/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'goodCompany'}">
+                                                    <dl>
+                                                        <dt>[전남우수기업]<a href="${serviceDomain}/companyInfo/bestCompany/bestCompanyView.do?menuCd=${entry['MENU_CD']}&bestCompanyNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>주요제품 : </strong>${entry['MAIN_PRODUCT']}</span>
+                                                            <span><strong>전화번호 : </strong>${entry['PHONE_NUMBER']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:otherwise><%--publicJobBbs--%>
+                                                    <dl>
+                                                        <dt>
+                                                            [게시판/${entry['BOARD_NAME']}] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                        </dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                        </dd>
+                                                    </dl>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 3}">
+                                            <span class="TxtR"><a class="collectionMore" href="publicJobNet">구인구직 검색결과 더보기 +</a></span>
+                                        </c:if>
+                                    </div>
+                                </c:when>
+                                <c:when test="${collection eq 'publicJobNet' && (group eq '' || group eq null)}">
+                                    <c:forEach var="groupResult" items="${collectionGroupResultMap}" varStatus="status">
+                                        <h2><c:out value="${groupResult.aliasText}"/> <span>총 <c:out value="${groupResult.count}"/>건</span></h2>
+                                        <div class="job_box">
+                                            <c:forEach var="entry" items="${groupResult.documents}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${entry['ALIAS'] eq 'careers'}">
+                                                        <dl>
+                                                            <dt>[채용정보]<a href="${serviceDomain}/spm/employ/employView.do?menuCd=${entry['MENU_CD']}&seekPersonNo=${entry['LINK_ID']}&bUserNo=${entry['BUSER_NO']}&wantedAuthNo=${entry['WANTED_AUTH_NO']}&listTarget=${entry['LIST_TARGET']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                                <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                                <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                                <span><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                                <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'publicJobs'}">
+                                                        <dl>
+                                                            <dt>[공공일자리] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'publicAgencyJobs'}">
+                                                        <dl>
+                                                            <dt>[공공기관채용정보] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>등록일 : </strong>${entry['RDATE']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'publicRecruitment'}">
+                                                        <dl>
+                                                            <dt>[공채속보] <a href="${serviceDomain}/spm/openEmploy/openEmployView.do?openEmployNo=${entry['LINK_ID']}&menuCd=${entry['MENU_CD']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                                <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                                <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                                <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                                <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                                <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
+                                                        <dl>
+                                                            <dt>[일자리정책,사업/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
+                                                                    test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
+                                                                    test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
+                                                                    test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
+                                                                    test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                                <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                                <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                                <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                                <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                                <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'goodCompany'}">
+                                                        <dl>
+                                                            <dt>[전남우수기업]<a href="${serviceDomain}/companyInfo/bestCompany/bestCompanyView.do?menuCd=${entry['MENU_CD']}&bestCompanyNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>주요제품 : </strong>${entry['MAIN_PRODUCT']}</span>
+                                                                <span><strong>전화번호 : </strong>${entry['PHONE_NUMBER']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:otherwise><%--publicJobBbs--%>
+                                                        <dl>
+                                                            <dt>
+                                                                [게시판/${entry['BOARD_NAME']}] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                            </dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </div>
                                     </c:forEach>
-                                    <c:if test="${collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 3}">
-                                        <span class="TxtR"><a class="collectionMore" href="publicJobNet">구인구직 검색결과 더보기 +</a></span>
-                                    </c:if>
-                                </div>
-                            </c:if>
+                                </c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
                             <c:if test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || collection eq 'educationTrainingNet'}">
                                 <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
                                 <div class="job_box">
@@ -350,7 +446,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
                                 </div>
                             </c:if>
                         </div>
-                        <c:if test="${totalCount > 10 && collection ne 'ALL'}">
+                        <c:if test="${totalCount > 10 && collection ne 'ALL' && group ne ''}">
                             <!--page navigation-->
                             <div class="paging_wrap">
                                 <div class="tac">

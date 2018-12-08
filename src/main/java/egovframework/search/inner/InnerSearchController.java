@@ -61,6 +61,7 @@ public class InnerSearchController {
             List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
             List<String> dailyPopKeywords = searchService.getPopKeyword("_ALL_", "D");
             List<FrequentlyAskedMenu> frequentlyAskedMenus = innerSearchService.getFrequentlyAskedMenus();
+            List<GroupResult> collectionGroupResultMap = (List<GroupResult>) result.get("collectionGroupResultMap");
 
             modelAndView.addObject("totalCount", totalCount);
             modelAndView.addObject("lastPaging", lastPaging);
@@ -72,6 +73,7 @@ public class InnerSearchController {
             modelAndView.addObject("realTimeKeywords", realTimeKeywords);
             modelAndView.addObject("groupingsResults", groupings);
             modelAndView.addObject("frequentlyAskedMenus", frequentlyAskedMenus);
+            modelAndView.addObject("collectionGroupResultMap", collectionGroupResultMap);
 
         } catch (Exception e) {
             logger.error(e.getMessage());

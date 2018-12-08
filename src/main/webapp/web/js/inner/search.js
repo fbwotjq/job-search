@@ -53,6 +53,7 @@ $(document).ready(function() {
 
         var collectionName = $(this).attr('href');
         $('#collection').val(collectionName);
+        $('#group').val('');
         $('#searchForm').submit();
 
     });
@@ -63,6 +64,7 @@ $(document).ready(function() {
         event.stopPropagation();
         var collectionName = $(this).attr('href');
         $('#collection').val(collectionName);
+        $('#group').val('');
         $('#searchForm').submit();
 
     });

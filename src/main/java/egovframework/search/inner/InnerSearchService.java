@@ -27,6 +27,7 @@ public class InnerSearchService {
     private static final Logger logger = LoggerFactory.getLogger(InnerSearchService.class);
     private static final String MULTI_GROUP_BY_FIELD = "ALIAS";
     private static final String MULTI_GROUP_BY_RESULT_SPLIT = "\\^\\^";
+    private static final String SEARCH_FIELD_BY_RESULT_SPLIT = ",";
 
     private final static String groupByCode = "groupByCode";
     private final static String groupByCount = "groupByCount";
@@ -48,8 +49,13 @@ public class InnerSearchService {
         WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
         collectionNameList.stream().forEach((String collection) -> {
 
-            if(!WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection, WNDefine.EXQUERY_FIELD,
+            if(collectionNameList.size() == 1 && !WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection, WNDefine.EXQUERY_FIELD,
                     String.format("<%s:contains:%s>", MULTI_GROUP_BY_FIELD, group));
+
+            if(collectionNameList.size() == 1 && WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection,
+                        WNDefine.GROUP_BY, String.format("%s,5", MULTI_GROUP_BY_FIELD));
+
+            logger.info(String.format("collectionNameListSize:%s, isGroupEmpty:%s", collectionNameList.size(), WNUtils.isEmpty(group)));
 
             wnsearch.setCollectionInfoValue(collection, WNDefine.MULTI_GROUP_BY, MULTI_GROUP_BY_FIELD);
             wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
@@ -72,7 +78,8 @@ public class InnerSearchService {
             String multiGroupByResult = wnsearch.getMultiGroupByResult(collection, MULTI_GROUP_BY_FIELD);
             String[] multiGroupByResultArray = WNUtils.isEmpty(multiGroupByResult) ? new String[0] : multiGroupByResult.split("@");
 
-            Supplier<Stream<Map<String, String>>> streams = () -> Arrays.asList(multiGroupByResultArray).stream().filter((String input) -> { // 좆같은건 버린다.
+            Supplier<Stream<Map<String, String>>> streams = () -> Arrays.asList(multiGroupByResultArray).stream()
+            .filter((String input) -> { // 혹시나 좆 같은건 버린다.
 
                 String[] groupBys = input.split(MULTI_GROUP_BY_RESULT_SPLIT);
                 GROUP_BY_CDOE value = GROUP_BY_CDOE.valueOf(groupBys[0]);
@@ -90,25 +97,26 @@ public class InnerSearchService {
 
             });
 
-            final List<GROUP_BY_CDOE> matchedCodes = streams.get().map((Map<String, String> result) -> {
-                return GROUP_BY_CDOE.valueOf(result.get(groupByCode));
-            }).collect(Collectors.toList());
+            final List<GROUP_BY_CDOE> matchedCodes = streams.get()
+            .map((Map<String, String> result) -> GROUP_BY_CDOE.valueOf(result.get(groupByCode)))
+            .collect(Collectors.toList());
 
-            groupings = Stream.concat(streams.get(), Arrays.stream(GROUP_BY_CDOE.values()).filter((GROUP_BY_CDOE code) -> {
-                return code.getCollection().equals(collection);
-            }).filter((GROUP_BY_CDOE code) -> {
-                return !matchedCodes.stream().filter((GROUP_BY_CDOE matchedCode) -> {
-                    return code == matchedCode;
-                }).findAny().isPresent();
-            }).map((GROUP_BY_CDOE code) -> {
+            groupings = Stream.concat(streams.get(), Arrays.stream(GROUP_BY_CDOE.values())
+            .filter((GROUP_BY_CDOE code) -> code.getCollection().equals(collection))
+            .filter((GROUP_BY_CDOE code) ->
+                    !matchedCodes.stream().filter((GROUP_BY_CDOE matchedCode) -> code == matchedCode)
+                    .findAny().isPresent())
+            .map((GROUP_BY_CDOE code) -> {
+
                 Map<String, String> map = new HashMap<>();
                 map.put(groupByCode, code.name());
                 map.put(groupByCount, new Integer(0).toString());
                 map.put(groupByName, code.getText());
                 return map;
+
             })).collect(Collectors.toList());
-            groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
-                    input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
+            //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
+            //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
         }
 
@@ -116,63 +124,86 @@ public class InnerSearchService {
         Map<String, Object> resultMap = new HashMap<>();
         Map<String, Integer> collectionCountMap = new HashMap<>();
         Map<String, Object> collectionResultMap = new HashMap<>();
-        collectionNameList.stream().forEach((String collection) -> {
+        List<GroupResult> collectionGroupResultMap = null;
+
+        if(collectionNameList.size() == 1 && WNUtils.isEmpty(group)) {
+
+            String collection = collectionNameList.get(0);
 
             int count = wnsearch.getResultTotalCount(collection);
             collectionCountMap.put(collection + "Count", count);
 
-            int thisTotalCount = wnsearch.getResultCount(collection);
+            int matchedGroupCount = wnsearch.getResultTotalGroupCount(collection);
+            logger.info(String.format("resultTotalCount: %s, matchedGroupCount: %s", count, matchedGroupCount));
+            List<String> searchResultFieldList = wnsearch.getSearchResultField(collection);
 
-            List<Map<String, String>> documentMapList = new ArrayList<Map<String, String>>();
-            IntStream.range(0, thisTotalCount).forEach((int index) -> {
+            collectionGroupResultMap = IntStream.range(0, matchedGroupCount).mapToObj((int index) -> {
 
-                List<String> searchResultFieldList = wnsearch.getSearchResultField(collection);
-                Map<String, String> documentMap = new HashMap<>();
-                searchResultFieldList.stream().forEach((String field) -> {
+                int matchedGroupResultTotalCount = wnsearch.getTotalCountInGroup(collection, index);
+                int matchedGroupResultCount = wnsearch.getCountInGroup(collection, index);
 
-                    field = field.split("/")[0];
-                    String result = wnsearch.getField(collection, field, index, false);
+                logger.info(String.format("matchedGroupResultTotalCount:%s, matchedGroupResultCount:%s", matchedGroupResultTotalCount, matchedGroupResultCount));
 
-                    result.replaceAll("&#8228;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&#8231;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;B&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;BR&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;/B&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;/BR&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;b&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;br&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;/b&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("&lt;/br&gt;", WNCommon.EMPTY_STRING);
-                    result.replaceAll("<B>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("<BR>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("</B>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("</BR>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("<b>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("<br>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("</b>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("</br>", WNCommon.EMPTY_STRING);
-                    result.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", WNCommon.EMPTY_STRING);
+                List<Map<String, String>> documents = IntStream.range(0, matchedGroupResultCount).mapToObj((int resultIndex) -> {
+                    Map<String, String> document = searchResultFieldList.stream()
+                    .map((String field) -> field.split("/")[0])
+                    .collect(Collectors.toMap(
+                        (String field) -> field,
+                        (String field) -> WNUtils.replaceHtml(wnsearch.getFieldInGroup(collection, field, index, resultIndex)
+                    )));
+                    logger.info(String.format("[SEARCH::SERVICE] collection grouped result => collection:%s, document:%s", collection, document));
+                    return document;
+                }).collect(Collectors.toList());
 
-                    documentMap.put(field, result);
+                GroupResult groupResult = new GroupResult();
+                groupResult.setAlias(documents.get(0).get(MULTI_GROUP_BY_FIELD));
+                groupResult.setAliasText(GROUP_BY_CDOE.valueOf(documents.get(0).get(MULTI_GROUP_BY_FIELD)).getText());
+                groupResult.setDocuments(documents);
+                groupResult.setCount(matchedGroupResultTotalCount);
+                return groupResult;
+
+            }).collect(Collectors.toList());
+
+        } else {
+
+            collectionNameList.stream().forEach((String collection) -> {
+
+                int count = wnsearch.getResultTotalCount(collection);
+                collectionCountMap.put(collection + "Count", count);
+
+                int thisTotalCount = wnsearch.getResultCount(collection);
+
+                List<Map<String, String>> documentMapList = new ArrayList<Map<String, String>>();
+                IntStream.range(0, thisTotalCount).forEach((int index) -> {
+
+                    List<String> searchResultFieldList = wnsearch.getSearchResultField(collection);
+                    Map<String, String> documentMap = new HashMap<>();
+                    searchResultFieldList.stream().forEach((String field) -> {
+
+                        field = field.split("/")[0];
+                        String result = WNUtils.replaceHtml(wnsearch.getField(collection, field, index, false));
+                        documentMap.put(field, result);
+
+                    });
+                    logger.info(String.format("[SEARCH::SERVICE] collection result count is => collection:%s,documentMap:%s", collection, documentMap));
+                    documentMapList.add(documentMap);
 
                 });
-                logger.info(String.format("[SEARCH::SERVICE] collection result count is => collection:%s,documentMap:%s", collection, documentMap));
-                documentMapList.add(documentMap);
+
+                collectionResultMap.put(collection + "Result", documentMapList);
+                logger.info(String.format("[SEARCH::SERVICE] collection result count is => collection:%s,count:%s,thisTotalCount:%s",
+                        collection, count, thisTotalCount));
 
             });
 
-            collectionResultMap.put(collection + "Result", documentMapList);
-            logger.info(String.format("[SEARCH::SERVICE] collection result count is => collection:%s,count:%s,thisTotalCount:%s",
-                    collection, count, thisTotalCount));
-
-        });
+        }
 
         // 실시간 검색어
         String realTimeKeywordString = wnsearch.recvRealTimeSearchKeywordList(5);
-        realTimeKeywordString = (realTimeKeywordString == null || "".equals(realTimeKeywordString)) ?
+        realTimeKeywordString = (realTimeKeywordString == null || WNCommon.EMPTY_STRING.equals(realTimeKeywordString)) ?
                 wnsearch.realTimeKeywords : realTimeKeywordString;
         List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null &&
-                !"".equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
+                !WNCommon.EMPTY_STRING.equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
                 : new ArrayList<>();
 
         // 전체 건수 결과
@@ -195,6 +226,7 @@ public class InnerSearchService {
         resultMap.put("paging", paging);
         resultMap.put("realTimeKeywords", realTimeKeywords);
         resultMap.put("groupings", groupings);
+        resultMap.put("collectionGroupResultMap", collectionGroupResultMap);
 
         return resultMap;
 
@@ -214,8 +246,8 @@ public class InnerSearchService {
                     null,
                     new ParameterizedTypeReference<List<FrequentlyAskedMenu>>(){});
             frequentlyAskedMenus = response.getBody();
-            frequentlyAskedMenus.forEach((FrequentlyAskedMenu input) -> { logger.info(String.format("frequentlyAskedMenu %s, %s",
-                    input.getMenuNm(), input.getMenuUrl())); });
+            //frequentlyAskedMenus.forEach((FrequentlyAskedMenu input) -> { logger.info(String.format("frequentlyAskedMenu %s, %s",
+            //        input.getMenuNm(), input.getMenuUrl())); });
 
         } catch (Exception e) {
             logger.error(e.getMessage());
