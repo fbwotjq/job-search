@@ -55,7 +55,7 @@ public class InnerSearchService {
             if(collectionNameList.size() == 1 && WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection,
                         WNDefine.GROUP_BY, String.format("%s,5", MULTI_GROUP_BY_FIELD));
 
-            logger.info(String.format("collectionNameListSize:%s, isGroupEmpty:%s", collectionNameList.size(), WNUtils.isEmpty(group)));
+            logger.info(String.format("collection: %s, collectionNameListSize:%s, isGroupEmpty:%s", collection, collectionNameList.size(), WNUtils.isEmpty(group)));
 
             wnsearch.setCollectionInfoValue(collection, WNDefine.MULTI_GROUP_BY, MULTI_GROUP_BY_FIELD);
             wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
@@ -134,7 +134,7 @@ public class InnerSearchService {
             collectionCountMap.put(collection + "Count", count);
 
             int matchedGroupCount = wnsearch.getResultTotalGroupCount(collection);
-            logger.info(String.format("resultTotalCount: %s, matchedGroupCount: %s", count, matchedGroupCount));
+            logger.info(String.format("collection: %s, resultTotalCount: %s, matchedGroupCount: %s", collection, count, matchedGroupCount));
             List<String> searchResultFieldList = wnsearch.getSearchResultField(collection);
 
             collectionGroupResultMap = IntStream.range(0, matchedGroupCount).mapToObj((int index) -> {
@@ -151,7 +151,7 @@ public class InnerSearchService {
                         (String field) -> field,
                         (String field) -> WNUtils.replaceHtml(wnsearch.getFieldInGroup(collection, field, index, resultIndex)
                     )));
-                    logger.info(String.format("[SEARCH::SERVICE] collection grouped result => collection:%s, document:%s", collection, document));
+                    //logger.info(String.format("[SEARCH::SERVICE] collection grouped result => collection:%s, document:%s", collection, document));
                     return document;
                 }).collect(Collectors.toList());
 

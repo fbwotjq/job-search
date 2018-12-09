@@ -218,7 +218,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dd>
                                                     </dl>
                                                 </c:when>
-                                                <c:otherwise><%--publicJobBbs--%>
+                                                <c:otherwise>
                                                     <dl>
                                                         <dt>
                                                             [게시판/${entry['BOARD_NAME']}] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
@@ -314,7 +314,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                             </dd>
                                                         </dl>
                                                     </c:when>
-                                                    <c:otherwise><%--publicJobBbs--%>
+                                                    <c:otherwise>
                                                         <dl>
                                                             <dt>
                                                                 [게시판/${entry['BOARD_NAME']}] <a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
@@ -326,56 +326,105 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:forEach>
+                                            <span class="TxtR"><a class="groupMore" href="<c:out value="${groupResult.alias}"/>"><c:out value="${groupResult.aliasText}"/> 검색결과 더보기 +</a></span>
                                         </div>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
-                            <c:if test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || collection eq 'educationTrainingNet'}">
-                                <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
-                                <div class="job_box">
-                                    <c:forEach var="entry" items="${collectionResultMap['educationTrainingNetResult']}" varStatus="status">
-                                        <c:choose>
-                                            <c:when test="${entry['ALIAS'] eq 'eduOrgan'}"><%--기관소개--%>
-                                                <dl>
-                                                    <dt>[기관소개]<a href="${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>지역 : </strong>${entry['LOCATION']}</span>
-                                                        <span><strong>전화번호 : </strong>${entry['TEL_NO']}</span>
-                                                        <span><strong>홈페이지 : </strong>${entry['HOMEPAGE']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS']  eq 'eduInfo'}"><%--교육훈련명--%>
-                                                <dl>
-                                                    <dt>[교육훈련명] <a href="${serviceDomain}/edu/education/educationView.do?menuCd=${entry['MENU_CD']}&listTarget=education&eduInfoNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
-                                                        <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
-                                                        <span><strong>교육정원 : </strong>${entry['EDU_MAX_COUNT']} 명</span>
-                                                        <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
-                                                        <span class="bg_none"><strong>교육장소 : </strong>${entry['EDU_ADDR1']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS'] eq 'eduBbs'}"><%--게시판--%>
-                                                <dl>
-                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                        </c:choose>
+                            <c:choose>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || (collection eq 'educationTrainingNet' && group ne '' && group ne null)}">
+                                    <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
+                                    <div class="job_box">
+                                        <c:forEach var="entry" items="${collectionResultMap['educationTrainingNetResult']}" varStatus="status">
+                                            <c:choose>
+                                                <c:when test="${entry['ALIAS'] eq 'eduOrgan'}"><%--기관소개--%>
+                                                    <dl>
+                                                        <dt>[기관소개]<a href="${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>지역 : </strong>${entry['LOCATION']}</span>
+                                                            <span><strong>전화번호 : </strong>${entry['TEL_NO']}</span>
+                                                            <span><strong>홈페이지 : </strong>${entry['HOMEPAGE']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'eduInfo'}"><%--교육훈련명--%>
+                                                    <dl>
+                                                        <dt>[교육훈련명] <a href="${serviceDomain}/edu/education/educationView.do?menuCd=${entry['MENU_CD']}&listTarget=education&eduInfoNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
+                                                            <span><strong>교육정원 : </strong>${entry['EDU_MAX_COUNT']} 명</span>
+                                                            <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
+                                                            <span class="bg_none"><strong>교육장소 : </strong>${entry['EDU_ADDR1']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS'] eq 'eduBbs'}"><%--게시판--%>
+                                                    <dl>
+                                                        <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 3}">
+                                            <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">교육훈련 검색결과 더보기 +</a></span>
+                                        </c:if>
+                                    </div>
+                                </c:when>
+                                <c:when test="${collection eq 'educationTrainingNet' && (group eq '' || group eq null)}">
+                                    <c:forEach var="groupResult" items="${collectionGroupResultMap}" varStatus="status">
+                                        <h2><c:out value="${groupResult.aliasText}"/> <span>총 <c:out value="${groupResult.count}"/>건</span></h2>
+                                        <div class="job_box">
+                                            <c:forEach var="entry" items="${groupResult.documents}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${entry['ALIAS'] eq 'eduOrgan'}">
+                                                        <dl>
+                                                            <dt>[기관소개]<a href="${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>지역 : </strong>${entry['LOCATION']}</span>
+                                                                <span><strong>전화번호 : </strong>${entry['TEL_NO']}</span>
+                                                                <span><strong>홈페이지 : </strong>${entry['HOMEPAGE']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS']  eq 'eduInfo'}">
+                                                        <dl>
+                                                            <dt>[교육훈련명] <a href="${serviceDomain}/edu/education/educationView.do?menuCd=${entry['MENU_CD']}&listTarget=education&eduInfoNo=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>교육기관 : </strong>${entry['COMPANY_NAME']}</span>
+                                                                <span><strong>모집기간 : </strong>${entry['RECRUIT_START_DT']} ~ ${entry['RECRUIT_END_DT']}</span>
+                                                                <span><strong>교육정원 : </strong>${entry['EDU_MAX_COUNT']} 명</span>
+                                                                <span class="bg_none"><strong>교육시간 : </strong>${entry['EDU_TIME']}</span>
+                                                                <span class="bg_none"><strong>교육장소 : </strong>${entry['EDU_ADDR1']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS'] eq 'eduBbs'}">
+                                                        <dl>
+                                                            <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <span class="TxtR"><a class="groupMore" href="<c:out value="${groupResult.alias}"/>"><c:out value="${groupResult.aliasText}"/> 검색결과 더보기 +</a></span>
+                                        </div>
                                     </c:forEach>
-                                    <c:if test="${collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 3}">
-                                        <span class="TxtR"><a class="collectionMore" href="educationTrainingNet">교육훈련 검색결과 더보기 +</a></span>
-                                    </c:if>
-                                </div>
-                            </c:if>
-                            <c:if test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
+                                </c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
                                 <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
                                 <div class="job_box">
                                     <c:forEach var="entry" items="${collectionResultMap['jobSupportNetResult']}" varStatus="status">
@@ -408,8 +457,16 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                         <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
                                     </c:if>
                                 </div>
-                            </c:if>
-                            <c:if test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
+                            </c:when>
+                                <c:when test="${collection eq 'jobSupportNet' && (group eq '' || group eq null)}">
+                                    <c:forEach var="groupResult" items="${collectionGroupResultMap}" varStatus="status">
+
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
                                 <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
                                 <div class="job_box">
                                     <c:forEach var="entry" items="${collectionResultMap['miniJobMatchingNetResult']}" varStatus="status">
@@ -444,7 +501,10 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                         <span class="TxtR"><a class="collectionMore" href="miniJobMatchingNet">미니잡매칭 검색결과 더보기 +</a></span>
                                     </c:if>
                                 </div>
-                            </c:if>
+                            </c:when>
+                                <c:when test="${collection eq 'miniJobMatchingNet' && (group eq '' || group eq null)}"></c:when>
+                                <c:otherwise></c:otherwise>
+                            </c:choose>
                         </div>
                         <c:if test="${totalCount > 10 && collection ne 'ALL' && group ne ''}">
                             <!--page navigation-->
