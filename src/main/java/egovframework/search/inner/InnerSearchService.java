@@ -238,7 +238,7 @@ public class InnerSearchService {
         try {
 
             String url = String.format("http://%s%s", WNCollection.SERVICE_DOMAIN, "/api/frequentMenuList.do?siteGroup=frequent&exceptMenuGroup=frequent&pageUnit=10");
-            logger.info(String.format("CALL => %s", url));
+            //logger.info(String.format("CALL => %s", url));
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<List<FrequentlyAskedMenu>> response = restTemplate.exchange(
                     url,
