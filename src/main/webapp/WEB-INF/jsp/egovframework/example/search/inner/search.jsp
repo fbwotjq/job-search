@@ -423,86 +423,150 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                 </c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
+                            <%-- ### collection : 일자리지원 ### --%>
                             <c:choose>
-                                <c:when test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || collection eq 'jobSupportNet'}">
-                                <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
-                                <div class="job_box">
-                                    <c:forEach var="entry" items="${collectionResultMap['jobSupportNetResult']}" varStatus="status">
-                                        <c:choose>
-                                            <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
-                                                <dl>
-                                                    <dt>[사업장] <a href="${serviceDomain}/work/work/workView.do?menuCd=${entry['MENU_CD']}&workId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>회차명 : </strong>${entry['OFFER_NAME']}</span>
-                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
-                                                        <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
-                                                        <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
-                                                        <span class="bg_none"><strong>근무형태 : </strong>${entry['WORK_TYPE']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
-                                                <dl>
-                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:otherwise></c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                    <c:if test="${collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 3}">
-                                        <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
-                                    </c:if>
-                                </div>
-                            </c:when>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 0) || (collection eq 'jobSupportNet' && group ne '' && group ne null)}">
+                                    <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['jobSupportNetCount']}"/>건</span></h2>
+                                    <div class="job_box">
+                                        <c:forEach var="entry" items="${collectionResultMap['jobSupportNetResult']}" varStatus="status">
+                                            <c:choose>
+                                                <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
+                                                    <dl>
+                                                        <dt>[사업장] <a href="${serviceDomain}/work/work/workView.do?menuCd=${entry['MENU_CD']}&workId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회차명 : </strong>${entry['OFFER_NAME']}</span>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
+                                                            <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
+                                                            <span class="bg_none"><strong>근무형태 : </strong>${entry['WORK_TYPE']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
+                                                    <dl>
+                                                        <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:otherwise></c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${collection eq 'ALL' && collectionCountMap['jobSupportNetCount'] > 3}">
+                                            <span class="TxtR"><a class="collectionMore" href="jobSupportNet">일자리지원 검색결과 더보기 +</a></span>
+                                        </c:if>
+                                    </div>
+                                </c:when>
                                 <c:when test="${collection eq 'jobSupportNet' && (group eq '' || group eq null)}">
                                     <c:forEach var="groupResult" items="${collectionGroupResultMap}" varStatus="status">
-
+                                        <h2><c:out value="${groupResult.aliasText}"/> <span>총 <c:out value="${groupResult.count}"/>건</span></h2>
+                                        <div class="job_box">
+                                            <c:forEach var="entry" items="${groupResult.documents}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${entry['ALIAS'] eq 'bussinessJang'}"><%--사업장--%>
+                                                        <dl>
+                                                            <dt>[사업장] <a href="${serviceDomain}/work/work/workView.do?menuCd=${entry['MENU_CD']}&workId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>회차명 : </strong>${entry['OFFER_NAME']}</span>
+                                                                <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                                <span><strong>업종 : </strong> ${entry['WORK_KIND']}</span>
+                                                                <span class="bg_none"><strong>소재지 : </strong>${entry['COMPANY_ADDR1']}</span>
+                                                                <span class="bg_none"><strong>근무형태 : </strong>${entry['WORK_TYPE']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
+                                                        <dl>
+                                                            <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:otherwise></c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <span class="TxtR"><a class="groupMore" href="<c:out value="${groupResult.alias}"/>"><c:out value="${groupResult.aliasText}"/> 검색결과 더보기 +</a></span>
+                                        </div>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
+                            <%-- ### collection : 미니잡매칭 ### --%>
                             <c:choose>
-                                <c:when test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || collection eq 'miniJobMatchingNet'}">
-                                <h2>미니잡매칭 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
-                                <div class="job_box">
-                                    <c:forEach var="entry" items="${collectionResultMap['miniJobMatchingNetResult']}" varStatus="status">
-                                <%--DOCID,LINK_ID,TITLE,CONTENT,COMPANY_NM,COMPANY_JOB,TEL_NO,INSERT_DT,INFOSUB_ID,KIND_NM,HIRE_CNT,PAY,EDUCATION,CAREER,MENU_CD,ALIAS--%>
-                                        <c:choose>
-                                            <c:when test="${entry['ALIAS'] eq 'miniJob'}"><%--사업장--%>
-                                                <dl>
-                                                    <dt>[미니잡매칭] <a href="${serviceDomain}/fair/job/sjinfo/infoView.do?menuCd=${entry['MENU_CD']}&infoId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                        <span><strong>회사명 : </strong>${entry['COMPANY_NM']}</span>
-                                                        <span><strong>업종 : </strong> ${entry['COMPANY_JOB']}</span>
-                                                        <span><strong>모집직종 : </strong> ${entry['KIND_NM']}</span>
-                                                        <span class="bg_none"><strong>급여 : </strong> ${entry['PAY']}</span>
-                                                        <span class="bg_none"><strong>학력 : </strong> ${entry['EDUCATION']}</span>
-                                                        <span class="bg_none"><strong>경력 : </strong> ${entry['CAREER']}</span>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
-                                                <dl>
-                                                    <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                    <dd>
-                                                        <p>${entry['CONTENT']}</p>
-                                                    </dd>
-                                                </dl>
-                                            </c:when>
-                                            <c:otherwise></c:otherwise>
-                                        </c:choose>
+                                <c:when test="${(collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 0) || (collection eq 'miniJobMatchingNet' && group ne '' && group ne null)}">
+                                    <h2>일자리지원 <span>총 <c:out value="${collectionCountMap['miniJobMatchingNetCount']}"/>건</span></h2>
+                                    <div class="job_box">
+                                        <c:forEach var="entry" items="${collectionResultMap['miniJobMatchingNetResult']}" varStatus="status">
+                                            <c:choose>
+                                                <c:when test="${entry['ALIAS'] eq 'miniJob'}"><%--사업장--%>
+                                                    <dl>
+                                                        <dt>[미니잡매칭] <a href="${serviceDomain}/fair/job/sjinfo/infoView.do?menuCd=${entry['MENU_CD']}&infoId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NM']}</span>
+                                                            <span><strong>업종 : </strong> ${entry['COMPANY_JOB']}</span>
+                                                            <span><strong>모집직종 : </strong> ${entry['KIND_NM']}</span>
+                                                            <span class="bg_none"><strong>급여 : </strong> ${entry['PAY']}</span>
+                                                            <span class="bg_none"><strong>학력 : </strong> ${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>경력 : </strong> ${entry['CAREER']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
+                                                    <dl>
+                                                        <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:otherwise></c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 3}">
+                                            <span class="TxtR"><a class="collectionMore" href="jobSupportNet">미니잡매칭 검색결과 더보기 +</a></span>
+                                        </c:if>
+                                    </div>
+                                </c:when>
+                                <c:when test="${collection eq 'miniJobMatchingNet' && (group eq '' || group eq null)}">
+                                    <c:forEach var="groupResult" items="${collectionGroupResultMap}" varStatus="status">
+                                        <h2><c:out value="${groupResult.aliasText}"/> <span>총 <c:out value="${groupResult.count}"/>건</span></h2>
+                                        <div class="job_box">
+                                            <c:forEach var="entry" items="${groupResult.documents}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${entry['ALIAS'] eq 'miniJob'}"><%--사업장--%>
+                                                        <dl>
+                                                            <dt>[미니잡매칭] <a href="${serviceDomain}/fair/job/sjinfo/infoView.do?menuCd=${entry['MENU_CD']}&infoId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                                <span><strong>회사명 : </strong>${entry['COMPANY_NM']}</span>
+                                                                <span><strong>업종 : </strong> ${entry['COMPANY_JOB']}</span>
+                                                                <span><strong>모집직종 : </strong> ${entry['KIND_NM']}</span>
+                                                                <span class="bg_none"><strong>급여 : </strong> ${entry['PAY']}</span>
+                                                                <span class="bg_none"><strong>학력 : </strong> ${entry['EDUCATION']}</span>
+                                                                <span class="bg_none"><strong>경력 : </strong> ${entry['CAREER']}</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
+                                                        <dl>
+                                                            <dt>[게시판/${entry['BOARD_NAME']}]<a href="${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
+                                                            <dd>
+                                                                <p>${entry['CONTENT']}</p>
+                                                            </dd>
+                                                        </dl>
+                                                    </c:when>
+                                                    <c:otherwise></c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <span class="TxtR"><a class="groupMore" href="<c:out value="${groupResult.alias}"/>"><c:out value="${groupResult.aliasText}"/> 검색결과 더보기 +</a></span>
+                                        </div>
                                     </c:forEach>
-                                    <c:if test="${collection eq 'ALL' && collectionCountMap['miniJobMatchingNetCount'] > 3}">
-                                        <span class="TxtR"><a class="collectionMore" href="miniJobMatchingNet">미니잡매칭 검색결과 더보기 +</a></span>
-                                    </c:if>
-                                </div>
-                            </c:when>
-                                <c:when test="${collection eq 'miniJobMatchingNet' && (group eq '' || group eq null)}"></c:when>
+                                </c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
                         </div>
