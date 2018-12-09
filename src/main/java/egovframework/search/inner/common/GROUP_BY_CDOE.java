@@ -12,7 +12,7 @@ public enum GROUP_BY_CDOE {
     jobPolicyMeet("구인구직만남의날", "publicJobNet"),
     jobPolicyCenter("일자리상담센터", "publicJobNet"), // 찾아가는일자리상담센터
     jobPolicyDay("잡매칭데이", "publicJobNet"),
-    eduOrgan("기관소개", "publicJobNet"),
+    eduOrgan("기관소개", "educationTrainingNet"),
     eduInfo("교육훈련정보", "educationTrainingNet"),
     eduBbs("게시판", "educationTrainingNet"),
     bussinessJang("사업장", "jobSupportNet"),
