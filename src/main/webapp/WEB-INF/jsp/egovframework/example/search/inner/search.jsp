@@ -113,6 +113,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                             </div>
                         </div>
                         <div class="search_sec">
+                            <%-- ### collection : 구인구직 ### --%>
                             <c:choose>
                                 <c:when test="${(collection eq 'ALL' && collectionCountMap['publicJobNetCount'] > 0) || (collection eq 'publicJobNet' && group ne '' && group ne null)}">
                                     <h2>구인구직 <span>총 <c:out value="${collectionCountMap['publicJobNetCount']}"/>건</span></h2>
@@ -332,6 +333,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                 </c:when>
                                 <c:otherwise></c:otherwise>
                             </c:choose>
+                            <%-- ### collection : 교육훈련 ### --%>
                             <c:choose>
                                 <c:when test="${(collection eq 'ALL' && collectionCountMap['educationTrainingNetCount'] > 0) || (collection eq 'educationTrainingNet' && group ne '' && group ne null)}">
                                     <h2>교육훈련 <span>총 <c:out value="${collectionCountMap['educationTrainingNetCount']}"/>건</span></h2>
