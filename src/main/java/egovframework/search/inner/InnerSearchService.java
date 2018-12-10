@@ -33,48 +33,29 @@ public class InnerSearchService {
     private final static String groupByCount = "groupByCount";
     private final static String groupByName = "groupByName";
 
-    public Map<String,Object> search(
-        String query,
-        String[] collections,
-        String group,
-        int startCount,
-        int viewResultCount
-    ) throws Exception {
+    /**
+     * 그룹바이에 대한 결과
+     * @param query
+     * @param collection
+     * @return
+     */
+    public List<Map<String, String>> findGroups(String query, String collection) throws Exception {
 
-        List<String> collectionNameList = new ArrayList<>(Arrays.asList(collections));
-        logger.info(String.format("[SEARCH::SERVICE] PARAM DEBUG MESSAGE => %s,%s,%s,%s", query, collections, startCount, viewResultCount));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // 검색 조건 셋팅, 질의, 디버그
-        WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
-        collectionNameList.stream().forEach((String collection) -> {
-
-            if(collectionNameList.size() == 1 && !WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection, WNDefine.EXQUERY_FIELD,
-                    String.format("<%s:contains:%s>", MULTI_GROUP_BY_FIELD, group));
-
-            if(collectionNameList.size() == 1 && WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection,
-                        WNDefine.GROUP_BY, String.format("%s,5", MULTI_GROUP_BY_FIELD));
-
-            logger.info(String.format("collection: %s, collectionNameListSize:%s, isGroupEmpty:%s", collection, collectionNameList.size(), WNUtils.isEmpty(group)));
-
-            wnsearch.setCollectionInfoValue(collection, WNDefine.MULTI_GROUP_BY, MULTI_GROUP_BY_FIELD);
-            wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
-            wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
-
-        });
-        wnsearch.search(query, !WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
-
-        String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
-        logger.info(String.format("[SEARCH::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // 검색 결과 정리
-
-        // 그룹바이에 대한 결과
         List<Map<String, String>> groupings = null;
-        if(collectionNameList.size() == 1) {
 
-            String collection = collectionNameList.get(0);
+        if(!WNCommon.COLLECTION_ALL.equals(collection) && !WNCommon.EMPTY_STRING.equals(query)) {
+
+            WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, new String[]{collection}, null, 0);
+            wnsearch.setCollectionInfoValue(collection, WNDefine.MULTI_GROUP_BY, MULTI_GROUP_BY_FIELD);
+            wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, "0,3");
+            wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
+            wnsearch.search(query, !WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
+
+            String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
+            logger.info(String.format("[GROUP::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
+
+            wnsearch.search(query, WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
+
             String multiGroupByResult = wnsearch.getMultiGroupByResult(collection, MULTI_GROUP_BY_FIELD);
             String[] multiGroupByResultArray = WNUtils.isEmpty(multiGroupByResult) ? new String[0] : multiGroupByResult.split("@");
 
@@ -103,8 +84,7 @@ public class InnerSearchService {
 
             groupings = Stream.concat(streams.get(), Arrays.stream(GROUP_BY_CDOE.values())
             .filter((GROUP_BY_CDOE code) -> code.getCollection().equals(collection))
-            .filter((GROUP_BY_CDOE code) ->
-                    !matchedCodes.stream().filter((GROUP_BY_CDOE matchedCode) -> code == matchedCode)
+            .filter((GROUP_BY_CDOE code) -> !matchedCodes.stream().filter((GROUP_BY_CDOE matchedCode) -> code == matchedCode)
                     .findAny().isPresent())
             .map((GROUP_BY_CDOE code) -> {
 
@@ -118,7 +98,51 @@ public class InnerSearchService {
             //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
             //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
+            if (wnsearch != null) {
+                wnsearch.closeServer();
+            }
+
         }
+
+        return groupings;
+
+    }
+
+    public Map<String,Object> search(
+        String query,
+        String[] collections,
+        String group,
+        int startCount,
+        int viewResultCount
+    ) throws Exception {
+
+        List<String> collectionNameList = new ArrayList<>(Arrays.asList(collections));
+        logger.info(String.format("[SEARCH::SERVICE] PARAM DEBUG MESSAGE => %s,%s,%s,%s", query, collections, startCount, viewResultCount));
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // 검색 조건 셋팅, 질의, 디버그
+        WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
+        collectionNameList.stream().forEach((String collection) -> {
+
+            if(collectionNameList.size() == 1 && !WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection, WNDefine.EXQUERY_FIELD,
+                    String.format("<%s:contains:%s>", MULTI_GROUP_BY_FIELD, group));
+
+            if(collectionNameList.size() == 1 && WNUtils.isEmpty(group)) wnsearch.setCollectionInfoValue(collection,
+                    WNDefine.GROUP_BY, String.format("%s,5", MULTI_GROUP_BY_FIELD));
+
+            logger.info(String.format("collection: %s, collectionNameListSize:%s, isGroupEmpty:%s", collection, collectionNameList.size(), WNUtils.isEmpty(group)));
+
+            wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, String.format("%s,%s", startCount, viewResultCount));
+            wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
+
+        });
+        wnsearch.search(query, !WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
+
+        String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
+        logger.info(String.format("[SEARCH::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // 검색 결과 정리
 
         // 컬랙션별 검색된 도큐먼트 결과
         Map<String, Object> resultMap = new HashMap<>();
@@ -225,7 +249,6 @@ public class InnerSearchService {
         resultMap.put("collectionResultMap", collectionResultMap);
         resultMap.put("paging", paging);
         resultMap.put("realTimeKeywords", realTimeKeywords);
-        resultMap.put("groupings", groupings);
         resultMap.put("collectionGroupResultMap", collectionGroupResultMap);
 
         return resultMap;
