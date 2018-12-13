@@ -191,7 +191,61 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dd>
                                                     </dl>
                                                 </c:when>
-                                                <c:when test="${entry['ALIAS']  eq 'jobPolicy'}">
+                                                <c:when test="${entry['ALIAS']  eq 'jobPolicyBus'}">
+                                                    <dl>
+                                                        <dt>[청년희망버스/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'jobPolicyDay'}">
+                                                    <dl>
+                                                        <dt>[잡매칭데이/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'jobPolicyMeet'}">
+                                                    <dl>
+                                                        <dt>[구인구직만남의날/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTWO')}">/spt/match/matchView.do?menuCd=${entry['MENU_CD']}&matchNo=${entry['LINK_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYTHREE')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when><c:when
+                                                            test="${fn:contains(entry['DOCID'], 'JOBPOLICYFORU')}">/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}</c:when></c:choose>">${entry['TITLE']}</a></dt>
+                                                        <dd>
+                                                            <p>${entry['CONTENT']}</p>
+                                                            <span><strong>회사명 : </strong>${entry['COMPANY_NAME']}</span>
+                                                            <span><strong>마감일 : </strong>${entry['RDATE']}</span>
+                                                            <span><strong>경력 : </strong>${entry['CAREER']}</span>
+                                                            <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
+                                                            <span class="bg_none"><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                            <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </c:when>
+                                                <c:when test="${entry['ALIAS']  eq 'jobPolicyCenter'}">
                                                     <dl>
                                                         <dt>[일자리정책,사업/${entry['BOARD_NAME']}] <a href="${serviceDomain}<c:choose><c:when
                                                             test="${fn:contains(entry['DOCID'], 'JOBPOLICYONE')}">/spt/bus/busView.do?menuCd=${entry['MENU_CD']}&hopeBusNo=${entry['LINK_ID']}</c:when><c:when
@@ -342,7 +396,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                             <c:choose>
                                                 <c:when test="${entry['ALIAS'] eq 'eduOrgan'}"><%--기관소개--%>
                                                     <dl>
-                                                        <dt>[기관소개]<a href="${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
+                                                        <dt>[기관소개]<a href="${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=E010004&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
                                                         <dd>
                                                             <p>${entry['CONTENT']}</p>
                                                             <span><strong>지역 : </strong>${entry['LOCATION']}</span>

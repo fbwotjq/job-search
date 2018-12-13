@@ -46,15 +46,25 @@ $(document).ready(function() {
         this.submit();
     });
 
+    // 좌측 메뉴 클릭
     $('#lmb ul li a').click(function (event) {
+        var query = $('#topQuery').val();
 
         event.preventDefault();
         event.stopPropagation();
 
-        var collectionName = $(this).attr('href');
-        $('#collection').val(collectionName);
-        $('#group').val('');
-        $('#searchForm').submit();
+        if (query != undefined && query.replace(/^\s+|\s+$/gm, EMPTY_TEXT) !== EMPTY_TEXT &&
+            $.trim(query) !== '검색어를 입력해주세요' && $.trim(query) !== EMPTY_TEXT) {
+            var collectionName = $(this).attr('href');
+            $('#collection').val(collectionName);
+            $('#group').val('');
+            $('#searchForm').submit();
+        } else {
+            alert(plzInsertKeywordText);
+        }
+
+
+
 
     });
 
