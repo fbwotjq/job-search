@@ -31,7 +31,7 @@
 /*list*/
 .total_search .item {float:right;width:925px;position:relative;}
 .total_search .item .total_search_box {padding:4px; background:url('../../images/inner/content/total_ptrn.gif') repeat left top;margin-bottom:50px;}
-.total_search .item .total_search_box .ts_wrap {padding:16px 22px 65px 22px;background-color:#fff;}
+.total_search .item .total_search_box .ts_wrap {padding:16px 22px 80px 22px;background-color:#fff;}
 .total_search .item .total_search_box .ts_wrap > span {display:inline-block; padding-left:25px; background:url('../../images/inner/content/total_tit.gif') no-repeat left 4px;font-size:1.25em;font-weight:700;}
 .total_search .item .total_search_box .ts_wrap ul {margin-top:15px; padding-left:26px;}
 .total_search .item .total_search_box .ts_wrap ul li {float:left; width:23%; padding-right:2%;}
