@@ -41,6 +41,8 @@ public class InnerSearchService {
      */
     public List<Map<String, String>> findGroups(String query, String collection) throws Exception {
 
+        query = "검색어를입력해주세요".equals(query.trim()) ? "" : query;
+
         List<Map<String, String>> groupings = null;
 
         if(!WNCommon.COLLECTION_ALL.equals(collection) && !WNCommon.EMPTY_STRING.equals(query)) {
@@ -95,14 +97,26 @@ public class InnerSearchService {
                 return map;
 
             })).collect(Collectors.toList());
-            //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
-            //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
             if (wnsearch != null) {
                 wnsearch.closeServer();
             }
 
+        } else if(!WNCommon.COLLECTION_ALL.equals(collection)) {
+
+            groupings = Arrays.stream(GROUP_BY_CDOE.values())
+            .filter((GROUP_BY_CDOE code) -> code.getCollection().equals(collection))
+            .map((GROUP_BY_CDOE code) -> {
+                Map<String, String> map = new HashMap<>();
+                map.put(groupByCode, code.name());
+                map.put(groupByCount, new Integer(0).toString());
+                map.put(groupByName, code.getText());
+                return map;
+            }).collect(Collectors.toList());
+
         }
+        //groupings.forEach((Map<String, String> input) -> { logger.info(String.format("groupings %s, %s, %s",
+        //        input.get(groupByCode), input.get(groupByCount), input.get(groupByName))); });
 
         return groupings;
 
@@ -115,6 +129,8 @@ public class InnerSearchService {
         int startCount,
         int viewResultCount
     ) throws Exception {
+
+        query = "검색어를입력해주세요".equals(query.trim()) ? "" : query;
 
         List<String> collectionNameList = new ArrayList<>(Arrays.asList(collections));
         logger.info(String.format("[SEARCH::SERVICE] PARAM DEBUG MESSAGE => %s,%s,%s,%s", query, collections, startCount, viewResultCount));

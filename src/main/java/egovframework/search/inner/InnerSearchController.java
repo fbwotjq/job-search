@@ -36,7 +36,7 @@ public class InnerSearchController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("search/inner/search");
-        modelAndView.addObject("query", query);
+        modelAndView.addObject("query", "검색어를입력해주세요".equals(query.trim()) ? WNCommon.EMPTY_STRING : query);
         modelAndView.addObject("collection", collection);
         modelAndView.addObject("group", group);
         modelAndView.addObject("serviceDomain", WNCollection.SERVICE_DOMAIN);
