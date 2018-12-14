@@ -709,9 +709,9 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
     <footer id="footer">
         <div class="footWrap">
             <ul class="linkArea">
-                <li><a href="/" target="_blank" title="새창으로 열림">개인정보보호정책</a></li>
-                <li><a href="/" target="_blank" title="새창으로 열림">이메일무단수집거부</a></li>
-                <li><a href="/" target="_blank" title="새창으로 열림">회원약관</a></li>
+                <li><a href="/content/view.do?menuCd=PLAT002004" target="_blank" title="새창으로 열림">개인정보보호정책</a></li>
+                <li><a href="/content/view.do?menuCd=PLAT002005" target="_blank" title="새창으로 열림">이메일무단수집거부</a></li>
+                <li><a href="/content/view.do?menuCd=PLAT002003" target="_blank" title="새창으로 열림">회원약관</a></li>
             </ul>
             <aside class="relate_site">
                 <div>
