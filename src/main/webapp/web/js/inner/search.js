@@ -40,27 +40,31 @@ $(document).ready(function() {
     });
 
     $('#searchForm').submit(function(event) {
+
         event.preventDefault();
         var query = $('#topQuery').val();
+
         if($.trim(query) === plzInsertKeywordText) {
             query = EMPTY_TEXT;
             $('#topQuery').val(EMPTY_TEXT);
         } else {
-            setMyKeyword(query);
+            var hasComma = query.indexOf(",") > 0;
+            var myKeyword = hasComma ? query.split(',').join('@') : query
+            setMyKeyword(myKeyword);
         }
         this.submit();
+
     });
 
     // 좌측 메뉴 클릭
     $('#lmb ul li a').click(function (event) {
-        var query = $('#topQuery').val();
 
         event.preventDefault();
         event.stopPropagation();
-
+        var query = $('#topQuery').val();
         var collectionName = $(this).attr('href');
         $('#collection').val(collectionName);
-        $('#group').val('');
+        $('#group').val(EMPTY_TEXT);
         $('#searchForm').submit();
 
     });
@@ -93,7 +97,11 @@ $(document).ready(function() {
         $('#myKeywordArea').empty();
         var array = myKeyword.split(",");
         for (i = 0; i < array.length ; i++) {
-            $('#myKeywordArea').append("<li><small>" + (i + 1) + "</small><a href='" + array[i] + "' class='otherKeyword'><span>" + array[i] + "</span></a></li>");
+
+            var hasComma = array[i].indexOf("@") > 0;
+            var myKeyword = hasComma ? array[i].split('@').join(',') : array[i];
+            $('#myKeywordArea').append("<li><small>" + (i + 1) + "</small><a href='" + myKeyword + "' class='otherKeyword'><span>" + myKeyword + "</span></a></li>");
+
         }
     } else {
         $('#myKeywordAreaDiv').hide();
