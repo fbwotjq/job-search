@@ -33,6 +33,38 @@ public class InnerSearchService {
     private final static String groupByCount = "groupByCount";
     private final static String groupByName = "groupByName";
 
+    public List<String> realTimeKeywords(String[] collections) throws Exception {
+
+        List<String> collectionNameList = new ArrayList<>(Arrays.asList(collections));
+        WNSearch wnsearch = new WNSearch(WNCommon.IS_DEBUG, WNCommon.IS_UID_SEARCH, collections, null, 0);
+        collectionNameList.stream().forEach((String collection) -> {
+
+            wnsearch.setCollectionInfoValue(collection, WNDefine.PAGE_INFO, "0,1");
+            wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
+
+        });
+        wnsearch.search("실시간쿼리", !WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
+        String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
+        logger.info(String.format("[REALTIME::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
+
+        // 실시간 검색어
+        String realTimeKeywordString = wnsearch.recvRealTimeSearchKeywordList(5);
+        realTimeKeywordString = (realTimeKeywordString == null || WNCommon.EMPTY_STRING.equals(realTimeKeywordString)) ?
+                wnsearch.realTimeKeywords : realTimeKeywordString;
+        List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null &&
+                !WNCommon.EMPTY_STRING.equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
+                : new ArrayList<>();
+
+        logger.info(String.format("[REALTIME::SERVICE] RESULT DEBUG MESSAGE => realTimeKeywordString: %s", realTimeKeywordString));
+
+        if (wnsearch != null) {
+            wnsearch.closeServer();
+        }
+
+        return realTimeKeywords;
+
+    }
+
     /**
      * 그룹바이에 대한 결과
      * @param query
@@ -152,7 +184,7 @@ public class InnerSearchService {
             wnsearch.setCollectionInfoValue(collection, WNDefine.SORT_FIELD, WNCommon.RANK_DESC);
 
         });
-        wnsearch.search(query, !WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
+        wnsearch.search(query, WNCommon.IS_REALTIME_KEYWORD, WNDefine.CONNECTION_CLOSE, WNCommon.USE_SUGGESTED_QUERY);
 
         String debugMsg = wnsearch.printDebug() != null ? wnsearch.printDebug().trim() : WNCommon.EMPTY_STRING;
         logger.info(String.format("[SEARCH::SERVICE] CONDITION DEBUG MESSAGE => %s", debugMsg));
@@ -238,22 +270,14 @@ public class InnerSearchService {
 
         }
 
-        // 실시간 검색어
-        String realTimeKeywordString = wnsearch.recvRealTimeSearchKeywordList(5);
-        realTimeKeywordString = (realTimeKeywordString == null || WNCommon.EMPTY_STRING.equals(realTimeKeywordString)) ?
-                wnsearch.realTimeKeywords : realTimeKeywordString;
-        List<String> realTimeKeywords = realTimeKeywordString != null && realTimeKeywordString.split(",") != null &&
-                !WNCommon.EMPTY_STRING.equals(realTimeKeywordString) ? new ArrayList<>(Arrays.asList(realTimeKeywordString.split(",")))
-                : new ArrayList<>();
-
         // 전체 건수 결과
         int totalCount = collectionCountMap.entrySet().stream().mapToInt(map -> map.getValue()).sum();
         int lastPaging = totalCount == 0 ? 0 : (int)Math.floor(totalCount / 10) * 10;
         String paging = collectionNameList.size() == 1 ? wnsearch.getPageLinks(startCount, totalCount, viewResultCount,
                 5) : WNCommon.EMPTY_STRING;
 
-        logger.info(String.format("[SEARCH::SERVICE] RESULT DEBUG MESSAGE => totalCount: %s, collectionCountMap:%s, paging: %s, realTimeKeywordString: %s",
-                totalCount, collectionCountMap, paging, realTimeKeywordString));
+        logger.info(String.format("[SEARCH::SERVICE] RESULT DEBUG MESSAGE => totalCount: %s, collectionCountMap:%s, paging: %s",
+                totalCount, collectionCountMap, paging));
 
         if (wnsearch != null) {
             wnsearch.closeServer();
@@ -264,7 +288,6 @@ public class InnerSearchService {
         resultMap.put("collectionCountMap", collectionCountMap);
         resultMap.put("collectionResultMap", collectionResultMap);
         resultMap.put("paging", paging);
-        resultMap.put("realTimeKeywords", realTimeKeywords);
         resultMap.put("collectionGroupResultMap", collectionGroupResultMap);
 
         return resultMap;

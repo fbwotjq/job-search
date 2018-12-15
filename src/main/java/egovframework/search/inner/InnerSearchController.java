@@ -13,18 +13,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PreDestroy;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Controller
 @RequestMapping("/inner/search")
 public class InnerSearchController {
 
+    ExecutorService executorService = Executors.newFixedThreadPool(20);
+
     private static final Logger logger = LoggerFactory.getLogger(InnerSearchController.class);
 
     @Autowired InnerSearchService innerSearchService;
     @Autowired SearchService searchService;
+
+    @PreDestroy
+    public void end() {
+        executorService.shutdownNow();
+    }
 
     @RequestMapping(value = "/search.do", method={RequestMethod.GET, RequestMethod.POST})
     public ModelAndView search(
@@ -61,7 +71,7 @@ public class InnerSearchController {
                 } finally {
                     return resultSearch;
                 }
-            });
+            }, executorService);
 
             CompletableFuture<List<Map<String, String>>> groupStep = CompletableFuture.supplyAsync(() -> {
                 List<Map<String, String>> resultGruop = null;
@@ -76,7 +86,7 @@ public class InnerSearchController {
                 } finally {
                     return resultGruop;
                 }
-            });
+            }, executorService);
 
             CompletableFuture<List<String>> weeklyPopKeywordsStep = CompletableFuture.supplyAsync(() -> {
                 List<String> resultWeeklyPopKeywords = null;
@@ -88,7 +98,7 @@ public class InnerSearchController {
                 } finally {
                     return resultWeeklyPopKeywords;
                 }
-            });
+            }, executorService);
 
             CompletableFuture<List<String>> dailyPopKeywordsStep = CompletableFuture.supplyAsync(() -> {
                 List<String> resultDailyPopKeywords = null;
@@ -100,7 +110,7 @@ public class InnerSearchController {
                 } finally {
                     return resultDailyPopKeywords;
                 }
-            });
+            }, executorService);
 
             CompletableFuture<List<FrequentlyAskedMenu>> frequentlyAskedMenusStep = CompletableFuture.supplyAsync(() -> {
                 List<FrequentlyAskedMenu> resultFrequentlyAskedMenu = null;
@@ -112,15 +122,33 @@ public class InnerSearchController {
                 } finally {
                     return resultFrequentlyAskedMenu;
                 }
-            });
+            }, executorService);
 
-            CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(searchStep, groupStep, weeklyPopKeywordsStep, dailyPopKeywordsStep, frequentlyAskedMenusStep);
+            CompletableFuture<List<String>> realTimeKeywordStep = CompletableFuture.supplyAsync(() -> {
+                List<String> realTimeKeyword = null;
+                try {
+                    realTimeKeyword = innerSearchService.realTimeKeywords(collections);
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
+                    e.printStackTrace();
+                } finally {
+                    return realTimeKeyword;
+                }
+            }, executorService);
+
+            CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(
+                    searchStep, groupStep, weeklyPopKeywordsStep, dailyPopKeywordsStep,
+                    frequentlyAskedMenusStep, realTimeKeywordStep
+            );
             combinedFuture.get();
+
             Map<String, Object> result = searchStep.get();
             List<Map<String, String>> groupings = groupStep.get();
             List<String> weeklyPopKeywords = weeklyPopKeywordsStep.get();
             List<String> dailyPopKeywords = dailyPopKeywordsStep.get();
             List<FrequentlyAskedMenu> frequentlyAskedMenus = frequentlyAskedMenusStep.get();
+            List<String> realTimeKeywords = realTimeKeywordStep.get();
+
             //Map<String, Object> result = innerSearchService.search(query, collections, group, startCount, viewCount);
             //List<Map<String, String>> groupings = innerSearchService.findGroups(query, collection);
             //List<String> weeklyPopKeywords = searchService.getPopKeyword("_ALL_", "W");
@@ -130,7 +158,6 @@ public class InnerSearchController {
             int totalCount = (int) result.get("totalCount");
             String paging = (String) result.get("paging");
             int lastPaging = (int) result.get("lastPaging");
-            List<String> realTimeKeywords = (List<String>) result.get("realTimeKeywords");
             Map<String, Integer> collectionCountMap = (Map<String, Integer>) result.get("collectionCountMap");
             Map<String, Object> collectionResultMap = (Map<String, Object>) result.get("collectionResultMap");
             List<GroupResult> collectionGroupResultMap = (List<GroupResult>) result.get("collectionGroupResultMap");
