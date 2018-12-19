@@ -278,6 +278,19 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                     </dl>
                                                 </c:when>
                                                 <c:otherwise>
+                                                <c:choose>
+                                                    <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                        <ul class="img_list">
+                                                            <li>
+                                                                <a href="/" title="" target="_blank">
+                                                                    <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                    <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                    <p>${entry['CONTENT']}</p>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     <dl>
                                                         <dt>
                                                             [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
@@ -286,6 +299,8 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                             <p>${entry['CONTENT']}</p>
                                                         </dd>
                                                     </dl>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:forEach>
@@ -428,14 +443,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dl>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <dl>
-                                                            <dt>
-                                                                [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
-                                                            </dt>
-                                                            <dd>
-                                                                <p>${entry['CONTENT']}</p>
-                                                            </dd>
-                                                        </dl>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                                <ul class="img_list">
+                                                                    <li>
+                                                                        <a href="/" title="" target="_blank">
+                                                                            <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <p>${entry['CONTENT']}</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <dl>
+                                                                    <dt>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:forEach>
@@ -457,7 +487,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         <dt>[기관소개] <a href="http://${serviceDomain}/edu/orgIntro/orgIntroView.do?menuNo=E010004&orgIntroId=${entry['LINK_ID']}">${entry['TITLE']}</a></dt>
                                                         <dd>
                                                             <p>${entry['CONTENT']}</p>
-                                                            <span><strong>지역 : </strong>${entry['LOCATION']}</span>
+                                                            <span><strong>지역 : </strong>${entry['EDU_ADDR1']}</span>
                                                             <span><strong>전화번호 : </strong>${entry['TEL_NO']}</span>
                                                             <span><strong>홈페이지 : </strong>${entry['HOMEPAGE']}</span>
                                                         </dd>
@@ -477,12 +507,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                     </dl>
                                                 </c:when>
                                                 <c:when test="${entry['ALIAS'] eq 'eduBbs'}"><%--게시판--%>
-                                                    <dl>
-                                                        <dt>[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                        <dd>
-                                                            <p>${entry['CONTENT']}</p>
-                                                        </dd>
-                                                    </dl>
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                            <ul class="img_list">
+                                                                <li>
+                                                                    <a href="/" title="" target="_blank">
+                                                                        <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <dl>
+                                                                <dt>
+                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                </dt>
+                                                                <dd>
+                                                                    <p>${entry['CONTENT']}</p>
+                                                                </dd>
+                                                            </dl>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
                                             </c:choose>
                                         </c:forEach>
@@ -522,12 +569,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dl>
                                                     </c:when>
                                                     <c:when test="${entry['ALIAS'] eq 'eduBbs'}">
-                                                        <dl>
-                                                            <dt>[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                            <dd>
-                                                                <p>${entry['CONTENT']}</p>
-                                                            </dd>
-                                                        </dl>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                                <ul class="img_list">
+                                                                    <li>
+                                                                        <a href="/" title="" target="_blank">
+                                                                            <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <p>${entry['CONTENT']}</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <dl>
+                                                                    <dt>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:when>
                                                 </c:choose>
                                             </c:forEach>
@@ -558,12 +622,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                     </dl>
                                                 </c:when>
                                                 <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
-                                                    <dl>
-                                                        <dt>[게시판/${entry['BOARD_NAME']}]<a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                        <dd>
-                                                            <p>${entry['CONTENT']}</p>
-                                                        </dd>
-                                                    </dl>
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                            <ul class="img_list">
+                                                                <li>
+                                                                    <a href="/" title="" target="_blank">
+                                                                        <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <dl>
+                                                                <dt>
+                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                </dt>
+                                                                <dd>
+                                                                    <p>${entry['CONTENT']}</p>
+                                                                </dd>
+                                                            </dl>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
                                                 <c:otherwise></c:otherwise>
                                             </c:choose>
@@ -593,12 +674,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dl>
                                                     </c:when>
                                                     <c:when test="${entry['ALIAS'] eq 'bussinessBbs'}"><%--게시판--%>
-                                                        <dl>
-                                                            <dt>[게시판/${entry['BOARD_NAME']}]<a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                            <dd>
-                                                                <p>${entry['CONTENT']}</p>
-                                                            </dd>
-                                                        </dl>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                                <ul class="img_list">
+                                                                    <li>
+                                                                        <a href="/" title="" target="_blank">
+                                                                            <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <p>${entry['CONTENT']}</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <dl>
+                                                                    <dt>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:when>
                                                     <c:otherwise></c:otherwise>
                                                 </c:choose>
@@ -631,12 +729,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                     </dl>
                                                 </c:when>
                                                 <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
-                                                    <dl>
-                                                        <dt>[게시판/${entry['BOARD_NAME']}]<a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                        <dd>
-                                                            <p>${entry['CONTENT']}</p>
-                                                        </dd>
-                                                    </dl>
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                            <ul class="img_list">
+                                                                <li>
+                                                                    <a href="/" title="" target="_blank">
+                                                                        <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <dl>
+                                                                <dt>
+                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                </dt>
+                                                                <dd>
+                                                                    <p>${entry['CONTENT']}</p>
+                                                                </dd>
+                                                            </dl>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
                                                 <c:otherwise></c:otherwise>
                                             </c:choose>
@@ -667,12 +782,29 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         </dl>
                                                     </c:when>
                                                     <c:when test="${entry['ALIAS'] eq 'miniJobBbs'}"><%--게시판--%>
-                                                        <dl>
-                                                            <dt>[게시판/${entry['BOARD_NAME']}]<a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a></dt>
-                                                            <dd>
-                                                                <p>${entry['CONTENT']}</p>
-                                                            </dd>
-                                                        </dl>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(entry['THUMBNAIL']) > 0}">  <%-- ### 이미지가 있을 경우 ### --%>
+                                                                <ul class="img_list">
+                                                                    <li>
+                                                                        <a href="/" title="" target="_blank">
+                                                                            <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <p>${entry['CONTENT']}</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <dl>
+                                                                    <dt>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
+                                                                    </dt>
+                                                                    <dd>
+                                                                        <p>${entry['CONTENT']}</p>
+                                                                    </dd>
+                                                                </dl>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:when>
                                                     <c:otherwise></c:otherwise>
                                                 </c:choose>
