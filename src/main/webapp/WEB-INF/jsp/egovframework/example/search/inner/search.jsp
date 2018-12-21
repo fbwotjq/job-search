@@ -166,7 +166,6 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                     <c:when test="">${entry['EMPLOYMENT_TYPE'] eq 'substitute'}>(대체인력채용)</c:when>
                                                                     <c:otherwise></c:otherwise>
                                                                 </c:choose>
-
                                                             </span>
                                                             <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
                                                         </dd>
@@ -332,7 +331,15 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                 <span><strong>마감일 : </strong>${entry['RDATE']}</span>
                                                                 <span><strong>경력 : </strong>${entry['CAREER']}</span>
                                                                 <span><strong>학력 : </strong>${entry['EDUCATION']}</span>
-                                                                <span><strong>고용형태 : </strong>${entry['EMPLOYMENT_TYPE']}</span>
+                                                                <span><strong>고용형태 : </strong>
+                                                                <c:if test="${entry['EMPLOYMENT_TYPE'] eq 'noperiod'}">기간의 정함이 없는 근로계약</c:if>
+                                                                <c:choose>
+                                                                    <c:when test="${entry['EMPLOYMENT_TYPE'] eq 'partTime'}">(시간(선택)제)</c:when>
+                                                                    <c:when test="">${entry['EMPLOYMENT_TYPE'] eq 'dispatch'}>(파견근로)</c:when>
+                                                                    <c:when test="">${entry['EMPLOYMENT_TYPE'] eq 'substitute'}>(대체인력채용)</c:when>
+                                                                    <c:otherwise></c:otherwise>
+                                                                </c:choose>
+                                                                </span>
                                                                 <span class="bg_none"><strong>근무지역 : </strong>${entry['WORKING_AREA']}</span>
                                                             </dd>
                                                         </dl>
