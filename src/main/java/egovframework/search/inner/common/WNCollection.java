@@ -107,7 +107,7 @@ public class WNCollection {
 				"RANK/DESC,DATE/DESC",  // set sort field (field,order) multi sort '/'
 				"basic,rpfmo,100",  // set sort field (field,order) multi sort '/'
 				"TITLE/100,CONTENT/50",// set search field
-				"DOCID,LINK_ID,TITLE,CONTENT/270,COMPANY_NM,COMPANY_JOB,TEL_NO,INSERT_DT,INFOSUB_ID,KIND_NM,HIRE_CNT,PAY,EDUCATION,CAREER,THUMBNAIL,ALIAS",// set document field
+				"DOCID,LINK_ID,BD_ID,TITLE,CONTENT/270,COMPANY_NM,COMPANY_JOB,TEL_NO,INSERT_DT,INFOSUB_ID,KIND_NM,HIRE_CNT,PAY,EDUCATION,CAREER,THUMBNAIL,ALIAS",// set document field
 				"", // set date range
 				"", // set rank range
 				"", // set prefix query, example: <fieldname:contains:value1>|<fieldname:contains:value2>/1,  (fieldname:contains:value) and ' ', or '|', not '!' / operator (AND:1, OR:0)

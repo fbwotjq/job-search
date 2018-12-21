@@ -465,7 +465,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                     <li>
                                                                         <a href="/" title="" target="_blank">
                                                                             <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                             <p>${entry['CONTENT']}</p>
                                                                         </a>
                                                                     </li>
@@ -529,7 +529,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                 <li>
                                                                     <a href="/" title="" target="_blank">
                                                                         <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['BOARD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                         <p>${entry['CONTENT']}</p>
                                                                     </a>
                                                                 </li>
@@ -538,7 +538,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         <c:otherwise>
                                                             <dl>
                                                                 <dt>
-                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['BOARD_ID']}">${entry['TITLE']}</a>
+                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
                                                                 </dt>
                                                                 <dd>
                                                                     <p>${entry['CONTENT']}</p>
@@ -591,7 +591,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                     <li>
                                                                         <a href="/" title="" target="_blank">
                                                                             <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['BOARD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                             <p>${entry['CONTENT']}</p>
                                                                         </a>
                                                                     </li>
@@ -600,7 +600,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                             <c:otherwise>
                                                                 <dl>
                                                                     <dt>
-                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['BOARD_ID']}">${entry['TITLE']}</a>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
                                                                     </dt>
                                                                     <dd>
                                                                         <p>${entry['CONTENT']}</p>
@@ -644,7 +644,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                 <li>
                                                                     <a href="/" title="" target="_blank">
                                                                         <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                         <p>${entry['CONTENT']}</p>
                                                                     </a>
                                                                 </li>
@@ -696,7 +696,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                     <li>
                                                                         <a href="/" title="" target="_blank">
                                                                             <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['BOARD_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BOARD_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                             <p>${entry['CONTENT']}</p>
                                                                         </a>
                                                                     </li>
@@ -751,7 +751,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                 <li>
                                                                     <a href="/" title="" target="_blank">
                                                                         <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['LINK_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                        <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['LINK_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                         <p>${entry['CONTENT']}</p>
                                                                     </a>
                                                                 </li>
@@ -760,7 +760,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                         <c:otherwise>
                                                             <dl>
                                                                 <dt>
-                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['LINK_ID']}">${entry['TITLE']}</a>
+                                                                    [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['LINK_ID']}&bdId=${entry['BD_ID']}">11${entry['TITLE']}</a>
                                                                 </dt>
                                                                 <dd>
                                                                     <p>${entry['CONTENT']}</p>
@@ -804,7 +804,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                                     <li>
                                                                         <a href="/" title="" target="_blank">
                                                                             <img src="http://${serviceDomain}${entry['THUMBNAIL']}" width="110" height="75">
-                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['LINK_ID']}"><strong>${entry['TITLE']}</a></strong></span>
+                                                                            <span class="title">[게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['LINK_ID']}&bdId=${entry['BD_ID']}"><strong>${entry['TITLE']}</strong></a></span>
                                                                             <p>${entry['CONTENT']}</p>
                                                                         </a>
                                                                     </li>
@@ -813,7 +813,7 @@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><!doctype html
                                                             <c:otherwise>
                                                                 <dl>
                                                                     <dt>
-                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['BD_ID']}&bdId=${entry['LINK_ID']}">${entry['TITLE']}</a>
+                                                                        [게시판/${entry['BOARD_NAME']}] <a href="http://${serviceDomain}/board/${entry['LINK_ID']}/boardView.do?menuCd=${entry['MENU_CD']}&boardId=${entry['LINK_ID']}&bdId=${entry['BD_ID']}">${entry['TITLE']}</a>
                                                                     </dt>
                                                                     <dd>
                                                                         <p>${entry['CONTENT']}</p>
